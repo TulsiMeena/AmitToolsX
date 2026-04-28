@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - AmitToolsX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600 flex items-center">
+                        <i class="fas fa-compress-arrows-alt mr-2"></i> AmitToolsX
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium border-b-2 border-blue-600">About Me</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium">Contact Us</a>
+                    <a href="privacy.html" class="text-gray-700 hover:text-blue-600 font-medium">Privacy Policy</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-md p-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6">About Me</h1>
+            <div class="prose prose-blue lg:prose-lg text-gray-600">
+                <p class="mb-4">Welcome to AmitToolsX! I'm Amit, the developer behind this platform. My goal is to provide simple, powerful, and privacy-focused tools that anyone can use directly in their browser.</p>
+                <p class="mb-4">I believe that powerful software doesn't have to be complicated or invasive. That's why AmitToolsX is designed to process everything locally on your device. Your data, including the images you resize, never touches our servers.</p>
+                <p class="mb-4">This project is a labor of love, constantly evolving with new features and tools. Whether you're a professional designer or someone who just needs to quickly resize a photo for a social media profile, I hope AmitToolsX makes your digital life a bit easier.</p>
+                <h2 class="text-2xl font-semibold text-gray-800 mt-8 mb-4">Why choose AmitToolsX?</h2>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li><strong>Privacy First:</strong> No uploads, no server tracking.</li>
+                    <li><strong>No Cost:</strong> All tools are completely free to use.</li>
+                    <li><strong>No Account Needed:</strong> Start using tools instantly without signing up.</li>
+                    <li><strong>High Performance:</strong> Fast, client-side processing.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">AmitToolsX</a>
+                    <p class="text-gray-500 mt-2">Free online tools for everyone.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="about.html" class="text-gray-500 hover:text-blue-600">About</a>
+                    <a href="contact.html" class="text-gray-500 hover:text-blue-600">Contact</a>
+                    <a href="privacy.html" class="text-gray-500 hover:text-blue-600">Privacy</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-100 text-center">
+                <p class="text-gray-400 text-sm">&copy; 2024 AmitToolsX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            // Reusing basic toggle logic if needed or can add a shared script file later
+        });
+    </script>
+</body>
+</html>

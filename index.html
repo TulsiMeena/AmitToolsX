@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmitToolsX - Advanced Image Resizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600 flex items-center">
+                        <i class="fas fa-compress-arrows-alt mr-2"></i> AmitToolsX
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium">About Me</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium">Contact Us</a>
+                    <a href="privacy.html" class="text-gray-700 hover:text-blue-600 font-medium">Privacy Policy</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Home</a>
+            <a href="about.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">About Me</a>
+            <a href="contact.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact Us</a>
+            <a href="privacy.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Privacy Policy</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <header class="text-center mb-10">
+                <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Advanced Image Resizer</h1>
+                <p class="text-lg text-gray-600">Resize, crop, and optimize your images for free, right in your browser.</p>
+            </header>
+
+            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+                <!-- Upload Area -->
+                <div id="drop-zone" class="border-2 border-dashed border-gray-300 rounded-xl p-10 text-center transition-colors hover:border-blue-500 cursor-pointer mb-8">
+                    <input type="file" id="file-input" class="hidden" accept="image/*">
+                    <i class="fas fa-cloud-upload-alt text-5xl text-gray-400 mb-4"></i>
+                    <p class="text-xl text-gray-700 mb-2 font-semibold">Choose an image or drag it here</p>
+                    <p class="text-sm text-gray-500">Supports JPG, PNG, WEBP</p>
+                </div>
+
+                <!-- Resizer Controls (Hidden until upload) -->
+                <div id="resizer-controls" class="hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Preview Column -->
+                        <div>
+                            <h3 class="text-lg font-semibold mb-3">Preview</h3>
+                            <div class="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center min-h-[300px]">
+                                <img id="preview-image" src="" alt="Preview" class="max-w-full max-h-[500px]">
+                            </div>
+                            <div class="mt-2 text-sm text-gray-500 text-center" id="original-info">
+                                Original: 0 x 0 px | 0 KB
+                            </div>
+                        </div>
+
+                        <!-- Settings Column -->
+                        <div class="space-y-6">
+                            <!-- Dimensions -->
+                            <div>
+                                <h3 class="text-lg font-semibold mb-3">Settings</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Width (px)</label>
+                                        <input type="number" id="width-input" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Height (px)</label>
+                                        <input type="number" id="height-input" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+                                </div>
+                                <div class="flex items-center mt-3">
+                                    <input type="checkbox" id="aspect-ratio-lock" checked class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                    <label for="aspect-ratio-lock" class="ml-2 block text-sm text-gray-900">Lock Aspect Ratio</label>
+                                </div>
+                            </div>
+
+                            <!-- Format & Quality -->
+                            <div class="grid grid-cols-1 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Save As</label>
+                                    <select id="format-select" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-blue-500 focus:border-blue-500">
+                                        <option value="image/jpeg">JPEG</option>
+                                        <option value="image/png">PNG</option>
+                                        <option value="image/webp">WebP</option>
+                                    </select>
+                                </div>
+                                <div id="quality-container">
+                                    <div class="flex justify-between mb-1">
+                                        <label class="block text-sm font-medium text-gray-700">Quality</label>
+                                        <span id="quality-value" class="text-sm font-bold text-blue-600">90%</span>
+                                    </div>
+                                    <input type="range" id="quality-input" min="1" max="100" value="90" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                                </div>
+                            </div>
+
+                            <!-- Filters -->
+                            <div class="border-t pt-4">
+                                <h4 class="text-sm font-semibold text-gray-600 mb-3 uppercase tracking-wider">Filters</h4>
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <label class="block text-xs font-medium text-gray-700">Brightness</label>
+                                            <span id="brightness-value" class="text-xs">100%</span>
+                                        </div>
+                                        <input type="range" id="brightness-input" min="0" max="200" value="100" class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <label class="block text-xs font-medium text-gray-700">Contrast</label>
+                                            <span id="contrast-value" class="text-xs">100%</span>
+                                        </div>
+                                        <input type="range" id="contrast-input" min="0" max="200" value="100" class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="grayscale-input" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                        <label for="grayscale-input" class="ml-2 block text-xs text-gray-900">Grayscale</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Download Button -->
+                            <button id="download-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center transition-colors">
+                                <i class="fas fa-download mr-2"></i> Download Resized Image
+                            </button>
+                            <div id="new-info" class="mt-2 text-sm text-gray-500 text-center hidden">
+                                Est. Size: 0 KB
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Privacy First</h3>
+                    <p class="text-gray-600 text-sm">Your images never leave your browser. All processing happens locally on your device.</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Lightning Fast</h3>
+                    <p class="text-gray-600 text-sm">Instantly resize and optimize your images without waiting for server uploads.</p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-circle text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">High Quality</h3>
+                    <p class="text-gray-600 text-sm">Fine-tune the output quality and format to get the perfect balance for your needs.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-10 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">AmitToolsX</a>
+                    <p class="text-gray-500 mt-2">Free online tools for everyone.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="about.html" class="text-gray-500 hover:text-blue-600">About</a>
+                    <a href="contact.html" class="text-gray-500 hover:text-blue-600">Contact</a>
+                    <a href="privacy.html" class="text-gray-500 hover:text-blue-600">Privacy</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-100 text-center">
+                <p class="text-gray-400 text-sm">&copy; 2024 AmitToolsX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
