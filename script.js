@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const widthInput = document.getElementById('width-input');
     const heightInput = document.getElementById('height-input');
+    const widthInch = document.getElementById('width-inch');
+    const heightInch = document.getElementById('height-inch');
     const aspectRatioLock = document.getElementById('aspect-ratio-lock');
 
     const formatSelect = document.getElementById('format-select');
@@ -21,11 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const grayscaleInput = document.getElementById('grayscale-input');
 
     const downloadBtn = document.getElementById('download-btn');
+    const newInfo = document.getElementById('new-info');
 
     let originalImage = null;
     let originalWidth = 0;
     let originalHeight = 0;
     let aspectRatio = 1;
+    const DPI = 96;
 
     // --- Upload Logic ---
 
@@ -70,17 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 widthInput.value = originalWidth;
                 heightInput.value = originalHeight;
 
+                updateInches();
+
                 previewImage.src = e.target.result;
-                originalInfo.textContent = `Original: ${originalWidth} x ${originalHeight} px | ${(file.size / 1024).toFixed(2)} KB`;
+                const sizeKB = (file.size / 1024).toFixed(2);
+                const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                originalInfo.textContent = `Original: ${originalWidth} x ${originalHeight} px | ${sizeKB} KB (${sizeMB} MB)`;
 
                 resizerControls.classList.remove('hidden');
                 dropZone.classList.add('hidden');
+                newInfo.classList.remove('hidden');
 
-                // Set default format based on original if possible, otherwise keep JPEG
-                if (file.type === 'image/png' || file.type === 'image/webp') {
+                if (file.type === 'image/png' || file.type === 'image/webp' || file.type === 'image/jpeg') {
                     formatSelect.value = file.type;
                 }
                 updateQualityVisibility();
+                estimateSize();
             };
             img.src = e.target.result;
         };
@@ -93,15 +102,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (aspectRatioLock.checked && originalImage) {
             heightInput.value = Math.round(widthInput.value / aspectRatio);
         }
+        updateInches();
+        estimateSize();
     });
 
     heightInput.addEventListener('input', () => {
         if (aspectRatioLock.checked && originalImage) {
             widthInput.value = Math.round(heightInput.value * aspectRatio);
         }
+        updateInches();
+        estimateSize();
     });
 
-    formatSelect.addEventListener('change', updateQualityVisibility);
+    function updateInches() {
+        widthInch.textContent = `${(widthInput.value / DPI).toFixed(2)} in`;
+        heightInch.textContent = `${(heightInput.value / DPI).toFixed(2)} in`;
+    }
+
+    formatSelect.addEventListener('change', () => {
+        updateQualityVisibility();
+        estimateSize();
+    });
 
     function updateQualityVisibility() {
         if (formatSelect.value === 'image/png') {
@@ -113,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     qualityInput.addEventListener('input', () => {
         qualityValue.textContent = `${qualityInput.value}%`;
+        estimateSize();
     });
 
     brightnessInput.addEventListener('input', () => {
@@ -134,7 +156,36 @@ document.addEventListener('DOMContentLoaded', () => {
         previewImage.style.filter = `brightness(${brightness}%) contrast(${contrast}%) grayscale(${grayscale}%)`;
     }
 
-    // --- Processing & Download ---
+    // --- Size Estimation ---
+    let debounceTimer;
+    function estimateSize() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            if (!originalImage) return;
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const targetWidth = parseInt(widthInput.value) || originalWidth;
+            const targetHeight = parseInt(heightInput.value) || originalHeight;
+
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            ctx.drawImage(originalImage, 0, 0, targetWidth, targetHeight);
+
+            const format = formatSelect.value;
+            const quality = parseInt(qualityInput.value) / 100;
+
+            canvas.toBlob((blob) => {
+                if (blob) {
+                    const sizeKB = (blob.size / 1024).toFixed(2);
+                    const sizeMB = (blob.size / (1024 * 1024)).toFixed(2);
+                    newInfo.textContent = `Estimated New Size: ${sizeKB} KB (${sizeMB} MB)`;
+                }
+            }, format, quality);
+        }, 300);
+    }
+
+    // --- Download ---
 
     downloadBtn.addEventListener('click', () => {
         if (!originalImage) return;
@@ -148,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.width = targetWidth;
         canvas.height = targetHeight;
 
-        // Apply filters to canvas
         const brightness = brightnessInput.value / 100;
         const contrast = contrastInput.value / 100;
         const grayscale = grayscaleInput.checked ? 1 : 0;
@@ -161,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const dataUrl = canvas.toDataURL(format, quality);
         const link = document.createElement('a');
-
         const extension = format.split('/')[1];
         link.download = `resized-image.${extension}`;
         link.href = dataUrl;

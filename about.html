@@ -31,6 +31,13 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="index.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Home</a>
+            <a href="about.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">About Me</a>
+            <a href="contact.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact Us</a>
+            <a href="privacy.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Privacy Policy</a>
+        </div>
     </nav>
 
     <main class="flex-grow container mx-auto px-4 py-12">
@@ -72,7 +79,8 @@
 
     <script>
         document.getElementById('mobile-menu-button').addEventListener('click', () => {
-            // Reusing basic toggle logic if needed or can add a shared script file later
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         });
     </script>
 </body>
