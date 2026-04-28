@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet the Team | AmitToolsX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #eff6ff 0%, #ffffff 100%);
+        }
+        .profile-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .profile-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+    </style>
+</head>
+<body class="hero-gradient flex flex-col min-h-screen text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-card border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg">
+                            <i class="fas fa-expand-arrows-alt text-lg"></i>
+                        </div>
+                        <span class="text-2xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+                            AmitToolsX
+                        </span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-10 text-sm font-semibold">
+                    <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="about.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">About</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+                    <a href="privacy.html" class="text-gray-600 hover:text-blue-600 transition-colors">Privacy</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-lg border-t border-gray-100 px-4 py-6 space-y-4">
+            <a href="index.html" class="block text-lg font-bold text-gray-700">Home</a>
+            <a href="about.html" class="block text-lg font-bold text-blue-600">About</a>
+            <a href="contact.html" class="block text-lg font-bold text-gray-700">Contact</a>
+            <a href="privacy.html" class="block text-lg font-bold text-gray-700">Privacy</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <header class="text-center mb-20">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tighter mb-6">Our Creative <span class="text-blue-600 underline decoration-blue-200 underline-offset-8">Minds</span></h1>
+                <p class="max-w-2xl mx-auto text-lg text-gray-600 leading-relaxed">
+                    AmitToolsX is built with a passion for excellence. Meet the visionaries behind the web's favorite image utility suite.
+                </p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <!-- Aman Meena (Admin) -->
+                <div class="profile-card bg-white rounded-[2.5rem] shadow-2xl overflow-hidden group border border-gray-100">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Technical_01.jpg" alt="Aman Meena" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute bottom-6 left-8">
+                            <span class="bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Administrator</span>
+                            <h2 class="text-3xl font-black text-white mt-2">Aman Meena</h2>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-8 bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-inner">
+                            <div class="text-center">
+                                <div class="text-xl font-black text-gray-900">15K+</div>
+                                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Followers</div>
+                            </div>
+                            <div class="w-px h-8 bg-gray-200"></div>
+                            <div class="text-center">
+                                <div class="text-xl font-black text-gray-900">200+</div>
+                                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Posts</div>
+                            </div>
+                            <div class="w-px h-8 bg-gray-200"></div>
+                            <div class="text-center">
+                                <div class="text-xl font-black text-gray-900">5+ Yrs</div>
+                                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Experience</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-8">
+                            A seasoned digital strategist and the heart of AmitToolsX. Aman ensures everything runs smoothly and coordinates the platform's vision with community needs.
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <a href="https://www.instagram.com/_technical_01?igsh=MTdydjJkbWl3Y3ppeg==" target="_blank" class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all shadow-sm">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="https://whatsapp.com/channel/0029VaDFCbF9hXFDBUx8fe3E" target="_blank" class="w-12 h-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center hover:bg-green-600 hover:text-white transition-all shadow-sm">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amit Meena (Creator) -->
+                <div class="profile-card bg-white rounded-[2.5rem] shadow-2xl overflow-hidden group border border-gray-100">
+                    <div class="relative h-80 overflow-hidden">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Amit%20meena.jpg" alt="Amit Meena" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
+                        <div class="absolute bottom-6 left-8">
+                            <span class="bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Site Creator</span>
+                            <h2 class="text-3xl font-black text-white mt-2">Amit Meena</h2>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <p class="text-gray-500 text-sm leading-relaxed mb-8">
+                            The technical architect and lead developer of AmitToolsX. Amit is passionate about building high-performance, privacy-focused web tools that empower users worldwide.
+                        </p>
+                        <div class="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
+                            <h4 class="text-xs font-black text-indigo-600 uppercase tracking-widest mb-2">Philosophy</h4>
+                            <p class="text-gray-600 text-sm italic">"Privacy is not a feature, it's a fundamental right. AmitToolsX was built to prove that powerful tools can respect that right."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Section -->
+            <div class="mt-32">
+                <h3 class="text-center text-xs font-black uppercase tracking-[0.3em] text-gray-400 mb-12">Featured Captures</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="aspect-square rounded-3xl overflow-hidden shadow-lg border border-white">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/aman1.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square rounded-3xl overflow-hidden shadow-lg border border-white">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/aman3.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square rounded-3xl overflow-hidden shadow-lg border border-white bg-blue-600 flex items-center justify-center">
+                         <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Aman.jpg" class="w-2/3">
+                    </div>
+                    <div class="aspect-square rounded-3xl overflow-hidden shadow-lg border border-white">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Technical_01.jpg" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center items-center space-x-2 mb-6">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                    <i class="fas fa-expand-arrows-alt text-sm"></i>
+                </div>
+                <span class="text-xl font-black tracking-tighter">AmitToolsX</span>
+            </div>
+            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest">&copy; 2024 AmitToolsX. Created with passion by Amit Meena.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
