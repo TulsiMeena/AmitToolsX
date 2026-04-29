@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <!-- QR Code Library -->
+    <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body class="text-white font-sans bg-home">
@@ -60,7 +60,9 @@
                 </div>
                 <div class="space-y-4 flex-1">
                     <textarea id="qr-input" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm" placeholder="Enter text or URL..."></textarea>
-                    <div id="qr-code" class="bg-white p-2 rounded-xl inline-block mx-auto hidden transition-all duration-500"></div>
+                    <div class="flex justify-center">
+                        <div id="qr-code" class="bg-white p-2 rounded-xl hidden transition-all duration-500"></div>
+                    </div>
                     <button id="generate-qr" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all">Generate QR Code</button>
                     <button id="download-qr" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition-all hidden">Download PNG</button>
                 </div>
@@ -120,7 +122,7 @@
                         </div>
                         <div class="bg-white/5 rounded-xl p-3">
                             <div id="count-chars" class="text-xl font-bold text-green-400">0</div>
-                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Characters</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Chars</div>
                         </div>
                         <div class="bg-white/5 rounded-xl p-3">
                             <div id="count-sentences" class="text-xl font-bold text-green-400">0</div>
@@ -131,6 +133,117 @@
                             <div class="text-[10px] uppercase tracking-widest text-gray-400">Paragraphs</div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Unit Converter -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-yellow-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-exchange-alt text-2xl text-yellow-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Unit Converter</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <select id="unit-type" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm">
+                        <option value="length" class="text-black">Length (m to km)</option>
+                        <option value="weight" class="text-black">Weight (kg to g)</option>
+                        <option value="temp" class="text-black">Temp (C to F)</option>
+                    </select>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="unit-input" class="w-1/2 bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Value">
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <input type="text" id="unit-output" readonly class="w-1/2 bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Result">
+                    </div>
+                    <button id="convert-unit" class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 rounded-xl transition-all">Convert Now</button>
+                </div>
+            </div>
+
+            <!-- Base64 Tool -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-code text-2xl text-red-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Base64 Tool</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="base64-input" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Enter text..."></textarea>
+                    <div class="flex gap-2">
+                        <button id="b64-encode" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-xl transition-all text-xs">Encode</button>
+                        <button id="b64-decode" class="flex-1 border border-red-600 text-red-400 hover:bg-red-600 hover:text-white font-bold py-2 rounded-xl transition-all text-xs">Decode</button>
+                    </div>
+                    <textarea id="base64-output" readonly rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Output..."></textarea>
+                </div>
+            </div>
+
+            <!-- JSON Formatter -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-indigo-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-brackets-curly text-2xl text-indigo-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">JSON Formatter</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="json-input" rows="6" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none font-mono text-xs" placeholder="Paste raw JSON here..."></textarea>
+                    <button id="format-json" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all">Format & Validate</button>
+                </div>
+            </div>
+
+             <!-- Age Calculator -->
+             <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-cyan-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-birthday-cake text-2xl text-cyan-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Age Calculator</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <input type="date" id="birth-date" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm">
+                    <div id="age-result" class="bg-white/5 rounded-xl p-4 text-center hidden">
+                        <div class="text-2xl font-bold text-cyan-400" id="age-val">--</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-400">Years Old</div>
+                    </div>
+                    <button id="calc-age" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl transition-all">Calculate Age</button>
+                </div>
+            </div>
+
+            <!-- Percentage Calculator -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-orange-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-percentage text-2xl text-orange-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Percentage Calc</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <div class="text-sm mb-2">What is <input type="number" id="perc-p" class="w-16 bg-white/10 border border-white/20 rounded-lg px-2 py-1 focus:outline-none" placeholder="%"> % of <input type="number" id="perc-total" class="w-24 bg-white/10 border border-white/20 rounded-lg px-2 py-1 focus:outline-none" placeholder="Value"> ?</div>
+                    <div class="bg-white/5 rounded-xl p-3 text-center">
+                        <div id="perc-result" class="text-2xl font-bold text-orange-400">0</div>
+                    </div>
+                    <button id="calc-perc" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl transition-all">Calculate</button>
+                </div>
+            </div>
+
+            <!-- Thumbnail Downloader -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col md:col-span-2 lg:col-span-1">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fab fa-youtube text-2xl text-red-500"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">YT Thumbnail</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <input type="text" id="yt-url" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Paste YouTube URL...">
+                    <div id="yt-preview-container" class="hidden space-y-4">
+                        <img id="yt-thumb-preview" src="" class="w-full rounded-xl shadow-lg">
+                        <div class="grid grid-cols-2 gap-2">
+                            <a id="dl-max" target="_blank" class="bg-white/10 hover:bg-white/20 p-2 rounded-lg text-[10px] text-center font-bold">4K/HD</a>
+                            <a id="dl-high" target="_blank" class="bg-white/10 hover:bg-white/20 p-2 rounded-lg text-[10px] text-center font-bold">High</a>
+                        </div>
+                    </div>
+                    <button id="get-thumbs" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition-all">Get Thumbnails</button>
                 </div>
             </div>
         </div>
