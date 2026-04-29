@@ -120,6 +120,18 @@
                     </label>
                 </div>
 
+                <!-- Global Watermark -->
+                <div class="glass p-4 rounded-2xl">
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-blue-300 mb-3">Global Watermark</h4>
+                    <div class="space-y-3">
+                        <input type="text" id="global-watermark-text" placeholder="Watermark Text" class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <input type="color" id="watermark-color" value="#cccccc" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                            <input type="range" id="watermark-opacity" min="0" max="100" value="30" class="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-400">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Page Thumbnails -->
                 <div class="glass p-4 rounded-2xl flex-1 flex flex-col min-h-[300px]">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-blue-300 mb-4 flex justify-between items-center">
@@ -153,12 +165,27 @@
                         <button id="tool-image" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Image">
                             <i class="fas fa-image mr-2"></i> Image
                         </button>
+                        <button id="tool-shape" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Shapes">
+                            <i class="fas fa-shapes mr-2"></i> Shapes
+                        </button>
+                        <button id="tool-highlight" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Highlight Text">
+                            <i class="fas fa-highlighter mr-2"></i> Highlight
+                        </button>
                         <input type="file" id="image-upload" accept="image/*" class="hidden">
                     </div>
 
                     <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
 
                     <!-- Tool Properties -->
+                    <div id="shape-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
+                        <select id="shape-type" class="bg-white/10 border border-white/20 rounded px-1 py-0.5 text-xs focus:outline-none">
+                            <option value="rect">Rectangle</option>
+                            <option value="circle">Circle</option>
+                            <option value="line">Line</option>
+                        </select>
+                        <input type="color" id="shape-color" value="#3b82f6" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                    </div>
+
                     <div id="text-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
                         <div class="flex items-center space-x-1">
                             <span class="text-[10px] text-white/60">Size:</span>
@@ -173,6 +200,12 @@
                     <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
 
                     <div class="flex items-center space-x-2">
+                        <button id="action-move-up" class="p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Move Page Up">
+                            <i class="fas fa-arrow-up mr-2"></i> Up
+                        </button>
+                        <button id="action-move-down" class="p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Move Page Down">
+                            <i class="fas fa-arrow-down mr-2"></i> Down
+                        </button>
                         <button id="action-rotate" class="p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Rotate Page">
                             <i class="fas fa-redo mr-2"></i> Rotate
                         </button>
@@ -192,6 +225,9 @@
                             <input type="password" id="pdf-password" placeholder="Set Password (Optional)" class="bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-400 w-40">
                             <i class="fas fa-lock absolute right-3 top-2.5 text-white/40"></i>
                         </div>
+                        <button id="export-images" class="bg-indigo-600/50 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-xl transition-all text-xs" title="Save pages as Images">
+                            <i class="fas fa-images mr-2"></i> Pages to PNG
+                        </button>
                         <button id="download-pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-xl shadow-lg transition-all transform hover:scale-[1.02] flex items-center">
                             <i class="fas fa-download mr-2"></i> Export PDF
                         </button>
