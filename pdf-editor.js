@@ -31,6 +31,13 @@ const deleteBtn = document.getElementById('action-delete');
 const toolSelect = document.getElementById('tool-select');
 const toolText = document.getElementById('tool-text');
 const toolDraw = document.getElementById('tool-draw');
+const toolImage = document.getElementById('tool-image');
+const imageUpload = document.getElementById('image-upload');
+const textSizeInput = document.getElementById('text-size');
+const textColorInput = document.getElementById('text-color');
+const textProperties = document.getElementById('text-properties');
+const pageBgColorInput = document.getElementById('page-bg-color');
+const pdfPasswordInput = document.getElementById('pdf-password');
 const downloadBtn = document.getElementById('download-pdf');
 
 let isDrawing = false;
@@ -46,6 +53,8 @@ deleteBtn.addEventListener('click', deleteCurrentPage);
 toolSelect.addEventListener('click', () => setTool('select'));
 toolText.addEventListener('click', () => setTool('text'));
 toolDraw.addEventListener('click', () => setTool('draw'));
+toolImage.addEventListener('click', () => imageUpload.click());
+imageUpload.addEventListener('change', handleImageUpload);
 downloadBtn.addEventListener('click', exportPDF);
 
 // Drawing Logic
@@ -70,8 +79,10 @@ function setTool(tool) {
 
     if (tool === 'text') {
         pdfCanvasContainer.style.cursor = 'text';
+        textProperties.classList.remove('hidden');
     } else {
         pdfCanvasContainer.style.cursor = 'default';
+        textProperties.classList.add('hidden');
     }
 }
 
@@ -102,6 +113,7 @@ function stopDrawing() {
 
 function handleCanvasClick(e) {
     if (currentTool !== 'text') return;
+    if (e.target.closest('.text-layer-item') || e.target.closest('.image-layer-item')) return;
 
     const rect = pdfCanvasContainer.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -110,13 +122,25 @@ function handleCanvasClick(e) {
     addTextInput(x, y);
 }
 
-function addTextInput(x, y, initialValue = '') {
+function addTextInput(x, y, initialValue = '', size = null, color = null) {
     const input = document.createElement('div');
-    input.className = 'text-layer-item text-black';
+    input.className = 'text-layer-item';
     input.contentEditable = true;
     input.style.left = `${x}px`;
     input.style.top = `${y}px`;
+    input.style.fontSize = `${size || textSizeInput.value}px`;
+    input.style.color = color || textColorInput.value;
     input.innerText = initialValue;
+
+    // Add delete button
+    const delBtn = document.createElement('div');
+    delBtn.className = 'delete-btn';
+    delBtn.innerHTML = '&times;';
+    delBtn.onclick = (e) => {
+        e.stopPropagation();
+        input.remove();
+    };
+    input.appendChild(delBtn);
 
     textLayer.appendChild(input);
 
@@ -147,6 +171,56 @@ function addTextInput(x, y, initialValue = '') {
 
     window.addEventListener('mouseup', () => {
         isDraggingText = false;
+    });
+}
+
+async function handleImageUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        addImageToPage(event.target.result, 50, 50);
+    };
+    reader.readAsDataURL(file);
+}
+
+function addImageToPage(src, x, y, width = 150) {
+    const imgWrapper = document.createElement('div');
+    imgWrapper.className = 'image-layer-item';
+    imgWrapper.style.left = `${x}px`;
+    imgWrapper.style.top = `${y}px`;
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.width = `${width}px`;
+    img.style.display = 'block';
+
+    const delBtn = document.createElement('div');
+    delBtn.className = 'delete-btn';
+    delBtn.innerHTML = '&times;';
+    delBtn.onclick = () => imgWrapper.remove();
+
+    imgWrapper.appendChild(img);
+    imgWrapper.appendChild(delBtn);
+    textLayer.appendChild(imgWrapper);
+
+    // Draggable logic for images
+    let isDraggingImg = false;
+    imgWrapper.addEventListener('mousedown', (e) => {
+        isDraggingImg = true;
+        e.stopPropagation();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDraggingImg) return;
+        const rect = pdfCanvasContainer.getBoundingClientRect();
+        imgWrapper.style.left = `${e.clientX - rect.left - (width / 2)}px`;
+        imgWrapper.style.top = `${e.clientY - rect.top - 50}px`;
+    });
+
+    window.addEventListener('mouseup', () => {
+        isDraggingImg = false;
     });
 }
 
@@ -336,11 +410,35 @@ function saveCurrentAnnotations() {
     // Save Text
     const textItems = textLayer.querySelectorAll('.text-layer-item');
     textItems.forEach(item => {
+        const textContent = Array.from(item.childNodes)
+            .filter(node => node.nodeType === Node.TEXT_NODE)
+            .map(node => node.textContent)
+            .join('')
+            .trim();
+
+        if (textContent) {
+            pageAnnotations.push({
+                type: 'text',
+                x: parseFloat(item.style.left),
+                y: parseFloat(item.style.top),
+                text: textContent,
+                size: parseInt(item.style.fontSize),
+                color: item.style.color,
+                scale: currentScale
+            });
+        }
+    });
+
+    // Save Images
+    const imageItems = textLayer.querySelectorAll('.image-layer-item');
+    imageItems.forEach(item => {
+        const img = item.querySelector('img');
         pageAnnotations.push({
-            type: 'text',
+            type: 'image',
             x: parseFloat(item.style.left),
             y: parseFloat(item.style.top),
-            text: item.innerText,
+            width: parseFloat(img.style.width),
+            src: img.src,
             scale: currentScale
         });
     });
@@ -366,9 +464,9 @@ function loadPageAnnotations(pageIdx) {
     const pageAnnotations = annotations[pageIdx] || [];
     pageAnnotations.forEach(ann => {
         if (ann.type === 'text') {
-            // Adjust coordinates based on current scale if needed
-            // For now assuming scale is constant 1.5
-            addTextInput(ann.x, ann.y, ann.text);
+            addTextInput(ann.x, ann.y, ann.text, ann.size, ann.color);
+        } else if (ann.type === 'image') {
+            addImageToPage(ann.src, ann.x, ann.y, ann.width);
         } else if (ann.type === 'draw') {
             const img = new Image();
             img.onload = () => {
@@ -389,6 +487,8 @@ async function exportPDF() {
         // This avoids issues with multiple saves
         const exportDoc = await PDFDocument.load(pdfBytes);
         const pages = exportDoc.getPages();
+        const bgColor = pageBgColorInput.value;
+        const password = pdfPasswordInput.value;
 
         for (let i = 0; i < pages.length; i++) {
             const page = pages[i];
@@ -397,25 +497,67 @@ async function exportPDF() {
                 page.setRotation(degrees((page.getRotation().angle + rotation) % 360));
             }
 
-            const pageAnnotations = annotations[i] || [];
             const { width, height } = page.getSize();
 
-            // Rendering was done at currentScale = 1.5
-            // canvas width = viewport width (which includes scale)
+            // Apply Background Color
+            if (bgColor !== "#ffffff") {
+                const hexToRgb = (hex) => {
+                    const r = parseInt(hex.slice(1, 3), 16) / 255;
+                    const g = parseInt(hex.slice(3, 5), 16) / 255;
+                    const b = parseInt(hex.slice(5, 7), 16) / 255;
+                    return rgb(r, g, b);
+                };
+                page.drawRectangle({
+                    x: 0,
+                    y: 0,
+                    width: width,
+                    height: height,
+                    color: hexToRgb(bgColor),
+                });
+            }
+
+            const pageAnnotations = annotations[i] || [];
             const renderWidth = drawingCanvas.width;
             const renderHeight = drawingCanvas.height;
 
             for (const ann of pageAnnotations) {
                 if (ann.type === 'text') {
-                    // Calculate relative positions
                     const relX = ann.x / renderWidth;
                     const relY = ann.y / renderHeight;
+                    const hexToRgb = (hex) => {
+                        // Handle rgb(r, g, b) format too if needed, but here mostly hex
+                        if (hex.startsWith('#')) {
+                            const r = parseInt(hex.slice(1, 3), 16) / 255;
+                            const g = parseInt(hex.slice(3, 5), 16) / 255;
+                            const b = parseInt(hex.slice(5, 7), 16) / 255;
+                            return rgb(r, g, b);
+                        }
+                        return rgb(0,0,0);
+                    };
 
                     page.drawText(ann.text, {
                         x: relX * width,
-                        y: height - (relY * height) - (12 * (height/renderHeight) * currentScale),
-                        size: 12 * (width / (renderWidth / currentScale)),
-                        color: rgb(0, 0, 0),
+                        y: height - (relY * height) - (ann.size * (height/renderHeight) * (currentScale/1.5)),
+                        size: ann.size * (width / (renderWidth / currentScale)),
+                        color: hexToRgb(ann.color),
+                    });
+                } else if (ann.type === 'image') {
+                    const relX = ann.x / renderWidth;
+                    const relY = ann.y / renderHeight;
+                    const relW = ann.width / renderWidth;
+
+                    const imageBytes = await fetch(ann.src).then(res => res.arrayBuffer());
+                    let image;
+                    if (ann.src.includes('image/png')) image = await exportDoc.embedPng(imageBytes);
+                    else image = await exportDoc.embedJpg(imageBytes);
+
+                    const imgAspectRatio = image.width / image.height;
+
+                    page.drawImage(image, {
+                        x: relX * width,
+                        y: height - (relY * height) - ((relW * width) / imgAspectRatio),
+                        width: relW * width,
+                        height: (relW * width) / imgAspectRatio,
                     });
                 } else if (ann.type === 'draw') {
                     const imageBytes = await fetch(ann.data).then(res => res.arrayBuffer());
@@ -428,6 +570,23 @@ async function exportPDF() {
                     });
                 }
             }
+        }
+
+        // Apply Password if set
+        if (password) {
+            exportDoc.encrypt({
+                userPassword: password,
+                ownerPassword: password,
+                permissions: {
+                    printing: 'highResolution',
+                    modifying: true,
+                    copying: true,
+                    annotating: true,
+                    fillingForms: true,
+                    contentAccessibility: true,
+                    documentAssembly: true
+                }
+            });
         }
 
         const pdfBytesFinal = await exportDoc.save();

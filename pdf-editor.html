@@ -44,6 +44,36 @@
             min-width: 50px;
             padding: 2px 5px;
             border: 1px dashed transparent;
+            word-break: break-word;
+        }
+        .image-layer-item {
+            position: absolute;
+            cursor: move;
+            border: 1px dashed transparent;
+        }
+        .image-layer-item:hover {
+            border-color: #3b82f6;
+        }
+        .delete-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+            z-index: 10;
+        }
+        .text-layer-item:hover .delete-btn,
+        .image-layer-item:hover .delete-btn {
+            display: flex;
         }
         .text-layer-item:hover {
             border-color: #3b82f6;
@@ -120,6 +150,24 @@
                         <button id="tool-draw" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Draw/Signature">
                             <i class="fas fa-pen-fancy mr-2"></i> Draw
                         </button>
+                        <button id="tool-image" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Image">
+                            <i class="fas fa-image mr-2"></i> Image
+                        </button>
+                        <input type="file" id="image-upload" accept="image/*" class="hidden">
+                    </div>
+
+                    <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
+
+                    <!-- Tool Properties -->
+                    <div id="text-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-[10px] text-white/60">Size:</span>
+                            <input type="number" id="text-size" value="16" min="8" max="72" class="w-12 bg-white/10 border border-white/20 rounded px-1 py-0.5 text-xs focus:outline-none">
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <span class="text-[10px] text-white/60">Color:</span>
+                            <input type="color" id="text-color" value="#000000" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                        </div>
                     </div>
 
                     <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
@@ -131,13 +179,23 @@
                         <button id="action-delete" class="p-2 px-4 rounded-lg bg-white/5 hover:bg-red-500/20 text-red-400 transition-all text-sm" title="Delete Page">
                             <i class="fas fa-trash-alt mr-2"></i> Delete
                         </button>
+                        <div class="flex items-center space-x-1 glass px-2 py-1 rounded-lg">
+                            <i class="fas fa-palette text-xs text-blue-300"></i>
+                            <input type="color" id="page-bg-color" value="#ffffff" title="Page Background Color" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                        </div>
                     </div>
 
                     <div class="flex-1"></div>
 
-                    <button id="download-pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-xl shadow-lg transition-all transform hover:scale-[1.02] flex items-center">
-                        <i class="fas fa-download mr-2"></i> Export PDF
-                    </button>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative group">
+                            <input type="password" id="pdf-password" placeholder="Set Password (Optional)" class="bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-400 w-40">
+                            <i class="fas fa-lock absolute right-3 top-2.5 text-white/40"></i>
+                        </div>
+                        <button id="download-pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-xl shadow-lg transition-all transform hover:scale-[1.02] flex items-center">
+                            <i class="fas fa-download mr-2"></i> Export PDF
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Canvas/Viewer -->
