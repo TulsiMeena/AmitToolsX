@@ -1,0 +1,45 @@
+/* Common Glassmorphism Effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body {
+    min-height: 100vh;
+}
+
+/* Page Gradients */
+.bg-home { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.bg-about { background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%); }
+.bg-contact { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); }
+.bg-privacy { background: linear-gradient(135deg, #2c3e50 0%, #000000 100%); }
+
+/* Profile Card Effects */
+.profile-card:hover .profile-img {
+    transform: scale(1.05);
+}
+
+/* Transitions */
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
