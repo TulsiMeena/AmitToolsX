@@ -239,3 +239,97 @@ if (getThumbsBtn) {
         return (match && match[7].length == 11) ? match[7] : false;
     }
 }
+
+// --- PDF Tools ---
+const pdfImagesInput = document.getElementById('pdf-images-input');
+const pdfImagesList = document.getElementById('pdf-images-list');
+const createPdfBtn = document.getElementById('create-pdf-from-images');
+
+const mergePdfInput = document.getElementById('merge-pdf-input');
+const mergePdfList = document.getElementById('merge-pdf-list');
+const mergePdfsBtn = document.getElementById('merge-pdfs-btn');
+
+if (pdfImagesInput) {
+    pdfImagesInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        pdfImagesList.innerText = files.length > 0 ? files.map(f => f.name).join(', ') : 'No files selected';
+    });
+
+    createPdfBtn.addEventListener('click', async () => {
+        const files = pdfImagesInput.files;
+        if (files.length === 0) return alert('Please select images first');
+
+        try {
+            const { PDFDocument } = PDFLib;
+            const pdfDoc = await PDFDocument.create();
+
+            for (const file of files) {
+                const arrayBuffer = await file.arrayBuffer();
+                let image;
+                if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+                    image = await pdfDoc.embedJpg(arrayBuffer);
+                } else if (file.type === 'image/png') {
+                    image = await pdfDoc.embedPng(arrayBuffer);
+                } else {
+                    continue; // Skip unsupported types
+                }
+
+                const page = pdfDoc.addPage([image.width, image.height]);
+                page.drawImage(image, {
+                    x: 0,
+                    y: 0,
+                    width: image.width,
+                    height: image.height,
+                });
+            }
+
+            const pdfBytes = await pdfDoc.save();
+            downloadBlob(pdfBytes, 'amittoolsx-images.pdf', 'application/pdf');
+        } catch (error) {
+            console.error(error);
+            alert('Error creating PDF: ' + error.message);
+        }
+    });
+}
+
+if (mergePdfInput) {
+    mergePdfInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        mergePdfList.innerText = files.length > 0 ? files.map(f => f.name).join(', ') : 'No files selected';
+    });
+
+    mergePdfsBtn.addEventListener('click', async () => {
+        const files = mergePdfInput.files;
+        if (files.length < 2) return alert('Please select at least 2 PDF files to merge');
+
+        try {
+            const { PDFDocument } = PDFLib;
+            const mergedPdf = await PDFDocument.create();
+
+            for (const file of files) {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await PDFDocument.load(arrayBuffer);
+                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                copiedPages.forEach((page) => mergedPdf.addPage(page));
+            }
+
+            const pdfBytes = await mergedPdf.save();
+            downloadBlob(pdfBytes, 'amittoolsx-merged.pdf', 'application/pdf');
+        } catch (error) {
+            console.error(error);
+            alert('Error merging PDFs: ' + error.message);
+        }
+    });
+}
+
+function downloadBlob(data, fileName, mimeType) {
+    const blob = new Blob([data], { type: mimeType });
+    const url = window.URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    window.URL.revokeObjectURL(url);
+}
