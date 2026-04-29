@@ -240,23 +240,15 @@ if (getThumbsBtn) {
     }
 }
 
-// --- PDF Tools ---
-const pdfImagesInput = document.getElementById('pdf-images-input');
-const pdfImagesList = document.getElementById('pdf-images-list');
-const createPdfBtn = document.getElementById('create-pdf-from-images');
+// --- PDF Conversion Tools ---
 
-const mergePdfInput = document.getElementById('merge-pdf-input');
-const mergePdfList = document.getElementById('merge-pdf-list');
-const mergePdfsBtn = document.getElementById('merge-pdfs-btn');
+// JPG to PDF
+const jpgToPdfInput = document.getElementById('jpg-to-pdf-input');
+const jpgToPdfBtn = document.getElementById('jpg-to-pdf-btn');
 
-if (pdfImagesInput) {
-    pdfImagesInput.addEventListener('change', (e) => {
-        const files = Array.from(e.target.files);
-        pdfImagesList.innerText = files.length > 0 ? files.map(f => f.name).join(', ') : 'No files selected';
-    });
-
-    createPdfBtn.addEventListener('click', async () => {
-        const files = pdfImagesInput.files;
+if (jpgToPdfBtn) {
+    jpgToPdfBtn.addEventListener('click', async () => {
+        const files = jpgToPdfInput.files;
         if (files.length === 0) return alert('Please select images first');
 
         try {
@@ -271,35 +263,80 @@ if (pdfImagesInput) {
                 } else if (file.type === 'image/png') {
                     image = await pdfDoc.embedPng(arrayBuffer);
                 } else {
-                    continue; // Skip unsupported types
+                    continue;
                 }
 
                 const page = pdfDoc.addPage([image.width, image.height]);
-                page.drawImage(image, {
-                    x: 0,
-                    y: 0,
-                    width: image.width,
-                    height: image.height,
-                });
+                page.drawImage(image, { x: 0, y: 0, width: image.width, height: image.height });
             }
 
             const pdfBytes = await pdfDoc.save();
-            downloadBlob(pdfBytes, 'amittoolsx-images.pdf', 'application/pdf');
+            downloadBlob(pdfBytes, 'amittoolsx_images_to_pdf.pdf', 'application/pdf');
         } catch (error) {
-            console.error(error);
-            alert('Error creating PDF: ' + error.message);
+            alert('Conversion failed: ' + error.message);
         }
     });
 }
 
-if (mergePdfInput) {
-    mergePdfInput.addEventListener('change', (e) => {
-        const files = Array.from(e.target.files);
-        mergePdfList.innerText = files.length > 0 ? files.map(f => f.name).join(', ') : 'No files selected';
-    });
+// HTML to PDF (Simple Implementation)
+const htmlToPdfUrl = document.getElementById('html-to-pdf-url');
+const htmlToPdfBtn = document.getElementById('html-to-pdf-btn');
 
-    mergePdfsBtn.addEventListener('click', async () => {
-        const files = mergePdfInput.files;
+if (htmlToPdfBtn) {
+    htmlToPdfBtn.addEventListener('click', () => {
+        const url = htmlToPdfUrl.value.trim();
+        if (!url) return alert('Please enter a valid URL');
+
+        // Open the URL in a new tab and suggest printing as PDF
+        const win = window.open(url, '_blank');
+        if (win) {
+            alert('AmitToolsX Hint: Once the page loads, press Ctrl+P (or Cmd+P) and select "Save as PDF" to complete the conversion.');
+        } else {
+            alert('Pop-up blocked. Please allow pop-ups to use this tool.');
+        }
+    });
+}
+
+// PDF to JPG (Extract Images)
+const pdfToJpgInput = document.getElementById('pdf-to-jpg-input');
+const pdfToJpgBtn = document.getElementById('pdf-to-jpg-btn');
+
+if (pdfToJpgBtn) {
+    pdfToJpgBtn.addEventListener('click', async () => {
+        const file = pdfToJpgInput.files[0];
+        if (!file) return alert('Please select a PDF file first');
+
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const viewport = page.getViewport({ scale: 2 });
+                const canvas = document.createElement('canvas');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const context = canvas.getContext('2d');
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.download = `amittoolsx_page_${i}.jpg`;
+                link.click();
+            }
+        } catch (error) {
+            alert('Extraction failed: ' + error.message);
+        }
+    });
+}
+
+// Merge PDF (New Implementation)
+const mergePdfInputNew = document.getElementById('merge-pdf-input-new');
+const mergePdfBtnNew = document.getElementById('merge-pdf-btn-new');
+
+if (mergePdfBtnNew) {
+    mergePdfBtnNew.addEventListener('click', async () => {
+        const files = mergePdfInputNew.files;
         if (files.length < 2) return alert('Please select at least 2 PDF files to merge');
 
         try {
@@ -314,10 +351,9 @@ if (mergePdfInput) {
             }
 
             const pdfBytes = await mergedPdf.save();
-            downloadBlob(pdfBytes, 'amittoolsx-merged.pdf', 'application/pdf');
+            downloadBlob(pdfBytes, 'amittoolsx_merged.pdf', 'application/pdf');
         } catch (error) {
-            console.error(error);
-            alert('Error merging PDFs: ' + error.message);
+            alert('Merging failed: ' + error.message);
         }
     });
 }
