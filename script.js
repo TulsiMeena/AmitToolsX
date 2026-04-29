@@ -31,6 +31,175 @@ const watermarkLogo = document.getElementById('watermark-logo');
 const outputFormat = document.getElementById('output-format');
 const openCropBtn = document.getElementById('open-crop');
 
+// --- Translation Logic ---
+const translations = {
+    en: {
+        navHome: "Home",
+        navPDF: "PDF Editor",
+        navTools: "Tools",
+        navAbout: "About",
+        navContact: "Contact",
+        navPrivacy: "Privacy",
+        heroTitle: "Image Resizer",
+        heroSub: "Resize your images instantly with professional precision.",
+        uploadTitle: "Click or Drag to Upload Images",
+        uploadSub: "(Supports Batch Processing)",
+        batchTitle: "Uploaded Images",
+        clearAll: "Clear All",
+        resizePresets: "Resize & Presets",
+        widthLabel: "Width (px)",
+        heightLabel: "Height (px)",
+        lockRatio: "Lock Ratio",
+        presetsLabel: "Custom Size",
+        cropTool: "Advanced Crop Tool",
+        filtersTitle: "Image Filters",
+        brightness: "Brightness",
+        contrast: "Contrast",
+        grayscale: "Grayscale",
+        watermarkTitle: "Watermark",
+        watermarkPlaceholder: "Enter Watermark Text",
+        logoLabel: "Logo:",
+        outputSettings: "Output Settings",
+        formatLabel: "Format",
+        qualityLabel: "Quality",
+        exifInfo: "EXIF data will be automatically removed for privacy.",
+        processBtn: "Process & Download",
+        footerAbout: "A premium suite of online utilities for modern developers and creators.",
+        footerLinks: "Quick Links",
+        footerConnect: "Connect With Us",
+        footerCreatedBy: "Created by",
+        footerManagedBy: "Managed by",
+        cropModalTitle: "Advanced Crop Tool",
+        reset: "Reset",
+        applyCrop: "Apply Crop",
+        // PDF Editor
+        pdfToolSelect: "Select",
+        pdfToolText: "Text",
+        pdfToolLink: "Links",
+        pdfToolForms: "Forms",
+        pdfToolImage: "Images",
+        pdfToolSign: "Sign",
+        pdfToolWhiteout: "Whiteout",
+        pdfToolAnnotate: "Annotate",
+        pdfToolShapes: "Shapes",
+        pdfToolDraw: "Draw",
+        pdfToolStamp: "Stamp",
+        pdfToolFind: "Find",
+        pdfExport: "Export PDF",
+        pdfUploadBtn: "Upload PDF",
+        pdfWelcomeTitle: "Advanced PDF Editor",
+        pdfWelcomeSub: "Upload your PDF to start editing. You can add text, signatures, rotate pages, or remove unwanted pages - all in your browser.",
+        // Tools Page
+        toolsTitle: "Multi-Utility Tools",
+        toolsSub: "Fast, secure, and professional tools for daily tasks.",
+        // About Page
+        aboutTitle: "Meet the Team",
+        aboutSub: "The creative minds behind AmitToolsX, dedicated to building powerful online utilities.",
+        followers: "Followers",
+        posts: "Posts",
+        experience: "Experience"
+    },
+    hi: {
+        navHome: "होम",
+        navPDF: "PDF एडिटर",
+        navTools: "टूल्स",
+        navAbout: "हमारे बारे में",
+        navContact: "संपर्क करें",
+        navPrivacy: "गोपनीयता",
+        heroTitle: "इमेज रिसाइज़र",
+        heroSub: "अपनी इमेज को प्रोफेशनल सटीकता के साथ तुरंत रिसाइज करें।",
+        uploadTitle: "इमेज अपलोड करने के लिए क्लिक करें या ड्रैग करें",
+        uploadSub: "(बैच प्रोसेसिंग का समर्थन करता है)",
+        batchTitle: "अपलोड की गई इमेज",
+        clearAll: "सभी साफ़ करें",
+        resizePresets: "रिसाइज और प्रीसेट",
+        widthLabel: "चौड़ाई (px)",
+        heightLabel: "ऊंचाई (px)",
+        lockRatio: "अनुपात लॉक करें",
+        presetsLabel: "कस्टम साइज",
+        cropTool: "एडवांस क्रॉप टूल",
+        filtersTitle: "इमेज फ़िल्टर",
+        brightness: "चमक (Brightness)",
+        contrast: "कंट्रास्ट",
+        grayscale: "ग्रेस्केल",
+        watermarkTitle: "वॉटरमार्क",
+        watermarkPlaceholder: "वॉटरमार्क टेक्स्ट दर्ज करें",
+        logoLabel: "लोगो:",
+        outputSettings: "आउटपुट सेटिंग्स",
+        formatLabel: "फॉर्मेट",
+        qualityLabel: "क्वालिटी",
+        exifInfo: "गोपनीयता के लिए EXIF डेटा स्वचालित रूप से हटा दिया जाएगा।",
+        processBtn: "प्रोसेस और डाउनलोड",
+        footerAbout: "आधुनिक डेवलपर्स और क्रिएटर्स के लिए ऑनलाइन उपयोगिताओं का एक प्रीमियम सूट।",
+        footerLinks: "त्वरित लिंक",
+        footerConnect: "हमसे जुड़ें",
+        footerCreatedBy: "द्वारा निर्मित",
+        footerManagedBy: "द्वारा प्रबंधित",
+        cropModalTitle: "एडवांस क्रॉप टूल",
+        reset: "रीसेट",
+        applyCrop: "क्रॉप लागू करें",
+        // PDF Editor
+        pdfToolSelect: "चुनें",
+        pdfToolText: "टेक्स्ट",
+        pdfToolLink: "लिंक्स",
+        pdfToolForms: "फॉर्म्स",
+        pdfToolImage: "इमेज",
+        pdfToolSign: "हस्ताक्षर",
+        pdfToolWhiteout: "व्हाइटआउट",
+        pdfToolAnnotate: "एनोटेट",
+        pdfToolShapes: "आकार",
+        pdfToolDraw: "ड्रॉ",
+        pdfToolStamp: "स्टैम्प",
+        pdfToolFind: "ढूंढें",
+        pdfExport: "PDF एक्सपोर्ट करें",
+        pdfUploadBtn: "PDF अपलोड करें",
+        pdfWelcomeTitle: "एडवांस PDF एडिटर",
+        pdfWelcomeSub: "संपादन शुरू करने के लिए अपना PDF अपलोड करें। आप टेक्स्ट, सिग्नेचर जोड़ सकते हैं, पेज घुमा सकते हैं या अनचाहे पेज हटा सकते हैं - सब कुछ अपने ब्राउज़र में।",
+        // Tools Page
+        toolsTitle: "मल्टी-यूटिलिटी टूल्स",
+        toolsSub: "दैनिक कार्यों के लिए तेज़, सुरक्षित और प्रोफेशनल टूल्स।",
+        // About Page
+        aboutTitle: "टीम से मिलें",
+        aboutSub: "शक्तिशाली ऑनलाइन यूटिलिटीज बनाने के लिए समर्पित अमितटूल्सएक्स के पीछे के रचनात्मक दिमाग।",
+        followers: "फॉलोअर्स",
+        posts: "पोस्ट्स",
+        experience: "अनुभव"
+    }
+};
+
+let currentLang = localStorage.getItem('lang') || 'en';
+
+function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            if ((el.tagName === 'INPUT' && el.type === 'text') || el.tagName === 'TEXTAREA') {
+                el.placeholder = translations[lang][key];
+            } else {
+                el.innerText = translations[lang][key];
+            }
+        }
+    });
+    updateLangUI();
+}
+
+function updateLangUI() {
+    const langBtn = document.getElementById('lang-toggle');
+    const langBtnMobile = document.getElementById('lang-toggle-mobile');
+    if (langBtn) langBtn.innerText = currentLang === 'en' ? 'हिन्दी' : 'English';
+    if (langBtnMobile) langBtnMobile.innerText = currentLang === 'en' ? 'हिन्दी' : 'English';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setLanguage(currentLang);
+    const langBtn = document.getElementById('lang-toggle');
+    const langBtnMobile = document.getElementById('lang-toggle-mobile');
+    if (langBtn) langBtn.addEventListener('click', () => setLanguage(currentLang === 'en' ? 'hi' : 'en'));
+    if (langBtnMobile) langBtnMobile.addEventListener('click', () => setLanguage(currentLang === 'en' ? 'hi' : 'en'));
+});
+
 // State
 let images = []; // Array of objects { file, dataUrl, naturalWidth, naturalHeight, ratio }
 let activeIndex = -1;
@@ -47,8 +216,8 @@ function toggleTheme() {
 
 function updateThemeIcons(theme) {
     const iconClass = theme === 'dark' ? 'fa-sun' : 'fa-moon';
-    themeIcon.className = `fas ${iconClass}`;
-    themeIconMobile.className = `fas ${iconClass}`;
+    if (themeIcon) themeIcon.className = `fas ${iconClass}`;
+    if (themeIconMobile) themeIconMobile.className = `fas ${iconClass}`;
 }
 
 // Initialize Theme
@@ -87,6 +256,7 @@ function handleFiles(files) {
 }
 
 function renderBatchList() {
+    if (!batchContainer) return;
     batchContainer.classList.remove('hidden');
     batchCount.innerText = images.length;
     batchList.innerHTML = '';
@@ -116,12 +286,14 @@ function setActiveImage(index) {
     activeIndex = index;
     const img = images[index];
 
-    previewImage.src = img.dataUrl;
-    previewImage.classList.remove('hidden');
-    previewPlaceholder.classList.add('hidden');
+    if (previewImage) {
+        previewImage.src = img.dataUrl;
+        previewImage.classList.remove('hidden');
+    }
+    if (previewPlaceholder) previewPlaceholder.classList.add('hidden');
 
-    widthInput.value = img.naturalWidth;
-    heightInput.value = img.naturalHeight;
+    if (widthInput) widthInput.value = img.naturalWidth;
+    if (heightInput) heightInput.value = img.naturalHeight;
     originalImageRatio = img.ratio;
 
     enableControls();
@@ -141,8 +313,8 @@ function removeImage(index, event) {
 }
 
 function resetToPlaceholder() {
-    previewImage.classList.add('hidden');
-    previewPlaceholder.classList.remove('hidden');
+    if (previewImage) previewImage.classList.add('hidden');
+    if (previewPlaceholder) previewPlaceholder.classList.remove('hidden');
     disableControls();
 }
 
@@ -159,7 +331,7 @@ function disableControls() {
 if (uploadBox) {
     uploadBox.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
-    clearBatchBtn.addEventListener('click', () => {
+    if (clearBatchBtn) clearBatchBtn.addEventListener('click', () => {
         images = [];
         activeIndex = -1;
         renderBatchList();
@@ -175,18 +347,18 @@ if (uploadBox) {
     });
 
     // Sync Inputs
-    widthInput.addEventListener('input', () => {
+    if (widthInput) widthInput.addEventListener('input', () => {
         if (aspectRatio.checked) heightInput.value = Math.floor(widthInput.value / originalImageRatio);
     });
-    heightInput.addEventListener('input', () => {
+    if (heightInput) heightInput.addEventListener('input', () => {
         if (aspectRatio.checked) widthInput.value = Math.floor(heightInput.value * originalImageRatio);
     });
-    qualitySlider.addEventListener('input', () => qualityVal.innerText = `${qualitySlider.value}%`);
+    if (qualitySlider) qualitySlider.addEventListener('input', () => qualityVal.innerText = `${qualitySlider.value}%`);
 
     // --- Advanced Processing Logic ---
 
     // Presets
-    presets.addEventListener('change', () => {
+    if (presets) presets.addEventListener('change', () => {
         const val = presets.value;
         if (val === 'ig-post') { widthInput.value = 1080; heightInput.value = 1080; }
         else if (val === 'ig-story') { widthInput.value = 1080; heightInput.value = 1920; }
@@ -194,19 +366,17 @@ if (uploadBox) {
         else if (val === 'yt-thumb') { widthInput.value = 1280; heightInput.value = 720; }
 
         if (val !== 'custom' && aspectRatio.checked) {
-            // For presets, we usually don't want to force ratio if it doesn't match,
-            // but let's keep it simple: if locked, it will adjust.
             widthInput.dispatchEvent(new Event('input'));
         }
     });
 
     // Filter Labels
-    brightnessSlider.addEventListener('input', () => brightnessVal.innerText = `${brightnessSlider.value}%`);
-    contrastSlider.addEventListener('input', () => contrastVal.innerText = `${contrastSlider.value}%`);
-    grayscaleSlider.addEventListener('input', () => grayscaleVal.innerText = `${grayscaleSlider.value}%`);
+    if (brightnessSlider) brightnessSlider.addEventListener('input', () => brightnessVal.innerText = `${brightnessSlider.value}%`);
+    if (contrastSlider) contrastSlider.addEventListener('input', () => contrastVal.innerText = `${contrastSlider.value}%`);
+    if (grayscaleSlider) grayscaleSlider.addEventListener('input', () => grayscaleVal.innerText = `${grayscaleSlider.value}%`);
 
     // --- Process & Download ---
-    downloadBtn.addEventListener('click', async () => {
+    if (downloadBtn) downloadBtn.addEventListener('click', async () => {
     if (activeIndex === -1) return;
 
     const canvas = document.createElement('canvas');
@@ -267,11 +437,12 @@ const applyCrop = document.getElementById('apply-crop');
 const resetCrop = document.getElementById('reset-crop');
 const cropCanvas = document.getElementById('crop-canvas');
 const cropOverlay = document.getElementById('crop-overlay');
-const cropCtx = cropCanvas.getContext('2d');
+const cropCtx = cropCanvas ? cropCanvas.getContext('2d') : null;
 
 if (openCropBtn) {
     let isCropping = false;
     let startX, startY, currentX, currentY;
+    let cropW = 0, cropH = 0;
 
     openCropBtn.addEventListener('click', () => {
         cropModal.classList.remove('hidden');
@@ -326,25 +497,25 @@ if (openCropBtn) {
 
         currentX = (x / scaleX);
         currentY = (y / scaleY);
-        this.cropW = (w / scaleX);
-        this.cropH = (h / scaleY);
+        cropW = (w / scaleX);
+        cropH = (h / scaleY);
     }
 
     applyCrop.addEventListener('click', () => {
-        if (!this.cropW || !this.cropH) return;
+        if (!cropW || !cropH) return;
 
         const tempCanvas = document.createElement('canvas');
         const tempCtx = tempCanvas.getContext('2d');
-        tempCanvas.width = this.cropW;
-        tempCanvas.height = this.cropH;
+        tempCanvas.width = cropW;
+        tempCanvas.height = cropH;
 
-        tempCtx.drawImage(cropCanvas, currentX, currentY, this.cropW, this.cropH, 0, 0, this.cropW, this.cropH);
+        tempCtx.drawImage(cropCanvas, currentX, currentY, cropW, cropH, 0, 0, cropW, cropH);
 
         const croppedDataUrl = tempCanvas.toDataURL();
         images[activeIndex].dataUrl = croppedDataUrl;
-        images[activeIndex].naturalWidth = this.cropW;
-        images[activeIndex].naturalHeight = this.cropH;
-        images[activeIndex].ratio = this.cropW / this.cropH;
+        images[activeIndex].naturalWidth = cropW;
+        images[activeIndex].naturalHeight = cropH;
+        images[activeIndex].ratio = cropW / cropH;
 
         setActiveImage(activeIndex);
         closeCrop.click();
@@ -352,7 +523,7 @@ if (openCropBtn) {
 
     resetCrop.addEventListener('click', () => {
         cropOverlay.classList.add('hidden');
-        this.cropW = 0;
-        this.cropH = 0;
+        cropW = 0;
+        cropH = 0;
     });
 }

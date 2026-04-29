@@ -93,7 +93,15 @@ drawingCanvas.addEventListener('mouseup', stopDrawing);
 drawingCanvas.addEventListener('mouseout', stopDrawing);
 
 // Text Logic
-pdfCanvasContainer.addEventListener('click', handleCanvasClick);
+pdfCanvasContainer.addEventListener('click', (e) => {
+    if (currentTool === 'text') {
+        const rect = pdfCanvasContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        if (e.target.closest('.text-layer-item') || e.target.closest('.image-layer-item')) return;
+        addTextInput(x, y);
+    }
+});
 
 function setTool(tool) {
     currentTool = tool;
@@ -114,23 +122,14 @@ function setTool(tool) {
         textProperties.classList.add('hidden');
     }
 
-    if (tool === 'shape') {
-        shapeProperties.classList.remove('hidden');
-    } else {
-        shapeProperties.classList.add('hidden');
-    }
+    if (tool === 'shape') shapeProperties.classList.remove('hidden');
+    else shapeProperties.classList.add('hidden');
 
-    if (tool === 'stamp') {
-        stampProperties.classList.remove('hidden');
-    } else {
-        stampProperties.classList.add('hidden');
-    }
+    if (tool === 'stamp') stampProperties.classList.remove('hidden');
+    else stampProperties.classList.add('hidden');
 
-    if (tool === 'highlight') {
-        highlightProperties.classList.remove('hidden');
-    } else {
-        highlightProperties.classList.add('hidden');
-    }
+    if (tool === 'highlight') highlightProperties.classList.remove('hidden');
+    else highlightProperties.classList.add('hidden');
 }
 
 function startDrawing(e) {
@@ -168,12 +167,6 @@ function draw(e) {
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
         [lastX, lastY] = [e.offsetX, e.offsetY];
-    } else if (currentTool === 'whiteout') {
-        // No real-time preview for whiteout yet, handled on mouseup
-    } else if (currentTool === 'shape') {
-        // Preview logic
-        // We don't clear full canvas here to keep previous shapes rendered in loadPageAnnotations
-        // But for a perfect preview we would need a temporary canvas
     }
 }
 
@@ -240,12 +233,6 @@ function stopDrawing(e) {
             y: shapeStartY,
             color: color
         });
-    } else if (currentTool === 'highlight') {
-        // Highlighting is done in real-time, but we need to save it
-        // To keep it simple and high-quality, we treat highlight strokes as 'draw' but with specific properties
-        // Actually the current draw function handles it, but loadPageAnnotations needs to know it's a highlight
-        // For simplicity, let's just save the current canvas state as a 'draw' annotation for now
-        // But a better way is to save segments. Let's stick to the current image-based 'draw' for now as it's reliable.
     }
     isDrawing = false;
 }
@@ -278,17 +265,6 @@ function drawArrow(ctx, fromx, fromy, tox, toy) {
     ctx.moveTo(tox, toy);
     ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
     ctx.stroke();
-}
-
-function handleCanvasClick(e) {
-    if (currentTool !== 'text') return;
-    if (e.target.closest('.text-layer-item') || e.target.closest('.image-layer-item')) return;
-
-    const rect = pdfCanvasContainer.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    addTextInput(x, y);
 }
 
 function addTextInput(x, y, initialValue = '', size = null, color = null) {
@@ -562,12 +538,11 @@ function showLoading(show) {
 }
 
 function saveCurrentAnnotations() {
-    if (currentPage === 0) return;
+    if (currentPage === 0 || !pdfRender) return;
     const pageIdx = currentPage - 1;
     const pageAnnotations = annotations[pageIdx] || [];
 
-    // Persist shapes
-    const filteredAnns = pageAnnotations.filter(a => a.type === 'shape');
+    const filteredAnns = pageAnnotations.filter(a => a.type === 'shape' || a.type === 'whiteout' || a.type === 'stamp');
 
     // Save Text
     textLayer.querySelectorAll('.text-layer-item').forEach(item => {
@@ -581,7 +556,7 @@ function saveCurrentAnnotations() {
         filteredAnns.push({ type: 'image', x: parseFloat(item.style.left), y: parseFloat(item.style.top), width: parseFloat(img.style.width), src: img.src, scale: currentScale });
     });
 
-    // Save Drawing/Highlight
+    // Save Drawing
     const drawingData = drawingCanvas.toDataURL();
     if (drawingData && drawingData !== 'data:,') filteredAnns.push({ type: 'draw', data: drawingData, scale: currentScale });
 
@@ -746,14 +721,14 @@ async function exportPDF() {
             const rotation = pageRotations[i] || 0;
             if (rotation !== 0) page.setRotation(degrees((page.getRotation().angle + rotation) % 360));
 
-            const { width, height } = page.getSize();
+            let { width, height } = page.getSize();
             const hexToRgb = (hex) => rgb(parseInt(hex.slice(1, 3), 16) / 255, parseInt(hex.slice(3, 5), 16) / 255, parseInt(hex.slice(5, 7), 16) / 255);
 
             if (bgColor !== "#ffffff") page.drawRectangle({ x: 0, y: 0, width, height, color: hexToRgb(bgColor) });
 
             const pageAnnotations = annotations[i] || [];
-            const renderWidth = drawingCanvas.width;
-            const renderHeight = drawingCanvas.height;
+            let renderWidth = drawingCanvas.width;
+            let renderHeight = drawingCanvas.height;
 
             for (const ann of pageAnnotations) {
                 const relX = ann.x / renderWidth;

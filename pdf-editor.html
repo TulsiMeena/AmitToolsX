@@ -90,21 +90,38 @@
     <nav class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold tracking-wider">AmitToolsX</div>
         <div class="hidden md:flex items-center space-x-8 text-lg">
-            <a href="index.html" class="hover:text-blue-300 transition-colors">Home</a>
-            <a href="tools.html" class="hover:text-blue-300 transition-colors text-blue-300 font-bold">Tools</a>
-            <a href="about.html" class="hover:text-blue-300 transition-colors">About</a>
-            <a href="contact.html" class="hover:text-blue-300 transition-colors">Contact</a>
-            <a href="privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+            <a href="index.html" class="hover:text-blue-300 transition-colors" data-i18n="navHome">Home</a>
+            <a href="pdf-editor.html" class="hover:text-blue-300 transition-colors text-blue-300 font-bold" data-i18n="navPDF">PDF Editor</a>
+            <a href="tools.html" class="hover:text-blue-300 transition-colors" data-i18n="navTools">Tools</a>
+            <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
+            <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
+            <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+            <button id="lang-toggle" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold hover:bg-white/20 transition-all">हिन्दी</button>
             <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
                 <i class="fas fa-moon" id="theme-icon"></i>
             </button>
         </div>
-        <div class="md:hidden">
+
+        <div class="flex items-center space-x-4 md:hidden">
+            <button id="lang-toggle-mobile" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold">हिन्दी</button>
+            <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon-mobile"></i>
+            </button>
             <button id="menu-btn" class="text-3xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden glass fixed top-16 left-0 w-full p-6 flex-col space-y-4 z-40 md:hidden">
+        <a href="index.html" class="hover:text-blue-300 transition-colors" data-i18n="navHome">Home</a>
+        <a href="pdf-editor.html" class="hover:text-blue-300 transition-colors" data-i18n="navPDF">PDF Editor</a>
+        <a href="tools.html" class="hover:text-blue-300 transition-colors" data-i18n="navTools">Tools</a>
+        <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
+        <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
+        <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+    </div>
 
     <!-- Main Workspace -->
     <main class="container mx-auto px-4 py-6">
@@ -115,7 +132,7 @@
                 <div class="glass p-4 rounded-2xl">
                     <label for="pdf-upload" class="flex flex-col items-center justify-center border-2 border-dashed border-white/20 rounded-xl p-6 hover:border-blue-400 transition-all cursor-pointer group">
                         <i class="fas fa-file-pdf text-4xl mb-2 group-hover:text-blue-400"></i>
-                        <span class="text-sm font-medium">Upload PDF</span>
+                        <span class="text-sm font-medium" data-i18n="pdfUploadBtn">Upload PDF</span>
                         <input type="file" id="pdf-upload" accept="application/pdf" class="hidden">
                     </label>
                 </div>
@@ -153,32 +170,32 @@
                 <!-- Toolbar -->
                 <div class="glass p-3 rounded-2xl flex flex-wrap items-center justify-between gap-4">
                     <div class="flex items-center space-x-2">
-                        <button id="tool-select" class="tool-btn active p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Select">
-                            <i class="fas fa-mouse-pointer mr-2"></i> Select
+                        <button id="tool-select" class="tool-btn active p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-mouse-pointer mr-2"></i> <span data-i18n="pdfToolSelect">Select</span>
                         </button>
-                        <button id="tool-text" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Text">
-                            <i class="fas fa-font mr-2"></i> Text
+                        <button id="tool-text" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-font mr-2"></i> <span data-i18n="pdfToolText">Text</span>
                         </button>
-                        <button id="tool-draw" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Draw/Signature">
-                            <i class="fas fa-pen-fancy mr-2"></i> Draw
+                        <button id="tool-draw" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-pen mr-2"></i> <span data-i18n="pdfToolDraw">Draw</span>
                         </button>
-                        <button id="tool-signature" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Signature">
-                            <i class="fas fa-signature mr-2"></i> Sign
+                        <button id="tool-signature" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-signature mr-2"></i> <span data-i18n="pdfToolSign">Sign</span>
                         </button>
-                        <button id="tool-image" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Image">
-                            <i class="fas fa-image mr-2"></i> Image
+                        <button id="tool-image" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-image mr-2"></i> <span data-i18n="pdfToolImage">Image</span>
                         </button>
-                        <button id="tool-shape" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Shapes">
-                            <i class="fas fa-shapes mr-2"></i> Shapes
+                        <button id="tool-shape" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-shapes mr-2"></i> <span data-i18n="pdfToolShapes">Shapes</span>
                         </button>
-                        <button id="tool-highlight" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Highlight Text">
-                            <i class="fas fa-highlighter mr-2"></i> Highlight
+                        <button id="tool-highlight" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-highlighter mr-2"></i> <span data-i18n="pdfToolAnnotate">Highlight</span>
                         </button>
-                        <button id="tool-whiteout" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Whiteout Content">
-                            <i class="fas fa-eraser mr-2"></i> Whiteout
+                        <button id="tool-whiteout" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-eraser mr-2"></i> <span data-i18n="pdfToolWhiteout">Whiteout</span>
                         </button>
-                        <button id="tool-stamp" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Stamp">
-                            <i class="fas fa-stamp mr-2"></i> Stamp
+                        <button id="tool-stamp" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-stamp mr-2"></i> <span data-i18n="pdfToolStamp">Stamp</span>
                         </button>
                         <input type="file" id="image-upload" accept="image/*" class="hidden">
                     </div>
@@ -255,7 +272,7 @@
                             <i class="fas fa-images mr-2"></i> Pages to PNG
                         </button>
                         <button id="download-pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-xl shadow-lg transition-all transform hover:scale-[1.02] flex items-center">
-                            <i class="fas fa-download mr-2"></i> Export PDF
+                            <i class="fas fa-download mr-2"></i> <span data-i18n="pdfExport">Export PDF</span>
                         </button>
                     </div>
                 </div>
@@ -279,10 +296,10 @@
                         <div class="w-24 h-24 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                             <i class="fas fa-file-pdf text-5xl text-blue-400"></i>
                         </div>
-                        <h2 class="text-3xl font-bold">Advanced PDF Editor</h2>
-                        <p class="text-white/60 max-w-md mx-auto">Upload your PDF to start editing. You can add text, signatures, rotate pages, or remove unwanted pages - all in your browser.</p>
-                        <button onclick="document.getElementById('pdf-upload').click()" class="bg-white/10 hover:bg-white/20 px-8 py-3 rounded-xl transition-all font-bold mt-4">
-                            Select PDF File
+                        <h2 class="text-3xl font-bold" data-i18n="pdfWelcomeTitle">Advanced PDF Editor</h2>
+                        <p class="text-white/60 max-w-md mx-auto" data-i18n="pdfWelcomeSub">Upload your PDF to start editing. You can add text, signatures, rotate pages, or remove unwanted pages - all in your browser.</p>
+                        <button onclick="document.getElementById('pdf-upload').click()" class="bg-white/10 hover:bg-white/20 px-8 py-3 rounded-xl transition-all font-bold mt-4" data-i18n="pdfUploadBtn">
+                            Upload PDF
                         </button>
                     </div>
                 </div>
@@ -304,7 +321,7 @@
     <!-- Footer -->
     <footer class="glass mt-12 py-6 px-6">
         <div class="container mx-auto text-center text-gray-400 text-sm">
-            &copy; 2024 AmitToolsX. Created by <span class="text-white font-bold">Amit Meena</span> & Managed by <span class="text-white font-bold">Aman Meena</span>.
+            &copy; 2024 AmitToolsX. <span data-i18n="footerCreatedBy">Created by</span> <span class="text-white font-bold">Amit Meena</span> & <span data-i18n="footerManagedBy">Managed by</span> <span class="text-white font-bold">Aman Meena</span>.
         </div>
     </footer>
 
@@ -343,21 +360,12 @@
         </div>
     </div>
 
+    <script src="script.js"></script>
     <script src="pdf-editor.js"></script>
     <script>
         // Mobile Menu Logic
         const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.createElement('div');
-        mobileMenu.id = 'mobile-menu';
-        mobileMenu.className = 'hidden glass fixed top-16 left-0 w-full p-6 flex-col space-y-4 z-40 md:hidden';
-        mobileMenu.innerHTML = `
-            <a href="index.html" class="hover:text-blue-300 transition-colors">Home</a>
-            <a href="tools.html" class="hover:text-blue-300 transition-colors text-blue-300">Tools</a>
-            <a href="about.html" class="hover:text-blue-300 transition-colors">About</a>
-            <a href="contact.html" class="hover:text-blue-300 transition-colors">Contact</a>
-            <a href="privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
-        `;
-        document.body.appendChild(mobileMenu);
+        const mobileMenu = document.getElementById('mobile-menu');
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
