@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Tools - AmitToolsX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body class="text-white font-sans bg-home">
+    <!-- Navigation -->
+    <nav class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold tracking-wider">AmitToolsX</div>
+        <div class="hidden md:flex items-center space-x-8 text-lg">
+            <a href="index.html" class="hover:text-blue-300 transition-colors">Home</a>
+            <a href="tools.html" class="hover:text-blue-300 transition-colors text-blue-300 font-bold">Tools</a>
+            <a href="about.html" class="hover:text-blue-300 transition-colors">About</a>
+            <a href="contact.html" class="hover:text-blue-300 transition-colors">Contact</a>
+            <a href="privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+        <div class="flex items-center space-x-4 md:hidden">
+            <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon-mobile"></i>
+            </button>
+            <button id="menu-btn" class="text-3xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden glass fixed top-16 left-0 w-full p-6 flex-col space-y-4 z-40 md:hidden">
+        <a href="index.html" class="hover:text-blue-300 transition-colors">Home</a>
+        <a href="tools.html" class="hover:text-blue-300 transition-colors">Tools</a>
+        <a href="about.html" class="hover:text-blue-300 transition-colors">About</a>
+        <a href="contact.html" class="hover:text-blue-300 transition-colors">Contact</a>
+        <a href="privacy.html" class="hover:text-blue-300 transition-colors">Privacy</a>
+    </div>
+
+    <main class="container mx-auto px-6 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Multi-Utility Tools</h1>
+            <p class="text-xl text-gray-200">Fast, secure, and professional tools for daily tasks.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- QR Code Generator -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-blue-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-qrcode text-2xl text-blue-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">QR Generator</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="qr-input" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm" placeholder="Enter text or URL..."></textarea>
+                    <div id="qr-code" class="bg-white p-2 rounded-xl inline-block mx-auto hidden transition-all duration-500"></div>
+                    <button id="generate-qr" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all">Generate QR Code</button>
+                    <button id="download-qr" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition-all hidden">Download PNG</button>
+                </div>
+            </div>
+
+            <!-- Password Generator -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-key text-2xl text-purple-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Password Gen</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <div class="relative">
+                        <input type="text" id="pass-output" readonly class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none pr-12 text-sm font-mono" placeholder="Your Password">
+                        <button id="copy-pass" class="absolute right-3 top-2.5 text-blue-400 hover:text-white transition-colors">
+                            <i class="fas fa-copy text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs"><span>Length:</span><span id="pass-len-val">16</span></div>
+                        <input type="range" id="pass-length" min="8" max="64" value="16" class="w-full h-1.5 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-purple-400">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <label class="flex items-center cursor-pointer bg-white/5 p-2 rounded-lg hover:bg-white/10">
+                            <input type="checkbox" id="pass-upper" checked class="mr-2"> Uppercase
+                        </label>
+                        <label class="flex items-center cursor-pointer bg-white/5 p-2 rounded-lg hover:bg-white/10">
+                            <input type="checkbox" id="pass-lower" checked class="mr-2"> Lowercase
+                        </label>
+                        <label class="flex items-center cursor-pointer bg-white/5 p-2 rounded-lg hover:bg-white/10">
+                            <input type="checkbox" id="pass-num" checked class="mr-2"> Numbers
+                        </label>
+                        <label class="flex items-center cursor-pointer bg-white/5 p-2 rounded-lg hover:bg-white/10">
+                            <input type="checkbox" id="pass-sym" checked class="mr-2"> Symbols
+                        </label>
+                    </div>
+                    <button id="generate-pass" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl transition-all">Generate Password</button>
+                </div>
+            </div>
+
+            <!-- Word Counter -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-file-alt text-2xl text-green-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Word Counter</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="word-input" rows="5" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-sm" placeholder="Paste your text here..."></textarea>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-white/5 rounded-xl p-3">
+                            <div id="count-words" class="text-xl font-bold text-green-400">0</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Words</div>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-3">
+                            <div id="count-chars" class="text-xl font-bold text-green-400">0</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Characters</div>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-3">
+                            <div id="count-sentences" class="text-xl font-bold text-green-400">0</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Sentences</div>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-3">
+                            <div id="count-paragraphs" class="text-xl font-bold text-green-400">0</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Paragraphs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass mt-20 py-10 px-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+            <div>
+                <h2 class="text-2xl font-bold mb-4">AmitToolsX</h2>
+                <p class="text-gray-300">A premium suite of online utilities for modern developers and creators.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="index.html" class="hover:text-white">Home</a></li>
+                    <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                    <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                    <li><a href="privacy.html" class="hover:text-white">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4">Connect With Us</h3>
+                <div class="flex justify-center md:justify-start space-x-6 text-2xl">
+                    <a href="https://www.instagram.com/_technical_01?igsh=MTdydjJkbWl3Y3ppeg==" target="_blank" class="hover:text-pink-400 transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="https://whatsapp.com/channel/0029VaDFCbF9hXFDBUx8fe3E" target="_blank" class="hover:text-green-400 transition-colors"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-400 text-sm">
+            &copy; 2024 AmitToolsX. Created by <span class="text-white font-bold">Amit Meena</span> & Managed by <span class="text-white font-bold">Aman Meena</span>.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="tools.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+    </script>
+</body>
+</html>
