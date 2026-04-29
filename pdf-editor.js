@@ -35,6 +35,9 @@ const toolText = document.getElementById('tool-text');
 const toolDraw = document.getElementById('tool-draw');
 const toolShape = document.getElementById('tool-shape');
 const toolHighlight = document.getElementById('tool-highlight');
+const toolWhiteout = document.getElementById('tool-whiteout');
+const toolStamp = document.getElementById('tool-stamp');
+const toolSignature = document.getElementById('tool-signature');
 const toolImage = document.getElementById('tool-image');
 const imageUpload = document.getElementById('image-upload');
 const textSizeInput = document.getElementById('text-size');
@@ -43,6 +46,11 @@ const textProperties = document.getElementById('text-properties');
 const shapeProperties = document.getElementById('shape-properties');
 const shapeTypeInput = document.getElementById('shape-type');
 const shapeColorInput = document.getElementById('shape-color');
+const stampProperties = document.getElementById('stamp-properties');
+const stampTypeInput = document.getElementById('stamp-type');
+const stampColorInput = document.getElementById('stamp-color');
+const highlightProperties = document.getElementById('highlight-properties');
+const highlightColorInput = document.getElementById('highlight-color');
 const pageBgColorInput = document.getElementById('page-bg-color');
 const pdfPasswordInput = document.getElementById('pdf-password');
 const watermarkTextInput = document.getElementById('global-watermark-text');
@@ -70,6 +78,9 @@ toolText.addEventListener('click', () => setTool('text'));
 toolDraw.addEventListener('click', () => setTool('draw'));
 toolShape.addEventListener('click', () => setTool('shape'));
 toolHighlight.addEventListener('click', () => setTool('highlight'));
+toolWhiteout.addEventListener('click', () => setTool('whiteout'));
+toolStamp.addEventListener('click', () => setTool('stamp'));
+toolSignature.addEventListener('click', () => openSignatureModal());
 toolImage.addEventListener('click', () => imageUpload.click());
 imageUpload.addEventListener('change', handleImageUpload);
 exportImagesBtn.addEventListener('click', exportAsImages);
@@ -89,7 +100,7 @@ function setTool(tool) {
     document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
     document.getElementById(`tool-${tool}`).classList.add('active');
 
-    if (tool === 'draw' || tool === 'shape' || tool === 'highlight') {
+    if (tool === 'draw' || tool === 'shape' || tool === 'highlight' || tool === 'whiteout' || tool === 'stamp') {
         drawingCanvas.classList.add('active');
     } else {
         drawingCanvas.classList.remove('active');
@@ -108,10 +119,22 @@ function setTool(tool) {
     } else {
         shapeProperties.classList.add('hidden');
     }
+
+    if (tool === 'stamp') {
+        stampProperties.classList.remove('hidden');
+    } else {
+        stampProperties.classList.add('hidden');
+    }
+
+    if (tool === 'highlight') {
+        highlightProperties.classList.remove('hidden');
+    } else {
+        highlightProperties.classList.add('hidden');
+    }
 }
 
 function startDrawing(e) {
-    if (currentTool === 'draw' || currentTool === 'shape' || currentTool === 'highlight') {
+    if (currentTool === 'draw' || currentTool === 'shape' || currentTool === 'highlight' || currentTool === 'whiteout' || currentTool === 'stamp') {
         isDrawing = true;
         [lastX, lastY] = [e.offsetX, e.offsetY];
         [shapeStartX, shapeStartY] = [e.offsetX, e.offsetY];
@@ -133,7 +156,11 @@ function draw(e) {
         ctx.stroke();
         [lastX, lastY] = [e.offsetX, e.offsetY];
     } else if (currentTool === 'highlight') {
-        ctx.strokeStyle = 'rgba(255, 255, 0, 0.4)';
+        const hex = highlightColorInput.value;
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.4)`;
         ctx.lineWidth = 15;
         ctx.lineCap = 'butt';
         ctx.beginPath();
@@ -141,6 +168,8 @@ function draw(e) {
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
         [lastX, lastY] = [e.offsetX, e.offsetY];
+    } else if (currentTool === 'whiteout') {
+        // No real-time preview for whiteout yet, handled on mouseup
     } else if (currentTool === 'shape') {
         // Preview logic
         // We don't clear full canvas here to keep previous shapes rendered in loadPageAnnotations
@@ -151,6 +180,8 @@ function draw(e) {
 function stopDrawing(e) {
     if (!isDrawing) return;
     const ctx = drawingCanvas.getContext('2d');
+    const pageIdx = currentPage - 1;
+    if (!annotations[pageIdx]) annotations[pageIdx] = [];
 
     if (currentTool === 'shape') {
         const type = shapeTypeInput.value;
@@ -159,6 +190,7 @@ function stopDrawing(e) {
         const h = e.offsetY - shapeStartY;
 
         ctx.strokeStyle = color;
+        ctx.fillStyle = color;
         ctx.lineWidth = 2;
 
         if (type === 'rect') ctx.strokeRect(shapeStartX, shapeStartY, w, h);
@@ -172,11 +204,10 @@ function stopDrawing(e) {
             ctx.moveTo(shapeStartX, shapeStartY);
             ctx.lineTo(e.offsetX, e.offsetY);
             ctx.stroke();
+        } else if (type === 'arrow') {
+            drawArrow(ctx, shapeStartX, shapeStartY, e.offsetX, e.offsetY);
         }
 
-        // Save shape to annotations
-        const pageIdx = currentPage - 1;
-        if (!annotations[pageIdx]) annotations[pageIdx] = [];
         annotations[pageIdx].push({
             type: 'shape',
             shapeType: type,
@@ -186,8 +217,67 @@ function stopDrawing(e) {
             h: h,
             color: color
         });
+    } else if (currentTool === 'whiteout') {
+        const w = e.offsetX - shapeStartX;
+        const h = e.offsetY - shapeStartY;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(shapeStartX, shapeStartY, w, h);
+        annotations[pageIdx].push({
+            type: 'whiteout',
+            x: shapeStartX,
+            y: shapeStartY,
+            w: w,
+            h: h
+        });
+    } else if (currentTool === 'stamp') {
+        const type = stampTypeInput.value;
+        const color = stampColorInput.value;
+        drawStamp(ctx, shapeStartX, shapeStartY, type, color);
+        annotations[pageIdx].push({
+            type: 'stamp',
+            stampType: type,
+            x: shapeStartX,
+            y: shapeStartY,
+            color: color
+        });
+    } else if (currentTool === 'highlight') {
+        // Highlighting is done in real-time, but we need to save it
+        // To keep it simple and high-quality, we treat highlight strokes as 'draw' but with specific properties
+        // Actually the current draw function handles it, but loadPageAnnotations needs to know it's a highlight
+        // For simplicity, let's just save the current canvas state as a 'draw' annotation for now
+        // But a better way is to save segments. Let's stick to the current image-based 'draw' for now as it's reliable.
     }
     isDrawing = false;
+}
+
+function drawStamp(ctx, x, y, text, color) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(-Math.PI / 12);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+    ctx.font = 'bold 24px Arial';
+    const textWidth = ctx.measureText(text).width;
+    ctx.strokeRect(-textWidth/2 - 10, -20, textWidth + 20, 40);
+    ctx.fillStyle = color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, 0, 0);
+    ctx.restore();
+}
+
+function drawArrow(ctx, fromx, fromy, tox, toy) {
+    const headlen = 10;
+    const dx = tox - fromx;
+    const dy = toy - fromy;
+    const angle = Math.atan2(dy, dx);
+    ctx.beginPath();
+    ctx.moveTo(fromx, fromy);
+    ctx.lineTo(tox, toy);
+    ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+    ctx.moveTo(tox, toy);
+    ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+    ctx.stroke();
 }
 
 function handleCanvasClick(e) {
@@ -512,10 +602,17 @@ function loadPageAnnotations(pageIdx) {
             img.src = ann.data;
         } else if (ann.type === 'shape') {
             ctx.strokeStyle = ann.color;
+            ctx.fillStyle = ann.color;
             ctx.lineWidth = 2;
             if (ann.shapeType === 'rect') ctx.strokeRect(ann.x, ann.y, ann.w, ann.h);
             else if (ann.shapeType === 'circle') { ctx.beginPath(); const radius = Math.sqrt(ann.w*ann.w + ann.h*ann.h); ctx.arc(ann.x, ann.y, radius, 0, 2*Math.PI); ctx.stroke(); }
             else if (ann.shapeType === 'line') { ctx.beginPath(); ctx.moveTo(ann.x, ann.y); ctx.lineTo(ann.x + ann.w, ann.y + ann.h); ctx.stroke(); }
+            else if (ann.shapeType === 'arrow') { drawArrow(ctx, ann.x, ann.y, ann.x + ann.w, ann.y + ann.h); }
+        } else if (ann.type === 'whiteout') {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(ann.x, ann.y, ann.w, ann.h);
+        } else if (ann.type === 'stamp') {
+            drawStamp(ctx, ann.x, ann.y, ann.stampType, ann.color);
         }
     });
 }
@@ -538,6 +635,100 @@ async function exportAsImages() {
     }
     showLoading(false);
 }
+
+// Signature Modal Logic
+const signatureModal = document.getElementById('signature-modal');
+const signaturePad = document.getElementById('signature-pad');
+const signatureText = document.getElementById('signature-text');
+const clearPadBtn = document.getElementById('clear-pad');
+const closeSignatureBtn = document.getElementById('close-signature');
+const addSignatureBtn = document.getElementById('add-signature-btn');
+const tabDraw = document.getElementById('tab-draw');
+const tabType = document.getElementById('tab-type');
+const drawContainer = document.getElementById('draw-container');
+const typeContainer = document.getElementById('type-container');
+
+let sigPadCtx = signaturePad.getContext('2d');
+let sigIsDrawing = false;
+let sigCurrentTab = 'draw';
+
+function openSignatureModal() {
+    signatureModal.classList.remove('hidden');
+    clearSignaturePad();
+}
+
+function closeSignatureModal() {
+    signatureModal.classList.add('hidden');
+}
+
+function clearSignaturePad() {
+    sigPadCtx.clearRect(0, 0, signaturePad.width, signaturePad.height);
+}
+
+signaturePad.addEventListener('mousedown', (e) => {
+    sigIsDrawing = true;
+    sigPadCtx.beginPath();
+    sigPadCtx.moveTo(e.offsetX, e.offsetY);
+});
+
+signaturePad.addEventListener('mousemove', (e) => {
+    if (!sigIsDrawing) return;
+    sigPadCtx.lineTo(e.offsetX, e.offsetY);
+    sigPadCtx.stroke();
+});
+
+signaturePad.addEventListener('mouseup', () => sigIsDrawing = false);
+
+clearPadBtn.addEventListener('click', clearSignaturePad);
+closeSignatureBtn.addEventListener('click', closeSignatureModal);
+
+tabDraw.addEventListener('click', () => {
+    sigCurrentTab = 'draw';
+    drawContainer.classList.remove('hidden');
+    typeContainer.classList.add('hidden');
+    tabDraw.classList.add('border-blue-400');
+    tabDraw.classList.remove('text-white/40', 'border-transparent');
+    tabType.classList.remove('border-blue-400');
+    tabType.classList.add('text-white/40', 'border-transparent');
+});
+
+tabType.addEventListener('click', () => {
+    sigCurrentTab = 'type';
+    drawContainer.classList.add('hidden');
+    typeContainer.classList.remove('hidden');
+    tabType.classList.add('border-blue-400');
+    tabType.classList.remove('text-white/40', 'border-transparent');
+    tabDraw.classList.remove('border-blue-400');
+    tabDraw.classList.add('text-white/40', 'border-transparent');
+});
+
+document.querySelectorAll('#font-options button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        signatureText.style.fontFamily = btn.getAttribute('data-font');
+        document.querySelectorAll('#font-options button').forEach(b => b.classList.remove('bg-blue-400/20'));
+        btn.classList.add('bg-blue-400/20');
+    });
+});
+
+addSignatureBtn.addEventListener('click', () => {
+    let sigData = '';
+    if (sigCurrentTab === 'draw') {
+        sigData = signaturePad.toDataURL();
+    } else {
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = 400;
+        tempCanvas.height = 100;
+        const tCtx = tempCanvas.getContext('2d');
+        tCtx.font = `bold 40px ${signatureText.style.fontFamily || 'cursive'}`;
+        tCtx.fillStyle = '#000000';
+        tCtx.textAlign = 'center';
+        tCtx.textBaseline = 'middle';
+        tCtx.fillText(signatureText.value || 'Signature', 200, 50);
+        sigData = tempCanvas.toDataURL();
+    }
+    addImageToPage(sigData, 100, 100, 200);
+    closeSignatureModal();
+});
 
 async function exportPDF() {
     if (!pdfDoc) return;
@@ -585,6 +776,38 @@ async function exportPDF() {
                     if (ann.shapeType === 'rect') page.drawRectangle({ ...config, y: config.y - (relH * height), width: relW * width, height: relH * height });
                     else if (ann.shapeType === 'circle') { const radius = Math.sqrt(Math.pow(relW * width, 2) + Math.pow(relH * height, 2)); page.drawCircle({ ...config, radius }); }
                     else if (ann.shapeType === 'line') page.drawLine({ start: { x: relX * width, y: height - (relY * height) }, end: { x: (ann.x + ann.w) / renderWidth * width, y: height - ((ann.y + ann.h) / renderHeight * height) }, color: config.borderColor, thickness: 2 });
+                    else if (ann.shapeType === 'arrow') {
+                        const start = { x: relX * width, y: height - (relY * height) };
+                        const end = { x: (ann.x + ann.w) / renderWidth * width, y: height - ((ann.y + ann.h) / renderHeight * height) };
+                        page.drawLine({ start, end, color: config.borderColor, thickness: 2 });
+                        // Draw arrow head
+                        const angle = Math.atan2(end.y - start.y, end.x - start.x);
+                        const headlen = 10 * (width / renderWidth);
+                        page.drawLine({ start: end, end: { x: end.x - headlen * Math.cos(angle - Math.PI / 6), y: end.y - headlen * Math.sin(angle - Math.PI / 6) }, color: config.borderColor, thickness: 2 });
+                        page.drawLine({ start: end, end: { x: end.x - headlen * Math.cos(angle + Math.PI / 6), y: end.y - headlen * Math.sin(angle + Math.PI / 6) }, color: config.borderColor, thickness: 2 });
+                    }
+                } else if (ann.type === 'whiteout') {
+                    const relW = ann.w / renderWidth;
+                    const relH = ann.h / renderHeight;
+                    page.drawRectangle({ x: relX * width, y: height - (relY * height) - (relH * height), width: relW * width, height: relH * height, color: rgb(1, 1, 1) });
+                } else if (ann.type === 'stamp') {
+                    const stampColor = hexToRgb(ann.color);
+                    page.drawRectangle({
+                        x: (relX * width) - 50,
+                        y: (height - (relY * height)) - 15,
+                        width: 100,
+                        height: 30,
+                        borderColor: stampColor,
+                        borderWidth: 2,
+                        rotate: degrees(-15)
+                    });
+                    page.drawText(ann.stampType, {
+                        x: (relX * width) - 40,
+                        y: (height - (relY * height)) - 5,
+                        size: 15,
+                        color: stampColor,
+                        rotate: degrees(-15)
+                    });
                 }
             }
 

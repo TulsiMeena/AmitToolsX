@@ -162,6 +162,9 @@
                         <button id="tool-draw" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Draw/Signature">
                             <i class="fas fa-pen-fancy mr-2"></i> Draw
                         </button>
+                        <button id="tool-signature" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Signature">
+                            <i class="fas fa-signature mr-2"></i> Sign
+                        </button>
                         <button id="tool-image" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Image">
                             <i class="fas fa-image mr-2"></i> Image
                         </button>
@@ -170,6 +173,12 @@
                         </button>
                         <button id="tool-highlight" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Highlight Text">
                             <i class="fas fa-highlighter mr-2"></i> Highlight
+                        </button>
+                        <button id="tool-whiteout" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Whiteout Content">
+                            <i class="fas fa-eraser mr-2"></i> Whiteout
+                        </button>
+                        <button id="tool-stamp" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Add Stamp">
+                            <i class="fas fa-stamp mr-2"></i> Stamp
                         </button>
                         <input type="file" id="image-upload" accept="image/*" class="hidden">
                     </div>
@@ -182,8 +191,25 @@
                             <option value="rect">Rectangle</option>
                             <option value="circle">Circle</option>
                             <option value="line">Line</option>
+                            <option value="arrow">Arrow</option>
                         </select>
                         <input type="color" id="shape-color" value="#3b82f6" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                    </div>
+
+                    <div id="stamp-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
+                        <select id="stamp-type" class="bg-white/10 border border-white/20 rounded px-1 py-0.5 text-xs focus:outline-none">
+                            <option value="APPROVED">Approved</option>
+                            <option value="CONFIDENTIAL">Confidential</option>
+                            <option value="DRAFT">Draft</option>
+                            <option value="FINAL">Final</option>
+                            <option value="URGENT">Urgent</option>
+                        </select>
+                        <input type="color" id="stamp-color" value="#ef4444" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                    </div>
+
+                    <div id="highlight-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
+                        <span class="text-[10px] text-white/60">Color:</span>
+                        <input type="color" id="highlight-color" value="#ffff00" class="w-6 h-6 bg-transparent border-none cursor-pointer">
                     </div>
 
                     <div id="text-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
@@ -281,6 +307,41 @@
             &copy; 2024 AmitToolsX. Created by <span class="text-white font-bold">Amit Meena</span> & Managed by <span class="text-white font-bold">Aman Meena</span>.
         </div>
     </footer>
+
+    <!-- Signature Modal -->
+    <div id="signature-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center hidden z-[100]">
+        <div class="glass p-8 rounded-3xl w-full max-w-md space-y-6">
+            <h3 class="text-2xl font-bold text-center">Add Signature</h3>
+            <div class="space-y-4">
+                <div class="flex border-b border-white/10 mb-4">
+                    <button id="tab-draw" class="flex-1 py-2 font-bold border-b-2 border-blue-400">Draw</button>
+                    <button id="tab-type" class="flex-1 py-2 font-bold border-b-2 border-transparent text-white/40">Type</button>
+                </div>
+
+                <div id="draw-container" class="space-y-4">
+                    <div class="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+                        <canvas id="signature-pad" width="400" height="200" class="cursor-crosshair"></canvas>
+                    </div>
+                    <button id="clear-pad" class="text-xs text-red-400 hover:text-red-300">Clear Signature Pad</button>
+                </div>
+
+                <div id="type-container" class="hidden space-y-4">
+                    <input type="text" id="signature-text" placeholder="Type your name..." class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <div class="grid grid-cols-2 gap-3" id="font-options">
+                        <button class="p-3 bg-white/5 rounded-lg text-left italic hover:bg-white/10" data-font="cursive">Cursive</button>
+                        <button class="p-3 bg-white/5 rounded-lg text-left font-serif hover:bg-white/10" data-font="serif">Serif</button>
+                        <button class="p-3 bg-white/5 rounded-lg text-left font-mono hover:bg-white/10" data-font="monospace">Monospace</button>
+                        <button class="p-3 bg-white/5 rounded-lg text-left font-bold hover:bg-white/10" data-font="sans-serif">Bold Sans</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex space-x-4 pt-4">
+                <button id="close-signature" class="flex-1 bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold">Cancel</button>
+                <button id="add-signature-btn" class="flex-1 bg-blue-600 hover:bg-blue-700 py-3 rounded-xl font-bold">Add to PDF</button>
+            </div>
+        </div>
+    </div>
 
     <script src="pdf-editor.js"></script>
     <script>
