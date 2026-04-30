@@ -97,7 +97,26 @@ const translations = {
         aboutSub: "The creative minds behind AmitToolsX, dedicated to building powerful online utilities.",
         followers: "Followers",
         posts: "Posts",
-        experience: "Experience"
+        experience: "Experience",
+        // Contact Page
+        contactTitle: "Get In Touch",
+        contactSub: "Have questions or feedback? We'd love to hear from you.",
+        nameLabel: "Full Name",
+        emailLabel: "Email Address",
+        messageLabel: "Message",
+        sendBtn: "Send Message",
+        connectSocial: "Connect on Social",
+        location: "Our Location",
+        // Privacy Page
+        privacyTitle: "Privacy Policy",
+        p1Title: "1. Data Processing",
+        p1Text: "At AmitToolsX, your privacy is our top priority. Unlike other platforms, we don't store your images or documents on any server. Every operation happens entirely within your browser's memory using client-side JavaScript. Your data never leaves your device.",
+        p2Title: "2. User Preferences & Cookies",
+        p2Text: "We use your browser's Local Storage to save your preferred theme (Dark/Light) and language (English/Hindi). This data stays on your machine. We do not use any third-party tracking cookies or analytical scripts that compromise your anonymity.",
+        p3Title: "3. Professional Grade Tools",
+        p3Text: "Our tools are built with high-performance algorithms to ensure quality preservation. Whether you are resizing for Instagram or compression for web use, we ensure that the output meets professional standards without any hidden watermarks.",
+        p4Title: "4. Reach Out to Us",
+        p4Text: "We value your feedback and transparency. If you have concerns about your privacy or suggestions for new features, please reach out to our team (Amit and Aman Meena) via our official social media channels."
     },
     hi: {
         navHome: "होम",
@@ -163,7 +182,26 @@ const translations = {
         aboutSub: "शक्तिशाली ऑनलाइन यूटिलिटीज बनाने के लिए समर्पित अमितटूल्सएक्स के पीछे के रचनात्मक दिमाग।",
         followers: "फॉलोअर्स",
         posts: "पोस्ट्स",
-        experience: "अनुभव"
+        experience: "अनुभव",
+        // Contact Page
+        contactTitle: "संपर्क करें",
+        contactSub: "क्या आपके पास प्रश्न या प्रतिक्रिया है? हमें आपसे सुनकर खुशी होगी।",
+        nameLabel: "पूरा नाम",
+        emailLabel: "ईमेल पता",
+        messageLabel: "संदेश",
+        sendBtn: "संदेश भेजें",
+        connectSocial: "सोशल पर जुड़ें",
+        location: "हमारा स्थान",
+        // Privacy Page
+        privacyTitle: "गोपनीयता नीति",
+        p1Title: "1. डेटा प्रोसेसिंग",
+        p1Text: "अमितटूल्सएक्स (AmitToolsX) में, आपकी गोपनीयता हमारी सर्वोच्च प्राथमिकता है। अन्य प्लेटफार्मों के विपरीत, हम आपकी इमेज या दस्तावेजों को किसी भी सर्वर पर स्टोर नहीं करते हैं। सभी प्रोसेसिंग पूरी तरह से आपके ब्राउज़र की मेमोरी में क्लाइंट-साइड जावास्क्रिप्ट का उपयोग करके होती है। आपका डेटा आपके डिवाइस से बाहर नहीं जाता है।",
+        p2Title: "2. उपयोगकर्ता प्राथमिकताएं और कुकीज़",
+        p2Text: "हम आपकी पसंदीदा थीम (डार्क/लाइट) और भाषा (अंग्रेजी/हिंदी) को सहेजने के लिए आपके ब्राउज़र के लोकल स्टोरेज (Local Storage) का उपयोग करते हैं। यह डेटा आपके मशीन पर ही रहता है। हम किसी भी थर्ड-पार्टी ट्रैकिंग कुकीज़ का उपयोग नहीं करते हैं।",
+        p3Title: "3. प्रोफेशनल ग्रेड टूल्स",
+        p3Text: "हमारे टूल्स उच्च-प्रदर्शन एल्गोरिदम के साथ बनाए गए हैं ताकि क्वालिटी बनी रहे। चाहे आप इंस्टाग्राम के लिए रिसाइज कर रहे हों या वेब उपयोग के लिए कंप्रेस कर रहे हों, हम सुनिश्चित करते हैं कि आउटपुट बिना किसी छिपे हुए वॉटरमार्क के प्रोफेशनल मानकों को पूरा करे।",
+        p4Title: "4. हमसे संपर्क करें",
+        p4Text: "हम आपकी प्रतिक्रिया और पारदर्शिता को महत्व देते हैं। यदि आपको अपनी गोपनीयता के बारे में कोई चिंता है या नए फीचर्स के लिए सुझाव हैं, तो कृपया हमारे आधिकारिक सोशल मीडिया चैनलों के माध्यम से हमारी टीम (अमित और अमन मीणा) से संपर्क करें।"
     }
 };
 
@@ -198,6 +236,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const langBtnMobile = document.getElementById('lang-toggle-mobile');
     if (langBtn) langBtn.addEventListener('click', () => setLanguage(currentLang === 'en' ? 'hi' : 'en'));
     if (langBtnMobile) langBtnMobile.addEventListener('click', () => setLanguage(currentLang === 'en' ? 'hi' : 'en'));
+
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+    }
 });
 
 // State
