@@ -72,6 +72,7 @@ const translations = {
         cropModalTitle: "Advanced Crop Tool",
         reset: "Reset",
         applyCrop: "Apply Crop",
+        installApp: "Install App",
         // PDF Editor
         pdfToolSelect: "Select",
         pdfToolText: "Text",
@@ -103,6 +104,15 @@ const translations = {
         visionTitle: "Our Vision",
         visionText: "We envision AmitToolsX as the go-to platform for creators and developers worldwide, offering a complete suite of browser-based utilities that eliminate the need for expensive software.",
         // Index Page New Sections
+        howItWorksTitle: "How It Works",
+        step1Title: "Upload",
+        step1Text: "Select your images or drag them into the upload box.",
+        step2Title: "Configure",
+        step2Text: "Adjust dimensions, apply filters, or add watermarks.",
+        step3Title: "Preview",
+        step3Text: "Instantly see changes and use the advanced crop tool.",
+        step4Title: "Download",
+        step4Text: "Get your processed images in high quality instantly.",
         whyTitle: "Why Choose AmitToolsX?",
         feature1Title: "100% Privacy",
         feature1Text: "All image and document processing happens locally in your browser. Your files never touch our servers.",
@@ -128,6 +138,7 @@ const translations = {
         p3Title: "3. Professional Grade Tools",
         p3Text: "Our tools are built with high-performance algorithms to ensure quality preservation. Whether you are resizing for Instagram or compression for web use, we ensure that the output meets professional standards without any hidden watermarks.",
         p4Title: "4. Reach Out to Us",
+        soonBtn: "Coming Soon",
         p4Text: "We value your feedback and transparency. If you have concerns about your privacy or suggestions for new features, please reach out to our team (Amit and Aman Meena) via our official social media channels."
     },
     hi: {
@@ -169,6 +180,7 @@ const translations = {
         cropModalTitle: "एडवांस क्रॉप टूल",
         reset: "रीसेट",
         applyCrop: "क्रॉप लागू करें",
+        installApp: "ऐप इंस्टॉल करें",
         // PDF Editor
         pdfToolSelect: "चुनें",
         pdfToolText: "टेक्स्ट",
@@ -200,6 +212,15 @@ const translations = {
         visionTitle: "हमारा दृष्टिकोण",
         visionText: "हम अमितटूल्सएक्स (AmitToolsX) को दुनिया भर के रचनाकारों और डेवलपर्स के लिए पसंदीदा मंच के रूप में देखते हैं, जो ब्राउज़र-आधारित उपयोगिताओं का एक पूरा सूट पेश करता है जो महंगे सॉफ़्टवेयर की आवश्यकता को समाप्त करता है।",
         // Index Page New Sections
+        howItWorksTitle: "यह कैसे काम करता है",
+        step1Title: "अपलोड",
+        step1Text: "अपनी इमेज चुनें या उन्हें अपलोड बॉक्स में ड्रैग करें।",
+        step2Title: "कॉन्फ़िगर",
+        step2Text: "आयाम समायोजित करें, फ़िल्टर लागू करें, या वॉटरमार्क जोड़ें।",
+        step3Title: "पूर्वावलोकन",
+        step3Text: "तुरंत बदलाव देखें और एडवांस क्रॉप टूल का उपयोग करें।",
+        step4Title: "डाउनलोड",
+        step4Text: "अपनी प्रोसेस्ड इमेज तुरंत उच्च गुणवत्ता में प्राप्त करें।",
         whyTitle: "अमितटूल्सएक्स (AmitToolsX) क्यों चुनें?",
         feature1Title: "100% गोपनीयता",
         feature1Text: "सभी इमेज और दस्तावेज़ प्रोसेसिंग आपके ब्राउज़र में स्थानीय रूप से होती है। आपकी फ़ाइलें कभी भी हमारे सर्वर को नहीं छूती हैं।",
@@ -225,6 +246,7 @@ const translations = {
         p3Title: "3. प्रोफेशनल ग्रेड टूल्स",
         p3Text: "हमारे टूल्स उच्च-प्रदर्शन एल्गोरिदम के साथ बनाए गए हैं ताकि क्वालिटी बनी रहे। चाहे आप इंस्टाग्राम के लिए रिसाइज कर रहे हों या वेब उपयोग के लिए कंप्रेस कर रहे हों, हम सुनिश्चित करते हैं कि आउटपुट बिना किसी छिपे हुए वॉटरमार्क के प्रोफेशनल मानकों को पूरा करे।",
         p4Title: "4. हमसे संपर्क करें",
+        soonBtn: "जल्द आ रहा है",
         p4Text: "हम आपकी प्रतिक्रिया और पारदर्शिता को महत्व देते हैं। यदि आपको अपनी गोपनीयता के बारे में कोई चिंता है या नए फीचर्स के लिए सुझाव हैं, तो कृपया हमारे आधिकारिक सोशल मीडिया चैनलों के माध्यम से हमारी टीम (अमित और अमन मीणा) से संपर्क करें।"
     }
 };
@@ -599,3 +621,32 @@ if (openCropBtn) {
         cropH = 0;
     });
 }
+
+// --- PWA Service Worker Registration ---
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed:', err));
+    });
+}
+
+// --- App Install Logic ---
+let deferredPrompt;
+const installBtns = document.querySelectorAll('.install-app-btn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtns.forEach(btn => btn.classList.remove('hidden'));
+});
+
+installBtns.forEach(btn => {
+    btn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            installBtns.forEach(b => b.classList.add('hidden'));
+        }
+        deferredPrompt = null;
+    });
+});

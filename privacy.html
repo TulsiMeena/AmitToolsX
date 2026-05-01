@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body class="text-white font-sans bg-privacy">
     <!-- Navigation -->
@@ -19,12 +20,14 @@
             <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
             <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
             <a href="privacy.html" class="hover:text-blue-300 transition-colors text-blue-300 font-bold" data-i18n="navPrivacy">Privacy</a>
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold hover:bg-blue-700 transition-all mr-4" data-i18n="installApp">Install App</button>
             <button id="lang-toggle" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold hover:bg-white/20 transition-all">हिन्दी</button>
             <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
                 <i class="fas fa-moon" id="theme-icon"></i>
             </button>
         </div>
         <div class="flex items-center space-x-4 md:hidden">
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold mr-2" data-i18n="installApp">Install App</button>
             <button id="lang-toggle-mobile" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold">हिन्दी</button>
             <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
                 <i class="fas fa-moon" id="theme-icon-mobile"></i>

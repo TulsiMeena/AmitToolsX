@@ -10,6 +10,7 @@
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <link rel="manifest" href="manifest.json">
 </head>
 <body class="text-white font-sans bg-home">
     <!-- Navigation -->
@@ -21,12 +22,14 @@
             <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
             <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
             <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold hover:bg-blue-700 transition-all mr-4" data-i18n="installApp">Install App</button>
             <button id="lang-toggle" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold hover:bg-white/20 transition-all">हिन्दी</button>
             <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
                 <i class="fas fa-moon" id="theme-icon"></i>
             </button>
         </div>
         <div class="flex items-center space-x-4 md:hidden">
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold mr-2" data-i18n="installApp">Install App</button>
             <button id="lang-toggle-mobile" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold">हिन्दी</button>
             <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
                 <i class="fas fa-moon" id="theme-icon-mobile"></i>
@@ -81,8 +84,8 @@
                         <i class="fas fa-file-word text-3xl text-blue-400"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-3">Word to PDF</h3>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Convert Microsoft Word (.doc, .docx) documents to PDF with original formatting. Perfect for resumes and reports. (Coming Soon)</p>
-                    <button class="w-full bg-white/10 text-gray-400 font-bold py-3 rounded-xl cursor-not-allowed">Pro Feature</button>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Convert Microsoft Word (.doc, .docx) documents to PDF with original formatting. Perfect for resumes and reports.</p>
+                    <button class="w-full bg-white/10 text-gray-400 font-bold py-3 rounded-xl cursor-not-allowed" data-i18n="soonBtn">Coming Soon</button>
                 </div>
 
                 <!-- HTML to PDF -->
@@ -128,8 +131,8 @@
                         <i class="fas fa-file-word text-3xl text-purple-400"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-3">PDF to Word</h3>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Turn your PDF documents into editable Word files (.docx) while preserving the layout and fonts. (Coming Soon)</p>
-                    <button class="w-full bg-white/10 text-gray-400 font-bold py-3 rounded-xl cursor-not-allowed">Pro Feature</button>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Turn your PDF documents into editable Word files (.docx) while preserving the layout and fonts.</p>
+                    <button class="w-full bg-white/10 text-gray-400 font-bold py-3 rounded-xl cursor-not-allowed" data-i18n="soonBtn">Coming Soon</button>
                 </div>
 
                 <!-- Merge PDF -->
