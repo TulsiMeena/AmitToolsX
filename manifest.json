@@ -9,6 +9,11 @@
   "icons": [
     {
       "src": "https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Technical_01.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Technical_01.jpg",
       "sizes": "512x512",
       "type": "image/jpeg"
     }

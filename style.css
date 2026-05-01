@@ -534,6 +534,13 @@ footer {
 
     .nav-links.active {
         display: flex;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .nav-actions {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .mobile-menu-btn {
