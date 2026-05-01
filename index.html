@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmitAIHub - Discover the Best AI Tools</title>
+    <title>AmitAIHub - Modern AI Tools Directory</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,14 +14,17 @@
             <nav>
                 <a href="index.html" class="logo">AmitAIHub</a>
                 <div class="nav-links" id="navLinks">
-                    <a href="index.html">Home</a>
-                    <a href="#tools">AI Tools</a>
-                    <a href="about.html">About</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <button class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-moon"></i>
-                    </button>
+                    <a href="index.html" data-i18n="nav-home">Home</a>
+                    <a href="#tools" data-i18n="nav-tools">AI Tools</a>
+                    <a href="about.html" data-i18n="nav-about">About</a>
+                    <a href="contact.html" data-i18n="nav-contact">Contact</a>
+                    <a href="privacy.html" data-i18n="nav-privacy">Privacy Policy</a>
+                    <div class="nav-actions">
+                        <button class="lang-toggle" id="langToggle">हिन्दी</button>
+                        <button class="theme-toggle" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
                 </div>
                 <button class="mobile-menu-btn" id="menuBtn">
                     <i class="fas fa-bars"></i>
@@ -31,39 +34,46 @@
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <h1>Discover the Best AI Tools in One Place</h1>
-                <p>Explore powerful AI tools for writing, images, coding, video, productivity, and more.</p>
+                <h1 data-i18n="hero-h1">Discover the Best AI Tools in One Place</h1>
+                <p data-i18n="hero-p">Explore powerful AI tools for writing, images, coding, video, productivity, and more.</p>
+
                 <div class="search-container">
-                    <input type="text" id="toolSearch" placeholder="Search for AI tools (e.g. ChatGPT, Midjourney)...">
+                    <input type="text" id="toolSearch" placeholder="Search for AI tools..." data-i18n="search-placeholder">
                 </div>
-                <div class="categories" id="categoryFilters">
-                    <button class="category-btn active" data-category="all">All Tools</button>
-                    <button class="category-btn" data-category="image">Image AI</button>
-                    <button class="category-btn" data-category="writing">Writing AI</button>
-                    <button class="category-btn" data-category="video">Video AI</button>
-                    <button class="category-btn" data-category="audio">Audio AI</button>
-                    <button class="category-btn" data-category="coding">Coding AI</button>
-                    <button class="category-btn" data-category="productivity">Productivity AI</button>
+
+                <div class="categories">
+                    <button class="category-btn active" data-category="all" data-i18n="cat-all">All Tools</button>
+                    <button class="category-btn" data-category="image" data-i18n="cat-image">Image AI</button>
+                    <button class="category-btn" data-category="writing" data-i18n="cat-writing">Writing AI</button>
+                    <button class="category-btn" data-category="video" data-i18n="cat-video">Video AI</button>
+                    <button class="category-btn" data-category="audio" data-i18n="cat-audio">Audio AI</button>
+                    <button class="category-btn" data-category="coding" data-i18n="cat-coding">Coding AI</button>
+                    <button class="category-btn" data-category="productivity" data-i18n="cat-productivity">Productivity AI</button>
                 </div>
             </div>
         </section>
 
-        <section class="container" id="tools">
-            <div class="tool-grid" id="toolGrid">
-                <!-- AI Tools will be dynamically loaded here by JavaScript -->
+        <!-- Tool Grid Section -->
+        <section class="section-content" id="tools">
+            <div class="container">
+                <div class="tool-grid" id="toolGrid">
+                    <!-- Tools will be injected by JavaScript -->
+                </div>
             </div>
         </section>
 
+        <!-- Newsletter Section -->
         <section class="newsletter">
             <div class="container">
-                <div class="glass-card newsletter-card">
-                    <h2>Stay Updated with New AI Tools</h2>
-                    <p>Subscribe to our newsletter to receive the latest AI tool updates directly in your inbox.</p>
+                <div class="newsletter-card glass-card">
+                    <h2 data-i18n="newsletter-h2">Stay Ahead of the Curve</h2>
+                    <p data-i18n="newsletter-p">Subscribe to our newsletter to get the latest AI tools and news delivered to your inbox.</p>
                     <form class="newsletter-form" id="newsletterForm">
                         <input type="email" placeholder="Enter your email address" required>
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                        <button type="submit" class="btn btn-primary" data-i18n="newsletter-btn">Subscribe Now</button>
                     </form>
                 </div>
             </div>
@@ -75,7 +85,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <a href="index.html" class="logo">AmitAIHub</a>
-                    <p style="margin-top: 15px; color: var(--text-muted);">The ultimate directory for the world's most powerful AI tools and resources.</p>
+                    <p style="margin-top: 15px; color: var(--text-muted);" data-i18n="footer-desc">The ultimate directory for the world's most powerful AI tools and resources.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-github"></i></a>
@@ -84,26 +94,26 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
+                    <h3 data-i18n="footer-quick">Quick Links</h3>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="index.html" data-i18n="nav-home">Home</a></li>
+                        <li><a href="about.html" data-i18n="nav-about">About Us</a></li>
+                        <li><a href="contact.html" data-i18n="nav-contact">Contact Us</a></li>
+                        <li><a href="privacy.html" data-i18n="nav-privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h3>AI Categories</h3>
+                    <h3 data-i18n="footer-categories">AI Categories</h3>
                     <ul>
-                        <li><a href="#" class="filter-link" data-category="image">Image AI</a></li>
-                        <li><a href="#" class="filter-link" data-category="writing">Writing AI</a></li>
-                        <li><a href="#" class="filter-link" data-category="coding">Coding AI</a></li>
-                        <li><a href="#" class="filter-link" data-category="video">Video AI</a></li>
+                        <li><a href="#" class="filter-link" data-category="image" data-i18n="cat-image">Image AI</a></li>
+                        <li><a href="#" class="filter-link" data-category="writing" data-i18n="cat-writing">Writing AI</a></li>
+                        <li><a href="#" class="filter-link" data-category="coding" data-i18n="cat-coding">Coding AI</a></li>
+                        <li><a href="#" class="filter-link" data-category="video" data-i18n="cat-video">Video AI</a></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 AmitAIHub. Created by Amit Meena.</p>
+                <p data-i18n="copyright">© 2026 AmitAIHub. Created by Amit Meena.</p>
             </div>
         </div>
     </footer>
