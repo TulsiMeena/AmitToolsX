@@ -197,9 +197,13 @@ const translations = {
         "how-it-works-p1": "AmitAIHub एक समुदाय संचालित मंच है। यदि आप एक नया AI टूल जोड़ना चाहते हैं या जानकारी अपडेट करना चाहते हैं, तो आप यह कर सकते हैं:",
         "how-it-works-li1": "टूल विवरण के साथ संपर्क फ़ॉर्म के माध्यम से हमसे संपर्क करें।",
         "how-it-works-li2": "हमें सीधे amitda@proton.me पर ईमेल करें।",
-        "how-it-works-li3": "हमारे GitHub रिपॉजिटरी पर पुल रिक्वेस्ट सबमिट करें।"
+        "how-it-works-li3": "हमारे GitHub रिपॉजिटरी पर पुल रिक्वेस्ट सबमिट करें।",
+        "nav-install": "ऐप इंस्टॉल करें"
     }
 };
+
+// Update translations with install button
+translations.en["nav-install"] = "Install App";
 
 // DOM Elements
 const toolGrid = document.getElementById('toolGrid');
@@ -207,6 +211,7 @@ const searchInput = document.getElementById('toolSearch');
 const categoryButtons = document.querySelectorAll('.category-btn');
 const themeToggle = document.getElementById('themeToggle');
 const langToggle = document.getElementById('langToggle');
+const installBtn = document.getElementById('installBtn');
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
 const newsletterForm = document.getElementById('newsletterForm');
@@ -346,6 +351,36 @@ if (themeToggle) {
         } else {
             icon.classList.remove('fa-sun');
             icon.classList.add('fa-moon');
+        }
+    });
+}
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Service Worker Registered'))
+            .catch(err => console.log('Service Worker Error:', err));
+    });
+}
+
+// PWA Install Logic
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.style.display = 'block';
+});
+
+if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                installBtn.style.display = 'none';
+            }
+            deferredPrompt = null;
         }
     });
 }
