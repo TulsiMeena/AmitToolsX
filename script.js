@@ -128,7 +128,17 @@ const translations = {
         "privacy-p": "Your privacy is important to us. Learn how we handle your data.",
         "tool-visit": "Visit Tool",
         "badge-new": "NEW",
-        "badge-trending": "TRENDING"
+        "badge-trending": "TRENDING",
+        "contact-email-us": "Email Us",
+        "contact-call-us": "Call Us",
+        "contact-address": "Address",
+        "address-text": "India Jaipur Karauli Sapotra mod",
+        "reviews-h2": "What Users Say",
+        "how-it-works-h2": "How to Add Information?",
+        "how-it-works-p1": "AmitAIHub is a community-driven platform. If you want to add a new AI tool or update information, you can:",
+        "how-it-works-li1": "Contact us via the contact form with tool details.",
+        "how-it-works-li2": "Email us directly at amitda@proton.me.",
+        "how-it-works-li3": "Submit a pull request on our GitHub repository."
     },
     hi: {
         "nav-home": "होम",
@@ -177,7 +187,17 @@ const translations = {
         "privacy-p": "आपकी गोपनीयता हमारे लिए महत्वपूर्ण है। जानें कि हम आपके डेटा को कैसे संभालते हैं।",
         "tool-visit": "टूल देखें",
         "badge-new": "नया",
-        "badge-trending": "ट्रेंडिंग"
+        "badge-trending": "ट्रेंडिंग",
+        "contact-email-us": "हमें ईमेल करें",
+        "contact-call-us": "हमें कॉल करें",
+        "contact-address": "पता",
+        "address-text": "भारत जयपुर करौली सपोटरा मोड",
+        "reviews-h2": "उपयोगकर्ता क्या कहते हैं",
+        "how-it-works-h2": "जानकारी कैसे जोड़ें?",
+        "how-it-works-p1": "AmitAIHub एक समुदाय संचालित मंच है। यदि आप एक नया AI टूल जोड़ना चाहते हैं या जानकारी अपडेट करना चाहते हैं, तो आप यह कर सकते हैं:",
+        "how-it-works-li1": "टूल विवरण के साथ संपर्क फ़ॉर्म के माध्यम से हमसे संपर्क करें।",
+        "how-it-works-li2": "हमें सीधे amitda@proton.me पर ईमेल करें।",
+        "how-it-works-li3": "हमारे GitHub रिपॉजिटरी पर पुल रिक्वेस्ट सबमिट करें।"
     }
 };
 
