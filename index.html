@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmitAIHub - Modern AI Tools Directory</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00f2ff">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">AmitAIHub</a>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" data-i18n="nav-home">Home</a>
+                    <a href="#tools" data-i18n="nav-tools">AI Tools</a>
+                    <a href="about.html" data-i18n="nav-about">About</a>
+                    <a href="contact.html" data-i18n="nav-contact">Contact</a>
+                    <a href="privacy.html" data-i18n="nav-privacy">Privacy Policy</a>
+                    <div class="nav-actions">
+                        <button class="btn btn-outline" id="installBtn" style="display: none; padding: 5px 15px; font-size: 0.9rem;" data-i18n="nav-install">Install App</button>
+                        <button class="lang-toggle" id="langToggle">हिन्दी</button>
+                        <button class="theme-toggle" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="mobile-menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 data-i18n="hero-h1">Discover the Best AI Tools in One Place</h1>
+                <p data-i18n="hero-p">Explore powerful AI tools for writing, images, coding, video, productivity, and more.</p>
+
+                <div class="search-container">
+                    <input type="text" id="toolSearch" placeholder="Search for AI tools..." data-i18n="search-placeholder">
+                </div>
+
+                <div class="categories">
+                    <button class="category-btn active" data-category="all" data-i18n="cat-all">All Tools</button>
+                    <button class="category-btn" data-category="favorites" data-i18n="cat-favorites"><i class="fas fa-heart"></i> My List</button>
+                    <button class="category-btn" data-category="image" data-i18n="cat-image">Image AI</button>
+                    <button class="category-btn" data-category="writing" data-i18n="cat-writing">Writing AI</button>
+                    <button class="category-btn" data-category="video" data-i18n="cat-video">Video AI</button>
+                    <button class="category-btn" data-category="audio" data-i18n="cat-audio">Audio AI</button>
+                    <button class="category-btn" data-category="coding" data-i18n="cat-coding">Coding AI</button>
+                    <button class="category-btn" data-category="productivity" data-i18n="cat-productivity">Productivity AI</button>
+                </div>
+
+                <div class="advanced-filters glass-card">
+                    <div class="filter-group">
+                        <label for="priceFilter" data-i18n="filter-price">Pricing:</label>
+                        <select id="priceFilter">
+                            <option value="all" data-i18n="price-all">All Prices</option>
+                            <option value="free" data-i18n="price-free">Free</option>
+                            <option value="freemium" data-i18n="price-freemium">Freemium</option>
+                            <option value="paid" data-i18n="price-paid">Paid</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sortBy" data-i18n="filter-sort">Sort By:</label>
+                        <select id="sortBy">
+                            <option value="newest" data-i18n="sort-newest">Newest First</option>
+                            <option value="trending" data-i18n="sort-trending">Trending</option>
+                            <option value="az" data-i18n="sort-az">A - Z</option>
+                            <option value="za" data-i18n="sort-za">Z - A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Milestones/Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label" data-i18n="stat-tools">Tools Listed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label" data-i18n="stat-cats">Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-label" data-i18n="stat-users">Users (K)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="24">0</div>
+                        <div class="stat-label" data-i18n="stat-support">Support (H)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tool Grid Section -->
+        <section class="section-content" id="tools">
+            <div class="container">
+                <div class="tool-grid" id="toolGrid">
+                    <!-- Tools will be injected by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews/Testimonials Section -->
+        <section class="section-content">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 40px; font-size: 2.5rem;" data-i18n="reviews-h2">What Users Say</h2>
+                <div class="tool-grid">
+                    <div class="glass-card">
+                        <p style="font-style: italic; margin-bottom: 15px;">"AmitAIHub has become my go-to resource for finding the latest AI tools. The categorization is perfect!"</p>
+                        <h4 style="color: var(--accent-blue);">- Sarah J., Designer</h4>
+                    </div>
+                    <div class="glass-card">
+                        <p style="font-style: italic; margin-bottom: 15px;">"The best directory for AI tools I've found so far. Clean UI and very fast."</p>
+                        <h4 style="color: var(--accent-purple);">- Mark D., Developer</h4>
+                    </div>
+                    <div class="glass-card">
+                        <p style="font-style: italic; margin-bottom: 15px;">"Love the bilingual support. It makes it so much easier for my team in India to use these tools."</p>
+                        <h4 style="color: var(--accent-blue);">- Rahul M., Content Creator</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section-content">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 40px; font-size: 2.5rem;" data-i18n="faq-h2">Frequently Asked Questions</h2>
+                <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
+                    <div class="faq-item glass-card">
+                        <div class="faq-question">
+                            <h3 data-i18n="faq-q1">What is AmitAIHub?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq-a1">AmitAIHub is a curated directory of the best Artificial Intelligence tools available online, categorized for easy discovery.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-card">
+                        <div class="faq-question">
+                            <h3 data-i18n="faq-q2">Are the tools on this site free?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq-a2">We list a variety of tools: some are completely free, some are 'freemium' (free with paid options), and some are paid. We provide pricing labels for each.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-card">
+                        <div class="faq-question">
+                            <h3 data-i18n="faq-q3">How often is the list updated?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq-a3">Our team constantly monitors the AI landscape and updates the directory with new trending tools almost every week.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit Tool Section -->
+        <section class="section-content" id="submit">
+            <div class="container">
+                <div class="glass-card" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <h2 data-i18n="submit-h2">Submit a Tool</h2>
+                    <p data-i18n="submit-p" style="margin: 15px 0 30px; color: var(--text-muted);">Know a great AI tool? Share it with the community.</p>
+                    <a href="contact.html" class="btn btn-primary" data-i18n="submit-btn">Submit Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-card glass-card">
+                    <h2 data-i18n="newsletter-h2">Stay Ahead of the Curve</h2>
+                    <p data-i18n="newsletter-p">Subscribe to our newsletter to get the latest AI tools and news delivered to your inbox.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn btn-primary" data-i18n="newsletter-btn">Subscribe Now</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Tool Detail Modal -->
+    <div id="toolModal" class="modal">
+        <div class="modal-content glass-card">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody">
+                <!-- Modal content will be injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content glass-card" style="text-align: center; max-width: 400px;">
+            <i class="fas fa-check-circle" style="font-size: 4rem; color: #00ff88; margin-bottom: 20px;"></i>
+            <h2 id="successTitle">Success!</h2>
+            <p id="successMessage">Thank you for reaching out.</p>
+            <button class="btn btn-primary close-success" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="index.html" class="logo">AmitAIHub</a>
+                    <p style="margin-top: 15px; color: var(--text-muted);" data-i18n="footer-desc">The ultimate directory for the world's most powerful AI tools and resources.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer-quick">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html" data-i18n="nav-home">Home</a></li>
+                        <li><a href="about.html" data-i18n="nav-about">About Us</a></li>
+                        <li><a href="contact.html" data-i18n="nav-contact">Contact Us</a></li>
+                        <li><a href="privacy.html" data-i18n="nav-privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer-categories">AI Categories</h3>
+                    <ul>
+                        <li><a href="#" class="filter-link" data-category="image" data-i18n="cat-image">Image AI</a></li>
+                        <li><a href="#" class="filter-link" data-category="writing" data-i18n="cat-writing">Writing AI</a></li>
+                        <li><a href="#" class="filter-link" data-category="coding" data-i18n="cat-coding">Coding AI</a></li>
+                        <li><a href="#" class="filter-link" data-category="video" data-i18n="cat-video">Video AI</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-i18n="copyright">© 2026 AmitAIHub. Created by Amit Meena.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

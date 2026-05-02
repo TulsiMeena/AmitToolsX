@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AmitAIHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00f2ff">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">AmitAIHub</a>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" data-i18n="nav-home">Home</a>
+                    <a href="index.html#tools" data-i18n="nav-tools">AI Tools</a>
+                    <a href="about.html" data-i18n="nav-about">About</a>
+                    <a href="contact.html" data-i18n="nav-contact">Contact</a>
+                    <a href="privacy.html" data-i18n="nav-privacy">Privacy Policy</a>
+                    <div class="nav-actions">
+                        <button class="btn btn-outline" id="installBtn" style="display: none; padding: 5px 15px; font-size: 0.9rem;" data-i18n="nav-install">Install App</button>
+                        <button class="lang-toggle" id="langToggle">हिन्दी</button>
+                        <button class="theme-toggle" id="themeToggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="mobile-menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1 data-i18n="about-h1">About AmitAIHub</h1>
+                <p data-i18n="about-p">Empowering your workflow with the best AI tools.</p>
+            </div>
+        </section>
+
+        <section class="section-content">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h2 style="margin-bottom: 20px; color: var(--accent-blue);" data-i18n="mission-h2">Our Mission</h2>
+                        <p style="margin-bottom: 20px;" data-i18n="mission-p1">At AmitAIHub, our mission is to simplify the complex world of Artificial Intelligence. With thousands of new AI tools launching every month, it can be overwhelming to find the right one for your specific needs. We curate, test, and categorize the most effective AI tools to help you stay ahead in the digital age.</p>
+                        <p data-i18n="mission-p2">Whether you're a developer, designer, writer, or business owner, AmitAIHub provides a centralized platform to discover cutting-edge technology that can transform how you work and create.</p>
+                    </div>
+                    <div class="glass-card">
+                        <h2 style="margin-bottom: 20px; color: var(--accent-purple);" data-i18n="why-h2">Why AmitAIHub?</h2>
+                        <ul style="list-style: none;">
+                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color: var(--accent-blue); margin-right: 10px;"></i> <span data-i18n="why-li1">Curated Selection of High-Quality Tools</span></li>
+                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color: var(--accent-blue); margin-right: 10px;"></i> <span data-i18n="why-li2">Daily Updates on Trending AI</span></li>
+                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color: var(--accent-blue); margin-right: 10px;"></i> <span data-i18n="why-li3">User-Friendly Categorization</span></li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-blue); margin-right: 10px;"></i> <span data-i18n="why-li4">Completely Free to Use</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="margin-top: 60px;">
+                    <h2 style="margin-bottom: 20px; color: var(--accent-blue);" data-i18n="how-it-works-h2">How to Add Information?</h2>
+                    <p style="margin-bottom: 15px;" data-i18n="how-it-works-p1">AmitAIHub is a community-driven platform. If you want to add a new AI tool or update information, you can:</p>
+                    <ul style="list-style: none; margin-bottom: 15px;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-paper-plane" style="color: var(--accent-purple); margin-right: 10px;"></i> <span data-i18n="how-it-works-li1">Contact us via the contact form with tool details.</span></li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-envelope" style="color: var(--accent-purple); margin-right: 10px;"></i> <span data-i18n="how-it-works-li2">Email us directly at amitda@proton.me.</span></li>
+                        <li><i class="fab fa-github" style="color: var(--accent-purple); margin-right: 10px;"></i> <span data-i18n="how-it-works-li3">Submit a pull request on our GitHub repository.</span></li>
+                    </ul>
+                </div>
+
+                <h2 style="text-align: center; margin-top: 80px; margin-bottom: 40px; font-size: 2.5rem;" data-i18n="creator-h2">Meet the Team</h2>
+                <div class="team-grid">
+                    <!-- Admin: Aman Meena -->
+                    <div class="creator-card glass-card">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Technical_01.jpg" alt="Aman Meena" class="creator-img" loading="lazy">
+                        <h3>Aman Meena</h3>
+                        <p style="color: var(--accent-blue); font-weight: 600; margin-bottom: 10px;" data-i18n="admin-role">Admin</p>
+                        <p data-i18n="aman-bio">Expert content creator and tech lead for the platform's social channels. Aman brings over 5 years of experience in the tech industry.</p>
+                        <div class="stats-box">
+                            <div class="stat-item">
+                                <strong>15k+</strong>
+                                <span data-i18n="aman-followers">Followers</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>200+</strong>
+                                <span data-i18n="aman-posts">Posts</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>5+</strong>
+                                <span data-i18n="aman-exp">Years Exp.</span>
+                            </div>
+                        </div>
+                        <div class="social-icons" style="justify-content: center; margin-top: 20px;">
+                            <a href="https://www.instagram.com/_.aman_x01___?igsh=MWhmaTdlM3J3bTF6dg==" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://whatsapp.com/channel/0029VaDFCbF9hXFDBUx8fe3E" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Creator: Amit Meena -->
+                    <div class="creator-card glass-card">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Amit%20meena.jpg" alt="Amit Meena" class="creator-img" loading="lazy">
+                        <h3>Amit Meena</h3>
+                        <p style="color: var(--accent-purple); font-weight: 600; margin-bottom: 10px;" data-i18n="creator-role">Creator & Lead Developer</p>
+                        <p data-i18n="amit-bio">Amit is the visionary behind AmitAIHub, responsible for the platform's design, architecture, and overall development.</p>
+                        <div class="social-icons" style="justify-content: center; margin-top: 20px;">
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="index.html" class="logo">AmitAIHub</a>
+                    <p style="margin-top: 15px; color: var(--text-muted);" data-i18n="footer-desc">The ultimate directory for the world's most powerful AI tools and resources.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer-quick">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html" data-i18n="nav-home">Home</a></li>
+                        <li><a href="about.html" data-i18n="nav-about">About Us</a></li>
+                        <li><a href="contact.html" data-i18n="nav-contact">Contact Us</a></li>
+                        <li><a href="privacy.html" data-i18n="nav-privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer-categories">AI Categories</h3>
+                    <ul>
+                        <li><a href="index.html#tools" data-i18n="cat-image">Image AI</a></li>
+                        <li><a href="index.html#tools" data-i18n="cat-writing">Writing AI</a></li>
+                        <li><a href="index.html#tools" data-i18n="cat-coding">Coding AI</a></li>
+                        <li><a href="index.html#tools" data-i18n="cat-video">Video AI</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-i18n="copyright">© 2026 AmitAIHub. Created by Amit Meena.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
