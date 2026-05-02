@@ -102,6 +102,303 @@ const aiTools = [
         link: "https://leonardo.ai",
         badge: "new",
         pricing: "Freemium"
+    },
+    {
+        id: "v0",
+        name: "v0.dev",
+        description: "Generative UI system by Vercel to build professional websites with simple prompts.",
+        category: "coding",
+        link: "https://v0.dev",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "heygen",
+        name: "HeyGen",
+        description: "Scale your video production with AI-generated avatars and seamless translations.",
+        category: "video",
+        link: "https://heygen.com",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "adobe-firefly",
+        name: "Adobe Firefly",
+        description: "Generative AI for creators, integrated directly into Adobe Photoshop and Illustrator.",
+        category: "image",
+        link: "https://www.adobe.com/sensei/generative-ai/firefly.html",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "cursor",
+        name: "Cursor",
+        description: "The AI-first code editor designed to make you exceptionally productive at software development.",
+        category: "coding",
+        link: "https://cursor.com",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "notion-ai",
+        name: "Notion AI",
+        description: "Work faster, write better, and think bigger with AI integrated directly into your workspace.",
+        category: "productivity",
+        link: "https://www.notion.so/product/ai",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "grammarly-go",
+        name: "GrammarlyGO",
+        description: "Generative AI that helps you write, rewrite, and brainstorm with personalized voice.",
+        category: "writing",
+        link: "https://www.grammarly.com/grammarlygo",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "descript",
+        name: "Descript",
+        description: "A new way to make video and podcasts by editing text instead of audio clips.",
+        category: "audio",
+        link: "https://www.descript.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "copy-ai",
+        name: "Copy.ai",
+        description: "AI-powered copywriting tool for marketing, social media, and business growth.",
+        category: "writing",
+        link: "https://www.copy.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "jasper",
+        name: "Jasper",
+        description: "AI content generator for teams that creates high-quality content 10x faster.",
+        category: "writing",
+        link: "https://www.jasper.ai",
+        badge: "trending",
+        pricing: "Paid"
+    },
+    {
+        id: "luma-dream-machine",
+        name: "Luma Dream Machine",
+        description: "A highly capable AI model that makes high-quality, realistic videos from text and images.",
+        category: "video",
+        link: "https://lumalabs.ai/dream-machine",
+        badge: "new",
+        pricing: "Freemium"
+    },
+    {
+        id: "replicate",
+        name: "Replicate",
+        description: "Run machine learning models in the cloud with an API, from text-to-image to voice.",
+        category: "coding",
+        link: "https://replicate.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "fireflies-ai",
+        name: "Fireflies.ai",
+        description: "AI meeting assistant that automatically records, transcribes, and summarizes meetings.",
+        category: "productivity",
+        link: "https://fireflies.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "tome",
+        name: "Tome",
+        description: "AI-powered storytelling platform to create compelling presentations and landing pages.",
+        category: "productivity",
+        link: "https://tome.app",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "otter-ai",
+        name: "Otter.ai",
+        description: "Get an AI meeting assistant that records audio, writes notes, and captures action items.",
+        category: "audio",
+        link: "https://otter.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "spline-ai",
+        name: "Spline AI",
+        description: "Describe what you want to create and let AI generate 3D objects, animations, and scenes.",
+        category: "image",
+        link: "https://spline.design/ai",
+        badge: "new",
+        pricing: "Freemium"
+    },
+    {
+        id: "character-ai",
+        name: "Character.ai",
+        description: "Neural language model chatbot service that can generate human-like text responses.",
+        category: "writing",
+        link: "https://character.ai",
+        badge: "trending",
+        pricing: "Free"
+    },
+    {
+        id: "revoicer",
+        name: "Revoicer",
+        description: "The most realistic AI voiceover generator that expresses human emotions in every voice.",
+        category: "audio",
+        link: "https://revoicer.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "blackbox-ai",
+        name: "Blackbox AI",
+        description: "The best AI coding assistant to help you write code faster and search for documentation.",
+        category: "coding",
+        link: "https://www.blackbox.ai",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "kaiber",
+        name: "Kaiber",
+        description: "AI creative lab that helps users generate high-quality video animations from prompts.",
+        category: "video",
+        link: "https://kaiber.ai",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "remove-bg",
+        name: "Remove.bg",
+        description: "Remove image backgrounds automatically in 5 seconds with just one click.",
+        category: "image",
+        link: "https://www.remove.bg",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "gamma",
+        name: "Gamma App",
+        description: "A new medium for presenting ideas, powered by AI to create docs, decks, and sites.",
+        category: "productivity",
+        link: "https://gamma.app",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "murf-ai",
+        name: "Murf AI",
+        description: "Versatile AI voice generator that enables you to create studio-quality voiceovers.",
+        category: "audio",
+        link: "https://murf.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "reword",
+        name: "Reword",
+        description: "Write better content for your readers with the help of a collaborative AI editor.",
+        category: "writing",
+        link: "https://reword.ai",
+        badge: "new",
+        pricing: "Paid"
+    },
+    {
+        id: "phind",
+        name: "Phind",
+        description: "The intelligent search engine and AI pair programmer for developers.",
+        category: "coding",
+        link: "https://www.phind.com",
+        badge: "",
+        pricing: "Free"
+    },
+    {
+        id: "kling",
+        name: "Kling AI",
+        description: "The latest breakthrough in video generation capable of producing cinematic 1080p clips.",
+        category: "video",
+        link: "https://klingai.com",
+        badge: "new",
+        pricing: "Freemium"
+    },
+    {
+        id: "framer-ai",
+        name: "Framer AI",
+        description: "Design and publish professional websites with the help of AI in minutes.",
+        category: "productivity",
+        link: "https://www.framer.com/ai",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "soundraw",
+        name: "Soundraw",
+        description: "AI music generator for creators, enabling you to customize every aspect of your tracks.",
+        category: "audio",
+        link: "https://soundraw.io",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "tabnine",
+        name: "Tabnine",
+        description: "AI assistant for software developers that helps write code faster with deep learning.",
+        category: "coding",
+        link: "https://www.tabnine.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "invideo",
+        name: "InVideo AI",
+        description: "Create published-ready videos from simple text ideas with an AI video editor.",
+        category: "video",
+        link: "https://invideo.io",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "lexica",
+        name: "Lexica",
+        description: "The search engine for Stable Diffusion images and a powerful generation tool.",
+        category: "image",
+        link: "https://lexica.art",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "summarize-tech",
+        name: "Summarize.tech",
+        description: "Get a summary of any long YouTube video, like a lecture or an event.",
+        category: "productivity",
+        link: "https://www.summarize.tech",
+        badge: "",
+        pricing: "Free"
+    },
+    {
+        id: "voicemod",
+        name: "Voicemod",
+        description: "Real-time AI voice changer and soundboard for gamers and content creators.",
+        category: "audio",
+        link: "https://www.voicemod.net",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "aider",
+        name: "Aider",
+        description: "Command line chat tool that allows you to edit code in your local git repo with AI.",
+        category: "coding",
+        link: "https://aider.chat",
+        badge: "new",
+        pricing: "Free"
     }
 ];
 
@@ -207,6 +504,15 @@ const translations = {
         "no-tools-p": "Try adjusting your search or category filter.",
         "view-details": "View Details",
         "features-h3": "Key Features",
+        "workflow-h2": "How AmitAIHub Works",
+        "workflow-s1-h": "Explore Tools",
+        "workflow-s1-p": "Browse through 1200+ AI tools across various professional categories.",
+        "workflow-s2-h": "Compare Features",
+        "workflow-s2-p": "View detailed breakdowns of pricing, features, and user capabilities.",
+        "workflow-s3-h": "Save to My List",
+        "workflow-s3-p": "Collect your favorite tools in your personal list for quick access anytime.",
+        "workflow-s4-h": "Boost Productivity",
+        "workflow-s4-p": "Integrate the best AI models into your daily workflow and save hours of work.",
         "filter-price": "Pricing:",
         "filter-sort": "Sort By:",
         "sort-newest": "Newest First",
@@ -316,6 +622,15 @@ const translations = {
         "no-tools-p": "अपनी खोज या श्रेणी फ़िल्टर को समायोजित करने का प्रयास करें।",
         "view-details": "विवरण देखें",
         "features-h3": "प्रमुख विशेषताएं",
+        "workflow-h2": "AmitAIHub कैसे काम करता है",
+        "workflow-s1-h": "टूल्स को एक्सप्लोर करें",
+        "workflow-s1-p": "विभिन्न व्यावसायिक श्रेणियों में 1200+ AI टूल्स ब्राउज़ करें।",
+        "workflow-s2-h": "विशेषताओं की तुलना करें",
+        "workflow-s2-p": "मूल्य निर्धारण, सुविधाओं और उपयोगकर्ता क्षमताओं का विस्तृत विवरण देखें।",
+        "workflow-s3-h": "मेरी सूची में सहेजें",
+        "workflow-s3-p": "किसी भी समय त्वरित पहुंच के लिए अपनी व्यक्तिगत सूची में अपने पसंदीदा टूल एकत्र करें।",
+        "workflow-s4-h": "उत्पादकता बढ़ाएं",
+        "workflow-s4-p": "अपने दैनिक वर्कफ़्लो में सर्वश्रेष्ठ AI मॉडल को एकीकृत करें और घंटों का काम बचाएं।",
         "filter-price": "कीमत:",
         "filter-sort": "क्रमबद्ध करें:",
         "sort-newest": "नवीनतम पहले",
@@ -717,23 +1032,34 @@ if ('serviceWorker' in navigator) {
 
 // PWA Install Logic
 let deferredPrompt;
+const installBanner = document.getElementById('installBanner');
+const installBannerBtn = document.getElementById('installBannerBtn');
+
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     if (installBtn) installBtn.style.display = 'block';
+    if (installBanner) installBanner.style.display = 'block';
 });
 
-if (installBtn) {
-    installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                installBtn.style.display = 'none';
-            }
-            deferredPrompt = null;
+const handleInstall = async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            if (installBtn) installBtn.style.display = 'none';
+            if (installBanner) installBanner.style.display = 'none';
         }
-    });
+        deferredPrompt = null;
+    }
+};
+
+if (installBtn) {
+    installBtn.addEventListener('click', handleInstall);
+}
+
+if (installBannerBtn) {
+    installBannerBtn.addEventListener('click', handleInstall);
 }
 
 // Initial Load

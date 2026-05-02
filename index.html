@@ -39,6 +39,23 @@
     <main>
         <!-- Hero Section -->
         <section class="hero">
+            <div id="installBanner" class="glass-card" style="display: none; margin-bottom: 30px; border: 1px solid var(--accent-blue); animation: fadeIn 1s ease;">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: 5px;">Install AmitAIHub App</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-muted);">Access your favorite AI tools even faster directly from your home screen.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary" id="installBannerBtn">Install Now</button>
+                        <button class="btn btn-outline" onclick="this.parentElement.parentElement.parentElement.style.display='none'">Later</button>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <h1 data-i18n="hero-h1">Discover the Best AI Tools in One Place</h1>
                 <p data-i18n="hero-p">Explore powerful AI tools for writing, images, coding, video, productivity, and more.</p>
@@ -86,20 +103,49 @@
             <div class="container">
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-number" data-target="1200">0</div>
                         <div class="stat-label" data-i18n="stat-tools">Tools Listed</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-number" data-target="150">0</div>
                         <div class="stat-label" data-i18n="stat-cats">Categories</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-number" data-target="25">0</div>
                         <div class="stat-label" data-i18n="stat-users">Users (K)</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" data-target="24">0</div>
                         <div class="stat-label" data-i18n="stat-support">Support (H)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workflow Section -->
+        <section class="section-content">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5rem;" data-i18n="workflow-h2">How AmitAIHub Works</h2>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <div class="step-number">01</div>
+                        <h3 data-i18n="workflow-s1-h">Explore Tools</h3>
+                        <p data-i18n="workflow-s1-p">Browse through 1200+ AI tools across various professional categories.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-number">02</div>
+                        <h3 data-i18n="workflow-s2-h">Compare Features</h3>
+                        <p data-i18n="workflow-s2-p">View detailed breakdowns of pricing, features, and user capabilities.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-number">03</div>
+                        <h3 data-i18n="workflow-s3-h">Save to My List</h3>
+                        <p data-i18n="workflow-s3-p">Collect your favorite tools in your personal list for quick access anytime.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-number">04</div>
+                        <h3 data-i18n="workflow-s4-h">Boost Productivity</h3>
+                        <p data-i18n="workflow-s4-p">Integrate the best AI models into your daily workflow and save hours of work.</p>
                     </div>
                 </div>
             </div>
