@@ -2,7 +2,7 @@
   "name": "AmitAIHub - AI Tools Directory",
   "short_name": "AmitAIHub",
   "description": "Discover the Best AI Tools in One Place.",
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0a0b10",
   "theme_color": "#00f2ff",

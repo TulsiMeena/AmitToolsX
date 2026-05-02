@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00f2ff">
 </head>
 <body>
     <header>
@@ -47,6 +49,7 @@
 
                 <div class="categories">
                     <button class="category-btn active" data-category="all" data-i18n="cat-all">All Tools</button>
+                    <button class="category-btn" data-category="favorites" data-i18n="cat-favorites"><i class="fas fa-heart"></i> My List</button>
                     <button class="category-btn" data-category="image" data-i18n="cat-image">Image AI</button>
                     <button class="category-btn" data-category="writing" data-i18n="cat-writing">Writing AI</button>
                     <button class="category-btn" data-category="video" data-i18n="cat-video">Video AI</button>
@@ -87,6 +90,17 @@
             </div>
         </section>
 
+        <!-- Submit Tool Section -->
+        <section class="section-content" id="submit">
+            <div class="container">
+                <div class="glass-card" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <h2 data-i18n="submit-h2">Submit a Tool</h2>
+                    <p data-i18n="submit-p" style="margin: 15px 0 30px; color: var(--text-muted);">Know a great AI tool? Share it with the community.</p>
+                    <a href="contact.html" class="btn btn-primary" data-i18n="submit-btn">Submit Now</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Newsletter Section -->
         <section class="newsletter">
             <div class="container">
@@ -101,6 +115,11 @@
             </div>
         </section>
     </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <footer>
         <div class="container">

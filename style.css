@@ -335,25 +335,46 @@ footer {
 }
 
 .tool-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 800;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .badge-new { background: #28a745; color: white; }
 .badge-trending { background: #ffc107; color: black; }
 
+.tool-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.tool-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .tool-category {
     font-size: 0.85rem;
     color: var(--accent-blue);
     font-weight: 600;
-    margin-bottom: 10px;
-    display: block;
+}
+
+.tool-pricing {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(var(--accent-blue-rgb), 0.1);
+    color: var(--accent-blue);
+    font-weight: 700;
+    display: inline-block;
+    width: fit-content;
+    text-transform: uppercase;
 }
 
 .tool-card h3 {
@@ -364,6 +385,74 @@ footer {
     color: var(--text-muted);
     font-size: 0.95rem;
     margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.tool-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.tool-icon-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.icon-btn:hover {
+    background: var(--accent-blue);
+    color: white;
+    transform: scale(1.1);
+}
+
+.fav-btn i.fas {
+    color: #ff4757;
+}
+
+/* Back to Top */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--neon-gradient);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: var(--transition);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--accent-blue);
 }
 
 /* Newsletter */
