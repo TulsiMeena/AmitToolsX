@@ -4,6 +4,8 @@ const aiTools = [
         id: "chatgpt",
         name: "ChatGPT",
         description: "A powerful conversational AI that can write, code, and assist with complex tasks.",
+        longDescription: "ChatGPT is an advanced language model developed by OpenAI. It is designed to generate human-like text based on the prompts provided by users. It can assist with a wide range of tasks including writing essays, generating code, translating languages, and answering complex questions across various domains.",
+        features: ["Text Generation", "Coding Assistance", "Creative Writing", "Translation"],
         category: "writing",
         link: "https://chat.openai.com",
         badge: "trending",
@@ -13,6 +15,8 @@ const aiTools = [
         id: "midjourney",
         name: "Midjourney",
         description: "An AI-powered system that creates high-quality images from text descriptions.",
+        longDescription: "Midjourney is a generative artificial intelligence program and service created and hosted by a San Francisco-based independent research lab Midjourney, Inc. Midjourney generates images from natural language descriptions, called prompts, similar to OpenAI's DALL-E and Stability AI's Stable Diffusion.",
+        features: ["High-Res Image Gen", "Artistic Styles", "Community Feed", "Discord Integration"],
         category: "image",
         link: "https://www.midjourney.com",
         badge: "trending",
@@ -139,7 +143,12 @@ const translations = {
         "why-li4": "Completely Free to Use",
         "creator-h2": "Meet the Team",
         "admin-role": "Admin",
+        "aman-bio": "Expert content creator and tech lead for the platform's social channels. Aman brings over 5 years of experience in the tech industry.",
+        "aman-followers": "Followers",
+        "aman-posts": "Posts",
+        "aman-exp": "Years Exp.",
         "creator-role": "Creator & Lead Developer",
+        "amit-bio": "Amit is the visionary behind AmitAIHub, responsible for the platform's design, architecture, and overall development.",
         "contact-h1": "Contact Us",
         "contact-p": "Have questions or suggestions? We'd love to hear from you.",
         "contact-name": "Full Name",
@@ -149,6 +158,16 @@ const translations = {
         "contact-btn": "Send Message",
         "privacy-h1": "Privacy Policy",
         "privacy-p": "Your privacy is important to us. Learn how we handle your data.",
+        "privacy-s1-h2": "1. Data Collection Policy",
+        "privacy-s1-p": "AmitAIHub does not require user registration for browsing our directory. We only collect information that you voluntarily provide through our contact form or newsletter subscription, such as your name and email address.",
+        "privacy-s2-h2": "2. Cookie Usage",
+        "privacy-s2-p": "We use cookies and similar tracking technologies to track the activity on our Service and hold certain information. Cookies are files with small amount of data which may include an anonymous unique identifier. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.",
+        "privacy-s3-h2": "3. Third-Party Links Notice",
+        "privacy-s3-p": "Our platform contains links to external websites that are not operated by us. Please be aware that we have no control over the content and practices of these sites, and cannot accept responsibility or liability for their respective privacy policies.",
+        "privacy-s4-h2": "4. Security Statement",
+        "privacy-s4-p": "The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.",
+        "privacy-s5-h2": "5. Updates to This Policy",
+        "privacy-s5-p": "We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.",
         "tool-visit": "Visit Tool",
         "badge-new": "NEW",
         "badge-trending": "TRENDING",
@@ -165,6 +184,17 @@ const translations = {
         "submit-h2": "Submit a Tool",
         "submit-p": "Know a great AI tool? Share it with the community.",
         "submit-btn": "Submit Now",
+        "faq-h2": "Frequently Asked Questions",
+        "faq-q1": "What is AmitAIHub?",
+        "faq-a1": "AmitAIHub is a curated directory of the best Artificial Intelligence tools available online, categorized for easy discovery.",
+        "faq-q2": "Are the tools on this site free?",
+        "faq-a2": "We list a variety of tools: some are completely free, some are 'freemium' (free with paid options), and some are paid. We provide pricing labels for each.",
+        "faq-q3": "How often is the list updated?",
+        "faq-a3": "Our team constantly monitors the AI landscape and updates the directory with new trending tools almost every week.",
+        "stat-tools": "Tools Listed",
+        "stat-cats": "Categories",
+        "stat-users": "Users (K)",
+        "stat-support": "Support (H)",
         "share-text": "Check out this awesome AI tool: ",
         "fav-added": "Added to Favorites!",
         "fav-removed": "Removed from Favorites!",
@@ -174,7 +204,16 @@ const translations = {
         "no-favorites-h3": "Your list is empty",
         "no-favorites-p": "Click the heart icon on any tool to save it here.",
         "no-tools-h3": "No tools found",
-        "no-tools-p": "Try adjusting your search or category filter."
+        "no-tools-p": "Try adjusting your search or category filter.",
+        "view-details": "View Details",
+        "features-h3": "Key Features",
+        "filter-price": "Pricing:",
+        "filter-sort": "Sort By:",
+        "sort-newest": "Newest First",
+        "sort-trending": "Trending",
+        "sort-az": "A - Z",
+        "sort-za": "Z - A",
+        "price-all": "All Prices"
     },
     hi: {
         "nav-home": "होम",
@@ -212,7 +251,12 @@ const translations = {
         "why-li4": "उपयोग करने के लिए पूरी तरह से मुफ़्त",
         "creator-h2": "टीम से मिलें",
         "admin-role": "एडमिन",
+        "aman-bio": "प्लेटफॉर्म के सोशल चैनलों के लिए विशेषज्ञ सामग्री निर्माता और तकनीकी प्रमुख। अमन के पास तकनीकी उद्योग में 5 से अधिक वर्षों का अनुभव है।",
+        "aman-followers": "फ़ॉलोअर्स",
+        "aman-posts": "पोस्ट",
+        "aman-exp": "वर्षों का अनुभव",
         "creator-role": "निर्माता और लीड डेवलपर",
+        "amit-bio": "अमित AmitAIHub के पीछे के दूरदर्शी हैं, जो प्लेटफॉर्म के डिजाइन, आर्किटेक्चर और समग्र विकास के लिए जिम्मेदार हैं।",
         "contact-h1": "संपर्क करें",
         "contact-p": "प्रश्न या सुझाव हैं? हमें आपसे सुनना अच्छा लगेगा।",
         "contact-name": "पूरा नाम",
@@ -222,6 +266,16 @@ const translations = {
         "contact-btn": "संदेश भेजें",
         "privacy-h1": "गोपनीयता नीति",
         "privacy-p": "आपकी गोपनीयता हमारे लिए महत्वपूर्ण है। जानें कि हम आपके डेटा को कैसे संभालते हैं।",
+        "privacy-s1-h2": "1. डेटा संग्रह नीति",
+        "privacy-s1-p": "AmitAIHub को हमारी निर्देशिका ब्राउज़ करने के लिए उपयोगकर्ता पंजीकरण की आवश्यकता नहीं है। हम केवल वही जानकारी एकत्र करते हैं जो आप स्वेच्छा से हमारे संपर्क फ़ॉर्म या न्यूज़लेटर सदस्यता के माध्यम से प्रदान करते हैं, जैसे आपका नाम और ईमेल पता।",
+        "privacy-s2-h2": "2. कुकी उपयोग",
+        "privacy-s2-p": "हम अपनी सेवा पर गतिविधि को ट्रैक करने और कुछ जानकारी रखने के लिए कुकीज़ और इसी तरह की ट्रैकिंग तकनीकों का उपयोग करते हैं। कुकीज़ डेटा की छोटी मात्रा वाली फाइलें होती हैं जिनमें एक अनाम विशिष्ट पहचानकर्ता शामिल हो सकता है। आप अपने ब्राउज़र को सभी कुकीज़ को अस्वीकार करने या कुकी भेजे जाने पर इंगित करने का निर्देश दे सकते हैं।",
+        "privacy-s3-h2": "3. तृतीय-पक्ष लिंक नोटिस",
+        "privacy-s3-p": "हमारे मंच में बाहरी वेबसाइटों के लिंक हैं जो हमारे द्वारा संचालित नहीं हैं। कृपया ध्यान रखें कि इन साइटों की सामग्री और प्रथाओं पर हमारा कोई नियंत्रण नहीं है, और हम उनकी संबंधित गोपनीयता नीतियों के लिए जिम्मेदारी या उत्तरदायित्व स्वीकार नहीं कर सकते।",
+        "privacy-s4-h2": "4. सुरक्षा विवरण",
+        "privacy-s4-p": "आपके डेटा की सुरक्षा हमारे लिए महत्वपूर्ण है, लेकिन याद रखें कि इंटरनेट पर प्रसारण का कोई भी तरीका, या इलेक्ट्रॉनिक स्टोरेज का कोई भी तरीका 100% सुरक्षित नहीं है। हालांकि हम आपके व्यक्तिगत डेटा की सुरक्षा के लिए व्यावसायिक रूप से स्वीकार्य साधनों का उपयोग करने का प्रयास करते हैं, हम इसकी पूर्ण सुरक्षा की गारंटी नहीं दे सकते।",
+        "privacy-s5-h2": "5. इस नीति में अपडेट",
+        "privacy-s5-p": "हम समय-समय पर अपनी गोपनीयता नीति को अपडेट कर सकते हैं। हम इस पृष्ठ पर नई गोपनीयता नीति पोस्ट करके आपको किसी भी बदलाव के बारे में सूचित करेंगे। आपको सलाह दी जाती है कि किसी भी बदलाव के लिए समय-समय पर इस गोपनीयता नीति की समीक्षा करें।",
         "tool-visit": "टूल देखें",
         "badge-new": "नया",
         "badge-trending": "ट्रेंडिंग",
@@ -239,6 +293,17 @@ const translations = {
         "submit-h2": "टूल सबमिट करें",
         "submit-p": "एक बेहतरीन AI टूल जानते हैं? इसे समुदाय के साथ साझा करें।",
         "submit-btn": "अभी सबमिट करें",
+        "faq-h2": "अक्सर पूछे जाने वाले प्रश्न",
+        "faq-q1": "AmitAIHub क्या है?",
+        "faq-a1": "AmitAIHub ऑनलाइन उपलब्ध सर्वोत्तम आर्टिफिशियल इंटेलिजेंस टूल्स की एक क्यूरेटेड डायरेक्टरी है, जिसे आसानी से खोजने के लिए वर्गीकृत किया गया है।",
+        "faq-q2": "क्या इस साइट पर टूल्स मुफ़्त हैं?",
+        "faq-a2": "हम विभिन्न प्रकार के टूल्स सूचीबद्ध करते हैं: कुछ पूरी तरह से मुफ़्त हैं, कुछ 'फ्रीमियम' हैं, और कुछ पेड हैं। हम प्रत्येक के लिए मूल्य निर्धारण लेबल प्रदान करते हैं।",
+        "faq-q3": "सूची कितनी बार अपडेट की जाती है?",
+        "faq-a3": "हमारी टीम लगातार AI परिदृश्य की निगरानी करती है और लगभग हर हफ्ते नए ट्रेंडिंग टूल्स के साथ डायरेक्टरी को अपडेट करती है।",
+        "stat-tools": "सूचीबद्ध उपकरण",
+        "stat-cats": "श्रेणियां",
+        "stat-users": "उपयोगकर्ता (K)",
+        "stat-support": "सहायता (H)",
         "share-text": "इस शानदार AI टूल को देखें: ",
         "fav-added": "पसंदीदा में जोड़ा गया!",
         "fav-removed": "पसंदीदा से हटाया गया!",
@@ -248,13 +313,24 @@ const translations = {
         "no-favorites-h3": "आपकी सूची खाली है",
         "no-favorites-p": "किसी भी टूल को यहाँ सहेजने के लिए हार्ट आइकन पर क्लिक करें।",
         "no-tools-h3": "कोई टूल नहीं मिला",
-        "no-tools-p": "अपनी खोज या श्रेणी फ़िल्टर को समायोजित करने का प्रयास करें।"
+        "no-tools-p": "अपनी खोज या श्रेणी फ़िल्टर को समायोजित करने का प्रयास करें।",
+        "view-details": "विवरण देखें",
+        "features-h3": "प्रमुख विशेषताएं",
+        "filter-price": "कीमत:",
+        "filter-sort": "क्रमबद्ध करें:",
+        "sort-newest": "नवीनतम पहले",
+        "sort-trending": "ट्रेंडिंग",
+        "sort-az": "A - Z",
+        "sort-za": "Z - A",
+        "price-all": "सभी कीमतें"
     }
 };
 
 // DOM Elements
 const toolGrid = document.getElementById('toolGrid');
 const searchInput = document.getElementById('toolSearch');
+const priceFilter = document.getElementById('priceFilter');
+const sortBy = document.getElementById('sortBy');
 const categoryButtons = document.querySelectorAll('.category-btn');
 const themeToggle = document.getElementById('themeToggle');
 const langToggle = document.getElementById('langToggle');
@@ -264,6 +340,11 @@ const navLinks = document.getElementById('navLinks');
 const newsletterForm = document.getElementById('newsletterForm');
 const contactForm = document.getElementById('contactForm');
 const backToTopBtn = document.getElementById('backToTop');
+const toolModal = document.getElementById('toolModal');
+const modalBody = document.getElementById('modalBody');
+const closeModal = document.querySelector('.close-modal');
+const successModal = document.getElementById('successModal');
+const closeSuccess = document.querySelector('.close-success');
 
 // Favorites Logic
 function getFavorites() {
@@ -298,6 +379,67 @@ function toggleFavorite(toolId) {
         });
     }
 }
+
+// Modal Logic
+function openToolModal(toolId) {
+    const tool = aiTools.find(t => t.id === toolId);
+    if (!tool || !modalBody) return;
+
+    const currentLang = localStorage.getItem('lang') || 'en';
+    const visitText = translations[currentLang]["tool-visit"];
+    const categoryKey = `cat-${tool.category}`;
+    const categoryText = translations[currentLang][categoryKey] || (tool.category.charAt(0).toUpperCase() + tool.category.slice(1) + " AI");
+    const pricingKey = `price-${tool.pricing.toLowerCase()}`;
+    const pricingText = translations[currentLang][pricingKey] || tool.pricing;
+
+    const longDesc = tool.longDescription || tool.description;
+    const features = tool.features || ["Easy to use", "Fast Performance", "Modern UI", "AI Powered"];
+
+    modalBody.innerHTML = `
+        <div class="modal-header">
+            <h2>${tool.name}</h2>
+            <div class="modal-grid">
+                <div class="modal-info-item">
+                    <h4 data-i18n="filter-price">${translations[currentLang]["filter-price"]}</h4>
+                    <p>${pricingText}</p>
+                </div>
+                <div class="modal-info-item">
+                    <h4 data-i18n="footer-categories">${translations[currentLang]["footer-categories"]}</h4>
+                    <p>${categoryText}</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-description">
+            <p>${longDesc}</p>
+        </div>
+        <div class="modal-features">
+            <h3 data-i18n="features-h3">${currentLang === 'en' ? 'Key Features' : 'प्रमुख विशेषताएं'}</h3>
+            <ul>
+                ${features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
+            </ul>
+        </div>
+        <div style="text-align: center;">
+            <a href="${tool.link}" target="_blank" class="btn btn-primary" style="padding: 12px 40px;">${visitText}</a>
+        </div>
+    `;
+
+    toolModal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+if (closeModal) {
+    closeModal.addEventListener('click', () => {
+        toolModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target === toolModal) {
+        toolModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
 
 // Share Logic
 async function shareTool(name, link) {
@@ -385,10 +527,10 @@ function displayTools(tools) {
                 </div>
                 ${badgeHTML}
             </div>
-            <h3>${tool.name}</h3>
+            <h3 class="tool-name-click" data-id="${tool.id}" style="cursor:pointer; transition: 0.3s;">${tool.name}</h3>
             <p>${tool.description}</p>
             <div class="tool-card-actions">
-                <a href="${tool.link}" target="_blank" class="btn btn-outline">${visitText}</a>
+                <button class="btn btn-outline view-details-btn" data-id="${tool.id}" data-i18n="view-details">${currentLang === 'en' ? 'View Details' : 'विवरण देखें'}</button>
                 <div class="tool-icon-btns">
                     <button class="icon-btn fav-btn" data-id="${tool.id}" title="Add to Favorites">
                         <i class="${heartIcon}"></i>
@@ -411,6 +553,10 @@ function displayTools(tools) {
     document.querySelectorAll('.share-btn').forEach(btn => {
         btn.addEventListener('click', () => shareTool(btn.getAttribute('data-name'), btn.getAttribute('data-link')));
     });
+
+    document.querySelectorAll('.view-details-btn, .tool-name-click').forEach(el => {
+        el.addEventListener('click', () => openToolModal(el.getAttribute('data-id')));
+    });
 }
 
 // Centralized Filtering and Rendering
@@ -422,9 +568,12 @@ function renderFilteredTools() {
     const category = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
 
     const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+    const price = priceFilter ? priceFilter.value : 'all';
+    const sort = sortBy ? sortBy.value : 'newest';
     const favorites = getFavorites();
 
-    const filteredTools = aiTools.filter(tool => {
+    let filteredTools = aiTools.filter(tool => {
+        // Category Filter
         let matchesCategory = false;
         if (category === 'all') {
             matchesCategory = true;
@@ -434,11 +583,36 @@ function renderFilteredTools() {
             matchesCategory = tool.category === category;
         }
 
+        // Price Filter
+        const matchesPrice = price === 'all' || tool.pricing.toLowerCase() === price;
+
+        // Search Filter
         const matchesSearch = tool.name.toLowerCase().includes(searchTerm) ||
                             tool.description.toLowerCase().includes(searchTerm) ||
                             tool.category.toLowerCase().includes(searchTerm);
-        return matchesCategory && matchesSearch;
+
+        return matchesCategory && matchesPrice && matchesSearch;
     });
+
+    // Sorting
+    filteredTools.sort((a, b) => {
+        if (sort === 'az') return a.name.localeCompare(b.name);
+        if (sort === 'za') return b.name.localeCompare(a.name);
+        if (sort === 'trending') {
+            if (a.badge === 'trending' && b.badge !== 'trending') return -1;
+            if (a.badge !== 'trending' && b.badge === 'trending') return 1;
+            return 0;
+        }
+        // Default newest: using array order as a proxy for newest if no date provided
+        // or just keep original data order
+        return 0;
+    });
+
+    if (sort === 'newest') {
+        // In our static list, we'll assume the original order is newest to oldest
+        // or we could reverse it if the data is oldest to newest.
+        // For now, let's just keep original order for "newest".
+    }
 
     displayTools(filteredTools);
 }
@@ -477,6 +651,19 @@ if (langToggle) {
 // Search Functionality
 if (searchInput) {
     searchInput.addEventListener('input', () => {
+        renderFilteredTools();
+    });
+}
+
+// Advanced Filter Listeners
+if (priceFilter) {
+    priceFilter.addEventListener('change', () => {
+        renderFilteredTools();
+    });
+}
+
+if (sortBy) {
+    sortBy.addEventListener('change', () => {
         renderFilteredTools();
     });
 }
@@ -571,12 +758,28 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage(savedLang);
 });
 
+// Helper to show success modal
+function showSuccess(title, message) {
+    if (!successModal) return;
+    document.getElementById('successTitle').innerText = title;
+    document.getElementById('successMessage').innerText = message;
+    successModal.style.display = 'block';
+}
+
+if (closeSuccess) {
+    closeSuccess.addEventListener('click', () => {
+        successModal.style.display = 'none';
+    });
+}
+
 // Newsletter Form Handling
 if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const lang = localStorage.getItem('lang') || 'en';
-        alert(lang === 'en' ? 'Thank you for subscribing to our newsletter!' : 'हमारे न्यूज़लेटर को सब्सक्राइब करने के लिए धन्यवाद!');
+        const title = lang === 'en' ? 'Subscribed!' : 'सब्सक्राइब किया गया!';
+        const msg = lang === 'en' ? 'Thank you for subscribing to our newsletter!' : 'हमारे न्यूज़लेटर को सब्सक्राइब करने के लिए धन्यवाद!';
+        showSuccess(title, msg);
         newsletterForm.reset();
     });
 }
@@ -586,7 +789,9 @@ if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const lang = localStorage.getItem('lang') || 'en';
-        alert(lang === 'en' ? 'Message sent successfully! We will get back to you soon.' : 'संदेश सफलतापूर्वक भेजा गया! हम जल्द ही आपसे संपर्क करेंगे।');
+        const title = lang === 'en' ? 'Sent!' : 'भेज दिया गया!';
+        const msg = lang === 'en' ? 'Message sent successfully! We will get back to you soon.' : 'संदेश सफलतापूर्वक भेजा गया! हम जल्द ही आपसे संपर्क करेंगे।';
+        showSuccess(title, msg);
         contactForm.reset();
     });
 }
@@ -617,4 +822,46 @@ if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+}
+
+// FAQ Accordion Logic
+document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+        const item = q.parentElement;
+        item.classList.toggle('active');
+    });
+});
+
+// Stats Animation Logic
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    const speed = 200;
+
+    stats.forEach(stat => {
+        const updateCount = () => {
+            const target = +stat.getAttribute('data-target');
+            const count = +stat.innerText;
+            const inc = target / speed;
+
+            if (count < target) {
+                stat.innerText = Math.ceil(count + inc);
+                setTimeout(updateCount, 1);
+            } else {
+                stat.innerText = target;
+            }
+        };
+        updateCount();
+    });
+}
+
+// Intersection Observer for Stats
+const statsSection = document.querySelector('.stats-section');
+if (statsSection) {
+    const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            animateStats();
+            observer.unobserve(statsSection);
+        }
+    }, { threshold: 0.5 });
+    observer.observe(statsSection);
 }

@@ -57,6 +57,51 @@
                     <button class="category-btn" data-category="coding" data-i18n="cat-coding">Coding AI</button>
                     <button class="category-btn" data-category="productivity" data-i18n="cat-productivity">Productivity AI</button>
                 </div>
+
+                <div class="advanced-filters glass-card">
+                    <div class="filter-group">
+                        <label for="priceFilter" data-i18n="filter-price">Pricing:</label>
+                        <select id="priceFilter">
+                            <option value="all" data-i18n="price-all">All Prices</option>
+                            <option value="free" data-i18n="price-free">Free</option>
+                            <option value="freemium" data-i18n="price-freemium">Freemium</option>
+                            <option value="paid" data-i18n="price-paid">Paid</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sortBy" data-i18n="filter-sort">Sort By:</label>
+                        <select id="sortBy">
+                            <option value="newest" data-i18n="sort-newest">Newest First</option>
+                            <option value="trending" data-i18n="sort-trending">Trending</option>
+                            <option value="az" data-i18n="sort-az">A - Z</option>
+                            <option value="za" data-i18n="sort-za">Z - A</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Milestones/Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label" data-i18n="stat-tools">Tools Listed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label" data-i18n="stat-cats">Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-label" data-i18n="stat-users">Users (K)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="24">0</div>
+                        <div class="stat-label" data-i18n="stat-support">Support (H)</div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -90,6 +135,42 @@
             </div>
         </section>
 
+        <!-- FAQ Section -->
+        <section class="section-content">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 40px; font-size: 2.5rem;" data-i18n="faq-h2">Frequently Asked Questions</h2>
+                <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
+                    <div class="faq-item glass-card">
+                        <div class="faq-question">
+                            <h3 data-i18n="faq-q1">What is AmitAIHub?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq-a1">AmitAIHub is a curated directory of the best Artificial Intelligence tools available online, categorized for easy discovery.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-card">
+                        <div class="faq-question">
+                            <h3 data-i18n="faq-q2">Are the tools on this site free?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq-a2">We list a variety of tools: some are completely free, some are 'freemium' (free with paid options), and some are paid. We provide pricing labels for each.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glass-card">
+                        <div class="faq-question">
+                            <h3 data-i18n="faq-q3">How often is the list updated?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p data-i18n="faq-a3">Our team constantly monitors the AI landscape and updates the directory with new trending tools almost every week.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Submit Tool Section -->
         <section class="section-content" id="submit">
             <div class="container">
@@ -115,6 +196,26 @@
             </div>
         </section>
     </main>
+
+    <!-- Tool Detail Modal -->
+    <div id="toolModal" class="modal">
+        <div class="modal-content glass-card">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody">
+                <!-- Modal content will be injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content glass-card" style="text-align: center; max-width: 400px;">
+            <i class="fas fa-check-circle" style="font-size: 4rem; color: #00ff88; margin-bottom: 20px;"></i>
+            <h2 id="successTitle">Success!</h2>
+            <p id="successMessage">Thank you for reaching out.</p>
+            <button class="btn btn-primary close-success" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top" title="Go to top">
