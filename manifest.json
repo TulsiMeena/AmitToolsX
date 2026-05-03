@@ -1,0 +1,17 @@
+{
+  "name": "AmitToolsX - Advanced Utilities",
+  "short_name": "AmitToolsX",
+  "description": "Professional image resizer, PDF editor and utility tools.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0b0b1a",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Aman.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

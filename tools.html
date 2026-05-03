@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Tools - AmitToolsX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body class="text-white font-sans bg-home">
+    <!-- Navigation -->
+    <nav class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold tracking-wider">AmitToolsX</div>
+        <div class="hidden md:flex items-center space-x-8 text-lg">
+            <a href="index.html" class="hover:text-blue-300 transition-colors" data-i18n="navHome">Home</a>
+            <a href="tools.html" class="hover:text-blue-300 transition-colors text-blue-300 font-bold" data-i18n="navTools">Tools</a>
+            <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
+            <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
+            <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold hover:bg-blue-700 transition-all mr-4" data-i18n="installApp">Install App</button>
+            <button id="lang-toggle" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold hover:bg-white/20 transition-all">हिन्दी</button>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+        <div class="flex items-center space-x-4 md:hidden">
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold mr-2" data-i18n="installApp">Install App</button>
+            <button id="lang-toggle-mobile" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold">हिन्दी</button>
+            <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon-mobile"></i>
+            </button>
+            <button id="menu-btn" class="text-3xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden glass fixed top-16 left-0 w-full p-6 flex-col space-y-4 z-40 md:hidden">
+        <a href="index.html" class="hover:text-blue-300 transition-colors" data-i18n="navHome">Home</a>
+        <a href="tools.html" class="hover:text-blue-300 transition-colors" data-i18n="navTools">Tools</a>
+        <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
+        <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
+        <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+    </div>
+
+    <main class="container mx-auto px-6 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4" data-i18n="toolsTitle">Multi-Utility Tools</h1>
+            <p class="text-xl text-gray-200" data-i18n="toolsSub">Fast, secure, and professional tools for daily tasks.</p>
+        </div>
+
+        <!-- PDF Conversion Section -->
+        <div class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="h-1 w-12 bg-blue-500 rounded-full mr-4"></div>
+                <h2 class="text-3xl font-bold">1️⃣ Convert TO PDF (सबसे ज्यादा use 🔥)</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- JPG to PDF -->
+                <div class="glass p-8 rounded-3xl shadow-xl hover:scale-[1.02] transition-all group">
+                    <div class="bg-blue-600/30 p-4 rounded-2xl w-fit mb-6 group-hover:bg-blue-600/50 transition-all">
+                        <i class="fas fa-image text-3xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">JPG to PDF</h3>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Best way to convert your images (JPG, PNG, WEBP) into a single, high-quality PDF document in seconds. No quality loss, 100% secure.</p>
+                    <div class="space-y-4">
+                        <label class="block w-full cursor-pointer bg-white/5 border-2 border-dashed border-white/20 rounded-xl p-4 text-center hover:bg-white/10 transition-all">
+                            <span class="text-xs text-gray-400">Select Images</span>
+                            <input type="file" id="jpg-to-pdf-input" multiple accept="image/*" class="hidden">
+                        </label>
+                        <button id="jpg-to-pdf-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Convert Now</button>
+                    </div>
+                </div>
+
+                <!-- Word to PDF -->
+                <div class="glass p-8 rounded-3xl shadow-xl hover:scale-[1.02] transition-all group opacity-80">
+                    <div class="bg-blue-600/30 p-4 rounded-2xl w-fit mb-6">
+                        <i class="fas fa-file-word text-3xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Word to PDF</h3>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Convert Microsoft Word (.doc, .docx) documents to PDF with original formatting. Perfect for resumes and reports.</p>
+                    <button class="w-full bg-white/10 text-gray-400 font-bold py-3 rounded-xl cursor-not-allowed" data-i18n="soonBtn">Coming Soon</button>
+                </div>
+
+                <!-- HTML to PDF -->
+                <div class="glass p-8 rounded-3xl shadow-xl hover:scale-[1.02] transition-all group">
+                    <div class="bg-blue-600/30 p-4 rounded-2xl w-fit mb-6">
+                        <i class="fas fa-code text-3xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">HTML to PDF</h3>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Transform any webpage or HTML code into a professional PDF. Ideal for saving articles and documentation.</p>
+                    <div class="space-y-4">
+                        <input type="text" id="html-to-pdf-url" placeholder="https://example.com" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm">
+                        <button id="html-to-pdf-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Convert URL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="h-1 w-12 bg-purple-500 rounded-full mr-4"></div>
+                <h2 class="text-3xl font-bold">🔵 2️⃣ Convert FROM PDF</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- PDF to JPG -->
+                <div class="glass p-8 rounded-3xl shadow-xl hover:scale-[1.02] transition-all group">
+                    <div class="bg-purple-600/30 p-4 rounded-2xl w-fit mb-6 group-hover:bg-purple-600/50 transition-all">
+                        <i class="fas fa-file-image text-3xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">PDF to JPG</h3>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Extract all pages from a PDF and convert them into individual high-resolution JPG/PNG images instantly. Fast and reliable.</p>
+                    <div class="space-y-4">
+                        <label class="block w-full cursor-pointer bg-white/5 border-2 border-dashed border-white/20 rounded-xl p-4 text-center hover:bg-white/10 transition-all">
+                            <span class="text-xs text-gray-400">Select PDF</span>
+                            <input type="file" id="pdf-to-jpg-input" accept="application/pdf" class="hidden">
+                        </label>
+                        <button id="pdf-to-jpg-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Extract Images</button>
+                    </div>
+                </div>
+
+                <!-- PDF to Word -->
+                <div class="glass p-8 rounded-3xl shadow-xl hover:scale-[1.02] transition-all group opacity-80">
+                    <div class="bg-purple-600/30 p-4 rounded-2xl w-fit mb-6">
+                        <i class="fas fa-file-word text-3xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">PDF to Word</h3>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Turn your PDF documents into editable Word files (.docx) while preserving the layout and fonts.</p>
+                    <button class="w-full bg-white/10 text-gray-400 font-bold py-3 rounded-xl cursor-not-allowed" data-i18n="soonBtn">Coming Soon</button>
+                </div>
+
+                <!-- Merge PDF -->
+                <div class="glass p-8 rounded-3xl shadow-xl hover:scale-[1.02] transition-all group">
+                    <div class="bg-purple-600/30 p-4 rounded-2xl w-fit mb-6">
+                        <i class="fas fa-layer-group text-3xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Merge PDF</h3>
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">Combine multiple PDF files into one organized document. Drag and drop to reorder pages as per your requirements.</p>
+                    <div class="space-y-4">
+                        <label class="block w-full cursor-pointer bg-white/5 border-2 border-dashed border-white/20 rounded-xl p-4 text-center hover:bg-white/10 transition-all">
+                            <span class="text-xs text-gray-400">Select PDF Files</span>
+                            <input type="file" id="merge-pdf-input-new" multiple accept="application/pdf" class="hidden">
+                        </label>
+                        <button id="merge-pdf-btn-new" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg">Merge Files</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center mb-10">
+            <div class="h-1 w-12 bg-green-500 rounded-full mr-4"></div>
+            <h2 class="text-3xl font-bold">🛠️ Essential Utility Tools</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            <!-- QR Code Generator -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-blue-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-qrcode text-2xl text-blue-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">QR Generator</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="qr-input" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm" placeholder="Enter text or URL..."></textarea>
+                    <div class="flex justify-center">
+                        <div id="qr-code" class="bg-white p-2 rounded-xl hidden transition-all duration-500"></div>
+                    </div>
+                    <button id="generate-qr" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all">Generate QR Code</button>
+                    <button id="download-qr" class="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl transition-all hidden">Download PNG</button>
+                </div>
+            </div>
+
+            <!-- Password Generator -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-key text-2xl text-purple-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Password Gen</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <div class="relative">
+                        <input type="text" id="pass-output" readonly class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none pr-12 text-sm font-mono" placeholder="Your Password">
+                        <button id="copy-pass" class="absolute right-3 top-2.5 text-blue-400 hover:text-white transition-colors">
+                            <i class="fas fa-copy text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs"><span>Length:</span><span id="pass-len-val">16</span></div>
+                        <input type="range" id="pass-length" min="8" max="64" value="16" class="w-full h-1.5 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-purple-400">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <label class="flex items-center cursor-pointer bg-white/5 p-2 rounded-lg hover:bg-white/10">
+                            <input type="checkbox" id="pass-upper" checked class="mr-2"> Uppercase
+                        </label>
+                        <label class="flex items-center cursor-pointer bg-white/5 p-2 rounded-lg hover:bg-white/10">
+                            <input type="checkbox" id="pass-lower" checked class="mr-2"> Lowercase
+                        </label>
+                        <label class="flex items-center cursor-pointer bg-white/5 p-2 rounded-lg hover:bg-white/10">
+                            <input type="checkbox" id="pass-num" checked class="mr-2"> Numbers
+                        </label>
+                        <label class="flex items-center cursor-pointer bg-white/5 p-2 rounded-lg hover:bg-white/10">
+                            <input type="checkbox" id="pass-sym" checked class="mr-2"> Symbols
+                        </label>
+                    </div>
+                    <button id="generate-pass" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl transition-all">Generate Password</button>
+                </div>
+            </div>
+
+            <!-- Word Counter -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-file-alt text-2xl text-green-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Word Counter</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="word-input" rows="5" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-sm" placeholder="Paste your text here..."></textarea>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-white/5 rounded-xl p-3">
+                            <div id="count-words" class="text-xl font-bold text-green-400">0</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Words</div>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-3">
+                            <div id="count-chars" class="text-xl font-bold text-green-400">0</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Chars</div>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-3">
+                            <div id="count-sentences" class="text-xl font-bold text-green-400">0</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Sentences</div>
+                        </div>
+                        <div class="bg-white/5 rounded-xl p-3">
+                            <div id="count-paragraphs" class="text-xl font-bold text-green-400">0</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-400">Paragraphs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit Converter -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-yellow-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-exchange-alt text-2xl text-yellow-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Unit Converter</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <select id="unit-type" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm">
+                        <option value="length" class="text-black">Length (m to km)</option>
+                        <option value="weight" class="text-black">Weight (kg to g)</option>
+                        <option value="temp" class="text-black">Temp (C to F)</option>
+                    </select>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="unit-input" class="w-1/2 bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Value">
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <input type="text" id="unit-output" readonly class="w-1/2 bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Result">
+                    </div>
+                    <button id="convert-unit" class="w-full bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 rounded-xl transition-all">Convert Now</button>
+                </div>
+            </div>
+
+            <!-- Base64 Tool -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-code text-2xl text-red-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Base64 Tool</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="base64-input" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Enter text..."></textarea>
+                    <div class="flex gap-2">
+                        <button id="b64-encode" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-xl transition-all text-xs">Encode</button>
+                        <button id="b64-decode" class="flex-1 border border-red-600 text-red-400 hover:bg-red-600 hover:text-white font-bold py-2 rounded-xl transition-all text-xs">Decode</button>
+                    </div>
+                    <textarea id="base64-output" readonly rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Output..."></textarea>
+                </div>
+            </div>
+
+            <!-- JSON Formatter -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-indigo-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-brackets-curly text-2xl text-indigo-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">JSON Formatter</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="json-input" rows="6" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none font-mono text-xs" placeholder="Paste raw JSON here..."></textarea>
+                    <button id="format-json" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all">Format & Validate</button>
+                </div>
+            </div>
+
+             <!-- Age Calculator -->
+             <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-cyan-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-birthday-cake text-2xl text-cyan-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Age Calculator</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <input type="date" id="birth-date" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm">
+                    <div id="age-result" class="bg-white/5 rounded-xl p-4 text-center hidden">
+                        <div class="text-2xl font-bold text-cyan-400" id="age-val">--</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-400">Years Old</div>
+                    </div>
+                    <button id="calc-age" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 rounded-xl transition-all">Calculate Age</button>
+                </div>
+            </div>
+
+            <!-- Percentage Calculator -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-orange-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-percentage text-2xl text-orange-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Percentage Calc</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <div class="text-sm mb-2">What is <input type="number" id="perc-p" class="w-16 bg-white/10 border border-white/20 rounded-lg px-2 py-1 focus:outline-none" placeholder="%"> % of <input type="number" id="perc-total" class="w-24 bg-white/10 border border-white/20 rounded-lg px-2 py-1 focus:outline-none" placeholder="Value"> ?</div>
+                    <div class="bg-white/5 rounded-xl p-3 text-center">
+                        <div id="perc-result" class="text-2xl font-bold text-orange-400">0</div>
+                    </div>
+                    <button id="calc-perc" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl transition-all">Calculate</button>
+                </div>
+            </div>
+
+            <!-- Text-to-Speech -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-pink-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-volume-up text-2xl text-pink-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Text-to-Speech</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="tts-input" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Type something to speak..."></textarea>
+                    <div class="flex gap-2">
+                        <select id="tts-voice" class="flex-1 bg-white/10 border border-white/20 rounded-xl px-2 py-2 text-xs focus:outline-none">
+                            <option value="en-US">English (US)</option>
+                            <option value="hi-IN">Hindi (India)</option>
+                        </select>
+                        <button id="tts-speak" class="bg-pink-600 hover:bg-pink-700 p-2 px-4 rounded-xl transition-all"><i class="fas fa-play"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Picker -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-emerald-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-eye-dropper text-2xl text-emerald-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Color Picker</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <div class="flex items-center gap-4">
+                        <input type="color" id="color-picker" class="w-16 h-16 bg-transparent border-none cursor-pointer">
+                        <div class="flex-1">
+                            <input type="text" id="color-hex" readonly class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm font-mono mb-2" value="#2563eb">
+                            <input type="text" id="color-rgb" readonly class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm font-mono" value="rgb(37, 99, 235)">
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-gray-400 text-center">Pick a color and copy the codes.</p>
+                </div>
+            </div>
+
+            <!-- Binary Converter -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-amber-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-binary text-2xl text-amber-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Binary Tool</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <input type="text" id="binary-text" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Text to Binary">
+                    <textarea id="binary-output" readonly rows="2" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-xs font-mono" placeholder="010010..."></textarea>
+                    <button id="convert-binary" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-xl transition-all">Convert</button>
+                </div>
+            </div>
+
+            <!-- Thumbnail Downloader -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col md:col-span-2 lg:col-span-1">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fab fa-youtube text-2xl text-red-500"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">YT Thumbnail</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <input type="text" id="yt-url" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Paste YouTube URL...">
+                    <div id="yt-preview-container" class="hidden space-y-4">
+                        <img id="yt-thumb-preview" src="" class="w-full rounded-xl shadow-lg">
+                        <div class="grid grid-cols-2 gap-2">
+                            <a id="dl-max" target="_blank" class="bg-white/10 hover:bg-white/20 p-2 rounded-lg text-[10px] text-center font-bold">4K/HD</a>
+                            <a id="dl-high" target="_blank" class="bg-white/10 hover:bg-white/20 p-2 rounded-lg text-[10px] text-center font-bold">High</a>
+                        </div>
+                    </div>
+                    <button id="get-thumbs" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition-all">Get Thumbnails</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass mt-20 py-10 px-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+            <div>
+                <h2 class="text-2xl font-bold mb-4">AmitToolsX</h2>
+                <p class="text-gray-300" data-i18n="footerAbout">A premium suite of online utilities for modern developers and creators.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4" data-i18n="footerLinks">Quick Links</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="index.html" class="hover:text-white" data-i18n="navHome">Home</a></li>
+                    <li><a href="about.html" class="hover:text-white" data-i18n="navAbout">About Us</a></li>
+                    <li><a href="contact.html" class="hover:text-white" data-i18n="navContact">Contact</a></li>
+                    <li><a href="privacy.html" class="hover:text-white" data-i18n="navPrivacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4" data-i18n="footerConnect">Connect With Us</h3>
+                <div class="flex justify-center md:justify-start space-x-6 text-2xl">
+                    <a href="https://www.instagram.com/_technical_01?igsh=MTdydjJkbWl3Y3ppeg==" target="_blank" class="hover:text-pink-400 transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="https://whatsapp.com/channel/0029VaDFCbF9hXFDBUx8fe3E" target="_blank" class="hover:text-green-400 transition-colors"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-400 text-sm">
+            &copy; 2024 AmitToolsX. <span data-i18n="footerCreatedBy">Created by</span> <span class="text-white font-bold">Amit Meena</span> & <span data-i18n="footerManagedBy">Managed by</span> <span class="text-white font-bold">Aman Meena</span>.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="tools.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+    </script>
+    <!-- Floating Install Button for Mobile -->
+    <button class="install-app-btn hidden fixed bottom-6 right-6 z-[100] bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center animate-bounce md:hidden">
+        <i class="fas fa-download text-xl"></i>
+    </button>
+</body>
+</html>
