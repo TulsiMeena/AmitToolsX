@@ -205,10 +205,58 @@
                     <p class="text-gray-400 text-sm" data-i18n="step4Text">Get your processed images in high quality instantly.</p>
                 </div>
             </div>
+
+            <!-- Pro Tip Info -->
+            <div class="mt-16 glass p-8 rounded-3xl border border-white/10 flex flex-col md:flex-row items-center">
+                <div class="bg-blue-600/20 p-6 rounded-2xl mb-6 md:mb-0 md:mr-8 text-blue-400 text-4xl">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-2" data-i18n="proTipTitle">Pro Tip for Best Experience</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed" data-i18n="proTipText">All our tools are free and work entirely on your device. For the best performance, use the latest browser version. You can batch process up to 20 images at once in our resizer!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="mt-32">
+            <h2 class="text-4xl font-extrabold text-center mb-16" data-i18n="reviewsTitle">User Reviews</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-3xl border border-white/5 hover:border-blue-500/30 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Rahul Sharma</h4>
+                            <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm italic">"The image resizer is incredibly fast. I love that it processes everything in the browser without uploading to a server."</p>
+                </div>
+                <div class="glass p-8 rounded-3xl border border-white/5 hover:border-purple-500/30 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-tr from-green-500 to-teal-500 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Priya Verma</h4>
+                            <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm italic">"Finally, a free PDF editor that actually works! The signature tool saved me so much time today."</p>
+                </div>
+                <div class="glass p-8 rounded-3xl border border-white/5 hover:border-pink-500/30 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-tr from-orange-500 to-red-500 rounded-full mr-4"></div>
+                        <div>
+                            <h4 class="font-bold">Amit Meena</h4>
+                            <div class="text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm italic">"As a developer, the JSON formatter and Unit Converter are my daily go-to tools. Highly recommended suite!"</p>
+                </div>
+            </div>
         </div>
 
         <!-- Why Choose Us Section -->
-        <div class="mt-32">
+        <div class="mt-40">
             <h2 class="text-4xl font-extrabold text-center mb-16" data-i18n="whyTitle">Why Choose AmitToolsX?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="glass p-10 rounded-3xl text-center border border-white/10 hover:border-blue-400/50 transition-all group">
@@ -310,5 +358,9 @@
             }
         });
     </script>
+    <!-- Floating Install Button for Mobile -->
+    <button class="install-app-btn hidden fixed bottom-6 right-6 z-[100] bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center animate-bounce md:hidden">
+        <i class="fas fa-download text-xl"></i>
+    </button>
 </body>
 </html>

@@ -334,6 +334,61 @@
                 </div>
             </div>
 
+            <!-- Text-to-Speech -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-pink-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-volume-up text-2xl text-pink-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Text-to-Speech</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <textarea id="tts-input" rows="3" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Type something to speak..."></textarea>
+                    <div class="flex gap-2">
+                        <select id="tts-voice" class="flex-1 bg-white/10 border border-white/20 rounded-xl px-2 py-2 text-xs focus:outline-none">
+                            <option value="en-US">English (US)</option>
+                            <option value="hi-IN">Hindi (India)</option>
+                        </select>
+                        <button id="tts-speak" class="bg-pink-600 hover:bg-pink-700 p-2 px-4 rounded-xl transition-all"><i class="fas fa-play"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Picker -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-emerald-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-eye-dropper text-2xl text-emerald-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Color Picker</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <div class="flex items-center gap-4">
+                        <input type="color" id="color-picker" class="w-16 h-16 bg-transparent border-none cursor-pointer">
+                        <div class="flex-1">
+                            <input type="text" id="color-hex" readonly class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm font-mono mb-2" value="#2563eb">
+                            <input type="text" id="color-rgb" readonly class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-sm font-mono" value="rgb(37, 99, 235)">
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-gray-400 text-center">Pick a color and copy the codes.</p>
+                </div>
+            </div>
+
+            <!-- Binary Converter -->
+            <div class="glass p-8 rounded-3xl shadow-xl flex flex-col">
+                <div class="flex items-center mb-6">
+                    <div class="bg-amber-600/30 p-3 rounded-2xl mr-4">
+                        <i class="fas fa-binary text-2xl text-amber-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Binary Tool</h2>
+                </div>
+                <div class="space-y-4 flex-1">
+                    <input type="text" id="binary-text" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-sm" placeholder="Text to Binary">
+                    <textarea id="binary-output" readonly rows="2" class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 focus:outline-none text-xs font-mono" placeholder="010010..."></textarea>
+                    <button id="convert-binary" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-xl transition-all">Convert</button>
+                </div>
+            </div>
+
             <!-- Thumbnail Downloader -->
             <div class="glass p-8 rounded-3xl shadow-xl flex flex-col md:col-span-2 lg:col-span-1">
                 <div class="flex items-center mb-6">
@@ -397,5 +452,9 @@
             mobileMenu.classList.toggle('flex');
         });
     </script>
+    <!-- Floating Install Button for Mobile -->
+    <button class="install-app-btn hidden fixed bottom-6 right-6 z-[100] bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center animate-bounce md:hidden">
+        <i class="fas fa-download text-xl"></i>
+    </button>
 </body>
 </html>

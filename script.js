@@ -73,6 +73,7 @@ const translations = {
         reset: "Reset",
         applyCrop: "Apply Crop",
         installApp: "Install App",
+        reviewsTitle: "User Reviews",
         // PDF Editor
         pdfToolSelect: "Select",
         pdfToolText: "Text",
@@ -113,6 +114,8 @@ const translations = {
         step3Text: "Instantly see changes and use the advanced crop tool.",
         step4Title: "Download",
         step4Text: "Get your processed images in high quality instantly.",
+        proTipTitle: "Pro Tip for Best Experience",
+        proTipText: "All our tools are free and work entirely on your device. For the best performance, use the latest browser version. You can batch process up to 20 images at once in our resizer!",
         whyTitle: "Why Choose AmitToolsX?",
         feature1Title: "100% Privacy",
         feature1Text: "All image and document processing happens locally in your browser. Your files never touch our servers.",
@@ -181,6 +184,7 @@ const translations = {
         reset: "रीसेट",
         applyCrop: "क्रॉप लागू करें",
         installApp: "ऐप इंस्टॉल करें",
+        reviewsTitle: "उपयोगकर्ता समीक्षाएं",
         // PDF Editor
         pdfToolSelect: "चुनें",
         pdfToolText: "टेक्स्ट",
@@ -221,6 +225,8 @@ const translations = {
         step3Text: "तुरंत बदलाव देखें और एडवांस क्रॉप टूल का उपयोग करें।",
         step4Title: "डाउनलोड",
         step4Text: "अपनी प्रोसेस्ड इमेज तुरंत उच्च गुणवत्ता में प्राप्त करें।",
+        proTipTitle: "सर्वोत्तम अनुभव के लिए प्रो टिप",
+        proTipText: "हमारे सभी उपकरण निःशुल्क हैं और पूरी तरह से आपके डिवाइस पर काम करते हैं। सर्वोत्तम प्रदर्शन के लिए, नवीनतम ब्राउज़र संस्करण का उपयोग करें। आप हमारे रिसाइज़र में एक साथ 20 इमेज तक बैच प्रोसेस कर सकते हैं!",
         whyTitle: "अमितटूल्सएक्स (AmitToolsX) क्यों चुनें?",
         feature1Title: "100% गोपनीयता",
         feature1Text: "सभी इमेज और दस्तावेज़ प्रोसेसिंग आपके ब्राउज़र में स्थानीय रूप से होती है। आपकी फ़ाइलें कभी भी हमारे सर्वर को नहीं छूती हैं।",

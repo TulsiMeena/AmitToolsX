@@ -369,3 +369,54 @@ function downloadBlob(data, fileName, mimeType) {
     document.body.removeChild(downloadLink);
     window.URL.revokeObjectURL(url);
 }
+
+// --- Text-to-Speech ---
+const ttsInput = document.getElementById('tts-input');
+const ttsVoice = document.getElementById('tts-voice');
+const ttsSpeak = document.getElementById('tts-speak');
+
+if (ttsSpeak) {
+    ttsSpeak.addEventListener('click', () => {
+        const text = ttsInput.value.trim();
+        if (!text) return alert('Enter text to speak');
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = ttsVoice.value;
+        window.speechSynthesis.speak(utterance);
+    });
+}
+
+// --- Color Picker ---
+const colorPicker = document.getElementById('color-picker');
+const colorHex = document.getElementById('color-hex');
+const colorRgb = document.getElementById('color-rgb');
+
+if (colorPicker) {
+    colorPicker.addEventListener('input', () => {
+        const hex = colorPicker.value;
+        colorHex.value = hex.toUpperCase();
+
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        colorRgb.value = `rgb(${r}, ${g}, ${b})`;
+    });
+}
+
+// --- Binary Converter ---
+const binaryText = document.getElementById('binary-text');
+const binaryOutput = document.getElementById('binary-output');
+const convertBinary = document.getElementById('convert-binary');
+
+if (convertBinary) {
+    convertBinary.addEventListener('click', () => {
+        const text = binaryText.value;
+        if (!text) return alert('Enter text to convert');
+
+        const binary = text.split('').map(char => {
+            return char.charCodeAt(0).toString(2).padStart(8, '0');
+        }).join(' ');
+
+        binaryOutput.value = binary;
+    });
+}

@@ -95,3 +95,29 @@ input[type="range"]::-webkit-slider-runnable-track {
 #crop-overlay {
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
 }
+
+/* Smooth tool interactions */
+.glass {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+}
+
+.glass:hover {
+    transform: translateY(-5px);
+}
+
+button {
+    transition: all 0.2s ease;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Custom Color Picker Styling */
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+    border-radius: 12px;
+}
