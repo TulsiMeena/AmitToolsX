@@ -420,3 +420,65 @@ if (convertBinary) {
         binaryOutput.value = binary;
     });
 }
+
+// --- Camera Utility ---
+const cameraFeed = document.getElementById('camera-feed');
+const cameraPlaceholder = document.getElementById('camera-placeholder');
+const startCameraBtn = document.getElementById('start-camera');
+const stopCameraBtn = document.getElementById('stop-camera');
+const cameraFilter = document.getElementById('camera-filter');
+const takeSnapshotBtn = document.getElementById('take-snapshot');
+const snapshotCanvas = document.getElementById('snapshot-canvas');
+
+let stream = null;
+
+if (startCameraBtn) {
+    startCameraBtn.addEventListener('click', async () => {
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+            cameraFeed.srcObject = stream;
+            cameraPlaceholder.classList.add('hidden');
+
+            startCameraBtn.disabled = true;
+            stopCameraBtn.disabled = false;
+            cameraFilter.disabled = false;
+            takeSnapshotBtn.disabled = false;
+        } catch (err) {
+            alert('Camera access denied or not available: ' + err.message);
+        }
+    });
+
+    stopCameraBtn.addEventListener('click', () => {
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            cameraFeed.srcObject = null;
+            cameraPlaceholder.classList.remove('hidden');
+
+            startCameraBtn.disabled = false;
+            stopCameraBtn.disabled = true;
+            cameraFilter.disabled = true;
+            takeSnapshotBtn.disabled = true;
+            cameraFeed.style.filter = 'none';
+            cameraFilter.value = 'none';
+        }
+    });
+
+    cameraFilter.addEventListener('change', () => {
+        cameraFeed.style.filter = cameraFilter.value;
+    });
+
+    takeSnapshotBtn.addEventListener('click', () => {
+        const context = snapshotCanvas.getContext('2d');
+        snapshotCanvas.width = cameraFeed.videoWidth;
+        snapshotCanvas.height = cameraFeed.videoHeight;
+
+        // Apply filter to canvas if any
+        context.filter = cameraFilter.value;
+        context.drawImage(cameraFeed, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
+
+        const link = document.createElement('a');
+        link.download = `amittoolsx_snapshot_${Date.now()}.png`;
+        link.href = snapshotCanvas.toDataURL('image/png');
+        link.click();
+    });
+}
