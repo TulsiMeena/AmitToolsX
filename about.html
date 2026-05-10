@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AmitToolsX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body class="text-white font-sans bg-about">
+    <!-- Navigation -->
+    <nav class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold tracking-wider">AmitToolsX</div>
+        <div class="hidden md:flex items-center space-x-8 text-lg">
+            <a href="index.html" class="hover:text-blue-300 transition-colors" data-i18n="navHome">Home</a>
+            <a href="pdf-editor.html" class="hover:text-blue-300 transition-colors" data-i18n="navPDF">PDF Editor</a>
+            <a href="tools.html" class="hover:text-blue-300 transition-colors" data-i18n="navTools">Tools</a>
+            <a href="about.html" class="hover:text-blue-300 transition-colors text-blue-300 font-bold" data-i18n="navAbout">About</a>
+            <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
+            <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold hover:bg-blue-700 transition-all mr-4" data-i18n="installApp">Install App</button>
+            <button id="lang-toggle" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold hover:bg-white/20 transition-all">हिन्दी</button>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+        <div class="flex items-center space-x-4 md:hidden">
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold mr-2" data-i18n="installApp">Install App</button>
+            <button id="lang-toggle-mobile" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold">हिन्दी</button>
+            <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon-mobile"></i>
+            </button>
+            <button id="menu-btn" class="text-3xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden glass fixed top-16 left-0 w-full p-6 flex-col space-y-4 z-40 md:hidden">
+        <a href="index.html" class="hover:text-blue-300 transition-colors" data-i18n="navHome">Home</a>
+        <a href="pdf-editor.html" class="hover:text-blue-300 transition-colors" data-i18n="navPDF">PDF Editor</a>
+        <a href="tools.html" class="hover:text-blue-300 transition-colors" data-i18n="navTools">Tools</a>
+        <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
+        <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
+        <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+    </div>
+
+    <main class="container mx-auto px-6 py-20">
+        <div class="text-center mb-20">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6" data-i18n="aboutTitle">Meet the Team</h1>
+            <p class="text-2xl text-gray-200 max-w-2xl mx-auto" data-i18n="aboutSub">The creative minds behind AmitToolsX, dedicated to building powerful online utilities.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <!-- Aman Meena (Admin) -->
+            <div class="glass p-10 rounded-3xl profile-card transition-all duration-500 shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4">
+                    <span class="bg-blue-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Admin</span>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500/50 shadow-lg shrink-0">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Technical_01.jpg" alt="Aman Meena" class="w-full h-full object-cover profile-img transition-transform duration-500">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">Aman Meena</h2>
+                        <p class="text-blue-400 font-medium mb-4">Digital Content Creator & Admin</p>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            Managing the digital presence and operational excellence of AmitToolsX. Aman brings 5+ years of digital experience to the team.
+                        </p>
+                        <div class="grid grid-cols-3 gap-4 mb-6 text-center">
+                            <div class="bg-white/10 rounded-xl p-2">
+                                <div class="text-xl font-bold text-blue-300">15k+</div>
+                                <div class="text-[10px] uppercase tracking-tighter" data-i18n="followers">Followers</div>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-2">
+                                <div class="text-xl font-bold text-blue-300">200+</div>
+                                <div class="text-[10px] uppercase tracking-tighter" data-i18n="posts">Posts</div>
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-2">
+                                <div class="text-xl font-bold text-blue-300">5+ yrs</div>
+                                <div class="text-[10px] uppercase tracking-tighter" data-i18n="experience">Experience</div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://www.instagram.com/_technical_01?igsh=MTdydjJkbWl3Y3ppeg==" target="_blank" class="bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded-lg text-sm font-bold transition-colors">
+                                <i class="fab fa-instagram mr-2"></i>Instagram
+                            </a>
+                            <a href="https://whatsapp.com/channel/0029VaDFCbF9hXFDBUx8fe3E" target="_blank" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm font-bold transition-colors">
+                                <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amit Meena (Creator) -->
+            <div class="glass p-10 rounded-3xl profile-card transition-all duration-500 shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4">
+                    <span class="bg-purple-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Creator</span>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-purple-500/50 shadow-lg shrink-0">
+                        <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Amit%20meena.jpg" alt="Amit Meena" class="w-full h-full object-cover profile-img transition-transform duration-500">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">Amit Meena</h2>
+                        <p class="text-purple-400 font-medium mb-4">Founder & Lead Developer</p>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            The visionary behind AmitToolsX. Amit is responsible for the design and development of all utilities, ensuring high performance and ease of use.
+                        </p>
+                        <div class="flex space-x-4">
+                            <button class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-bold transition-colors">
+                                <i class="fas fa-code mr-2"></i>Developer Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission & Vision -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-32">
+            <div class="glass p-12 rounded-3xl border border-white/10 hover:border-blue-400/30 transition-all">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-bullseye text-blue-400 mr-4"></i>
+                    <span data-i18n="missionTitle">Our Mission</span>
+                </h2>
+                <p class="text-gray-300 text-lg leading-relaxed" data-i18n="missionText">
+                    Our mission is to provide high-quality, secure, and accessible digital tools to everyone. We believe that professional editing and utility tools should be free and easy to use without compromising user privacy.
+                </p>
+            </div>
+            <div class="glass p-12 rounded-3xl border border-white/10 hover:border-purple-400/30 transition-all">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-eye text-purple-400 mr-4"></i>
+                    <span data-i18n="visionTitle">Our Vision</span>
+                </h2>
+                <p class="text-gray-300 text-lg leading-relaxed" data-i18n="visionText">
+                    We envision AmitToolsX as the go-to platform for creators and developers worldwide, offering a complete suite of browser-based utilities that eliminate the need for expensive software.
+                </p>
+            </div>
+        </div>
+
+        <!-- Additional Images Grid -->
+        <div class="mt-32">
+            <h2 class="text-4xl font-bold text-center mb-12">Gallery</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass p-2 rounded-2xl overflow-hidden aspect-square">
+                    <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/aman1.jpg" alt="Aman Profile 1" class="w-full h-full object-cover rounded-xl hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="glass p-2 rounded-2xl overflow-hidden aspect-square">
+                    <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/aman3.jpg" alt="Aman Profile 2" class="w-full h-full object-cover rounded-xl hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="glass p-2 rounded-2xl overflow-hidden aspect-square">
+                    <img src="https://raw.githubusercontent.com/Amitmeena55/Aman-Meena-/main/Aman.jpg" alt="Instagram Logo" class="w-full h-full object-cover rounded-xl hover:scale-110 transition-transform duration-700">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass mt-20 py-10 px-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+            <div>
+                <h2 class="text-2xl font-bold mb-4">AmitToolsX</h2>
+                <p class="text-gray-300" data-i18n="footerAbout">A premium suite of online utilities for modern developers and creators.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4" data-i18n="footerLinks">Quick Links</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="index.html" class="hover:text-white" data-i18n="navHome">Home</a></li>
+                    <li><a href="tools.html" class="hover:text-white" data-i18n="navTools">Tools</a></li>
+                    <li><a href="contact.html" class="hover:text-white" data-i18n="navContact">Contact</a></li>
+                    <li><a href="privacy.html" class="hover:text-white" data-i18n="navPrivacy">Privacy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-4" data-i18n="footerConnect">Connect With Us</h3>
+                <div class="flex justify-center md:justify-start space-x-6 text-2xl">
+                    <a href="https://www.instagram.com/_technical_01?igsh=MTdydjJkbWl3Y3ppeg==" target="_blank" class="hover:text-pink-400 transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="https://whatsapp.com/channel/0029VaDFCbF9hXFDBUx8fe3E" target="_blank" class="hover:text-green-400 transition-colors"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-400 text-sm">
+            &copy; 2024 AmitToolsX. <span data-i18n="footerCreatedBy">Created by</span> <span class="text-white font-bold">Amit Meena</span> & <span data-i18n="footerManagedBy">Managed by</span> <span class="text-white font-bold">Aman Meena</span>.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+    </script>
+    <!-- Floating Install Button for Mobile -->
+    <button class="install-app-btn hidden fixed bottom-6 right-6 z-[100] bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center animate-bounce md:hidden">
+        <i class="fas fa-download text-xl"></i>
+    </button>
+</body>
+</html>

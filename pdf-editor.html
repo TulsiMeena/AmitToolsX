@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmitToolsX - Advanced PDF Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- PDF-Lib -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <style>
+        .pdf-viewer-container {
+            height: calc(100vh - 160px);
+        }
+        .tool-btn.active {
+            background-color: rgba(59, 130, 246, 0.5);
+            border-color: rgba(59, 130, 246, 0.8);
+        }
+        #pdf-canvas-container canvas {
+            max-width: 100%;
+            height: auto !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .thumbnail-page.active {
+            border: 2px solid #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        #drawing-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        #drawing-canvas.active {
+            pointer-events: auto;
+            cursor: crosshair;
+        }
+        .text-layer-item {
+            position: absolute;
+            cursor: move;
+            min-width: 50px;
+            padding: 2px 5px;
+            border: 1px dashed transparent;
+            word-break: break-word;
+        }
+        .image-layer-item {
+            position: absolute;
+            cursor: move;
+            border: 1px dashed transparent;
+        }
+        .image-layer-item:hover {
+            border-color: #3b82f6;
+        }
+        .delete-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            display: none;
+            z-index: 10;
+        }
+        .text-layer-item:hover .delete-btn,
+        .image-layer-item:hover .delete-btn {
+            display: flex;
+        }
+        .text-layer-item:hover {
+            border-color: #3b82f6;
+        }
+        .text-layer-item:focus {
+            border-color: #3b82f6;
+            outline: none;
+            background: rgba(59, 130, 246, 0.1);
+        }
+    </style>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body class="text-white font-sans bg-home">
+    <!-- Navigation -->
+    <nav class="glass sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold tracking-wider">AmitToolsX</div>
+        <div class="hidden md:flex items-center space-x-8 text-lg">
+            <a href="index.html" class="hover:text-blue-300 transition-colors" data-i18n="navHome">Home</a>
+            <a href="pdf-editor.html" class="hover:text-blue-300 transition-colors text-blue-300 font-bold" data-i18n="navPDF">PDF Editor</a>
+            <a href="tools.html" class="hover:text-blue-300 transition-colors" data-i18n="navTools">Tools</a>
+            <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
+            <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
+            <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold hover:bg-blue-700 transition-all mr-4" data-i18n="installApp">Install App</button>
+            <button id="lang-toggle" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold hover:bg-white/20 transition-all">हिन्दी</button>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+
+        <div class="flex items-center space-x-4 md:hidden">
+            <button class="install-app-btn hidden px-3 py-1 bg-blue-600 rounded-lg text-sm font-bold mr-2" data-i18n="installApp">Install App</button>
+            <button id="lang-toggle-mobile" class="px-3 py-1 bg-white/10 rounded-lg text-sm font-bold">हिन्दी</button>
+            <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-white/10 transition-colors text-xl">
+                <i class="fas fa-moon" id="theme-icon-mobile"></i>
+            </button>
+            <button id="menu-btn" class="text-3xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden glass fixed top-16 left-0 w-full p-6 flex-col space-y-4 z-40 md:hidden">
+        <a href="index.html" class="hover:text-blue-300 transition-colors" data-i18n="navHome">Home</a>
+        <a href="pdf-editor.html" class="hover:text-blue-300 transition-colors" data-i18n="navPDF">PDF Editor</a>
+        <a href="tools.html" class="hover:text-blue-300 transition-colors" data-i18n="navTools">Tools</a>
+        <a href="about.html" class="hover:text-blue-300 transition-colors" data-i18n="navAbout">About</a>
+        <a href="contact.html" class="hover:text-blue-300 transition-colors" data-i18n="navContact">Contact</a>
+        <a href="privacy.html" class="hover:text-blue-300 transition-colors" data-i18n="navPrivacy">Privacy</a>
+    </div>
+
+    <!-- Main Workspace -->
+    <main class="container mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Sidebar: Thumbnails & Tools -->
+            <aside class="w-full md:w-64 flex flex-col gap-6">
+                <!-- Upload Box -->
+                <div class="glass p-4 rounded-2xl">
+                    <label for="pdf-upload" class="flex flex-col items-center justify-center border-2 border-dashed border-white/20 rounded-xl p-6 hover:border-blue-400 transition-all cursor-pointer group">
+                        <i class="fas fa-file-pdf text-4xl mb-2 group-hover:text-blue-400"></i>
+                        <span class="text-sm font-medium" data-i18n="pdfUploadBtn">Upload PDF</span>
+                        <input type="file" id="pdf-upload" accept="application/pdf" class="hidden">
+                    </label>
+                </div>
+
+                <!-- Global Watermark -->
+                <div class="glass p-4 rounded-2xl">
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-blue-300 mb-3">Global Watermark</h4>
+                    <div class="space-y-3">
+                        <input type="text" id="global-watermark-text" placeholder="Watermark Text" class="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-xs focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <input type="color" id="watermark-color" value="#cccccc" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                            <input type="range" id="watermark-opacity" min="0" max="100" value="30" class="w-20 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-400">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Thumbnails -->
+                <div class="glass p-4 rounded-2xl flex-1 flex flex-col min-h-[300px]">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-blue-300 mb-4 flex justify-between items-center">
+                        Pages
+                        <span id="page-count" class="text-xs text-white/60">0/0</span>
+                    </h3>
+                    <div id="thumbnail-container" class="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar max-h-[400px]">
+                        <!-- Thumbnails injected here -->
+                        <div class="text-center text-white/40 mt-10">
+                            <i class="fas fa-images text-2xl mb-2"></i>
+                            <p class="text-xs">Upload a PDF to see pages</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Editor Area -->
+            <section class="flex-1 flex flex-col gap-4">
+                <!-- Toolbar -->
+                <div class="glass p-3 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center space-x-2">
+                        <button id="tool-select" class="tool-btn active p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-mouse-pointer mr-2"></i> <span data-i18n="pdfToolSelect">Select</span>
+                        </button>
+                        <button id="tool-text" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-font mr-2"></i> <span data-i18n="pdfToolText">Text</span>
+                        </button>
+                        <button id="tool-draw" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-pen mr-2"></i> <span data-i18n="pdfToolDraw">Draw</span>
+                        </button>
+                        <button id="tool-signature" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-signature mr-2"></i> <span data-i18n="pdfToolSign">Sign</span>
+                        </button>
+                        <button id="tool-image" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-image mr-2"></i> <span data-i18n="pdfToolImage">Image</span>
+                        </button>
+                        <button id="tool-shape" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-shapes mr-2"></i> <span data-i18n="pdfToolShapes">Shapes</span>
+                        </button>
+                        <button id="tool-highlight" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-highlighter mr-2"></i> <span data-i18n="pdfToolAnnotate">Highlight</span>
+                        </button>
+                        <button id="tool-whiteout" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-eraser mr-2"></i> <span data-i18n="pdfToolWhiteout">Whiteout</span>
+                        </button>
+                        <button id="tool-stamp" class="tool-btn p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm">
+                            <i class="fas fa-stamp mr-2"></i> <span data-i18n="pdfToolStamp">Stamp</span>
+                        </button>
+                        <input type="file" id="image-upload" accept="image/*" class="hidden">
+                    </div>
+
+                    <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
+
+                    <!-- Tool Properties -->
+                    <div id="shape-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
+                        <select id="shape-type" class="bg-white/10 border border-white/20 rounded px-1 py-0.5 text-xs focus:outline-none">
+                            <option value="rect">Rectangle</option>
+                            <option value="circle">Circle</option>
+                            <option value="line">Line</option>
+                            <option value="arrow">Arrow</option>
+                        </select>
+                        <input type="color" id="shape-color" value="#3b82f6" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                    </div>
+
+                    <div id="stamp-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
+                        <select id="stamp-type" class="bg-white/10 border border-white/20 rounded px-1 py-0.5 text-xs focus:outline-none">
+                            <option value="APPROVED">Approved</option>
+                            <option value="CONFIDENTIAL">Confidential</option>
+                            <option value="DRAFT">Draft</option>
+                            <option value="FINAL">Final</option>
+                            <option value="URGENT">Urgent</option>
+                        </select>
+                        <input type="color" id="stamp-color" value="#ef4444" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                    </div>
+
+                    <div id="highlight-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
+                        <span class="text-[10px] text-white/60">Color:</span>
+                        <input type="color" id="highlight-color" value="#ffff00" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                    </div>
+
+                    <div id="text-properties" class="hidden flex items-center space-x-3 glass px-3 py-1 rounded-xl">
+                        <div class="flex items-center space-x-1">
+                            <span class="text-[10px] text-white/60">Size:</span>
+                            <input type="number" id="text-size" value="16" min="8" max="72" class="w-12 bg-white/10 border border-white/20 rounded px-1 py-0.5 text-xs focus:outline-none">
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <span class="text-[10px] text-white/60">Color:</span>
+                            <input type="color" id="text-color" value="#000000" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                        </div>
+                    </div>
+
+                    <div class="h-6 w-px bg-white/10 hidden sm:block"></div>
+
+                    <div class="flex items-center space-x-2">
+                        <button id="action-move-up" class="p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Move Page Up">
+                            <i class="fas fa-arrow-up mr-2"></i> Up
+                        </button>
+                        <button id="action-move-down" class="p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Move Page Down">
+                            <i class="fas fa-arrow-down mr-2"></i> Down
+                        </button>
+                        <button id="action-rotate" class="p-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition-all text-sm" title="Rotate Page">
+                            <i class="fas fa-redo mr-2"></i> Rotate
+                        </button>
+                        <button id="action-delete" class="p-2 px-4 rounded-lg bg-white/5 hover:bg-red-500/20 text-red-400 transition-all text-sm" title="Delete Page">
+                            <i class="fas fa-trash-alt mr-2"></i> Delete
+                        </button>
+                        <div class="flex items-center space-x-1 glass px-2 py-1 rounded-lg">
+                            <i class="fas fa-palette text-xs text-blue-300"></i>
+                            <input type="color" id="page-bg-color" value="#ffffff" title="Page Background Color" class="w-6 h-6 bg-transparent border-none cursor-pointer">
+                        </div>
+                    </div>
+
+                    <div class="flex-1"></div>
+
+                    <div class="flex items-center space-x-4">
+                        <div class="relative group">
+                            <input type="password" id="pdf-password" placeholder="Set Password (Optional)" class="bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-400 w-40">
+                            <i class="fas fa-lock absolute right-3 top-2.5 text-white/40"></i>
+                        </div>
+                        <button id="export-images" class="bg-indigo-600/50 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-xl transition-all text-xs" title="Save pages as Images">
+                            <i class="fas fa-images mr-2"></i> Pages to PNG
+                        </button>
+                        <button id="download-pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-xl shadow-lg transition-all transform hover:scale-[1.02] flex items-center">
+                            <i class="fas fa-download mr-2"></i> <span data-i18n="pdfExport">Export PDF</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Canvas/Viewer -->
+                <div class="glass rounded-3xl p-6 relative overflow-hidden flex flex-col items-center justify-center pdf-viewer-container bg-black/20">
+                    <div id="pdf-canvas-container" class="relative shadow-2xl transition-all duration-300">
+                        <canvas id="pdf-main-canvas"></canvas>
+                        <canvas id="drawing-canvas"></canvas>
+                        <div id="text-layer" class="absolute inset-0 pointer-events-none"></div>
+                    </div>
+                    
+                    <!-- Loading Overlay -->
+                    <div id="loading-overlay" class="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center hidden z-10">
+                        <div class="w-12 h-12 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+                        <p class="font-bold">Processing PDF...</p>
+                    </div>
+
+                    <!-- Welcome Screen -->
+                    <div id="welcome-screen" class="text-center space-y-4">
+                        <div class="w-24 h-24 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-file-pdf text-5xl text-blue-400"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold" data-i18n="pdfWelcomeTitle">Advanced PDF Editor</h2>
+                        <p class="text-white/60 max-w-md mx-auto" data-i18n="pdfWelcomeSub">Upload your PDF to start editing. You can add text, signatures, rotate pages, or remove unwanted pages - all in your browser.</p>
+                        <button onclick="document.getElementById('pdf-upload').click()" class="bg-white/10 hover:bg-white/20 px-8 py-3 rounded-xl transition-all font-bold mt-4" data-i18n="pdfUploadBtn">
+                            Upload PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Page Navigation -->
+                <div class="glass p-3 rounded-2xl flex items-center justify-center space-x-6">
+                    <button id="prev-page" class="p-2 hover:text-blue-400 transition-colors disabled:opacity-30">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                    </button>
+                    <span class="text-sm font-bold">Page <span id="current-page-num">0</span> of <span id="total-pages-num">0</span></span>
+                    <button id="next-page" class="p-2 hover:text-blue-400 transition-colors disabled:opacity-30">
+                        <i class="fas fa-chevron-right text-xl"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass mt-12 py-6 px-6">
+        <div class="container mx-auto text-center text-gray-400 text-sm">
+            &copy; 2024 AmitToolsX. <span data-i18n="footerCreatedBy">Created by</span> <span class="text-white font-bold">Amit Meena</span> & <span data-i18n="footerManagedBy">Managed by</span> <span class="text-white font-bold">Aman Meena</span>.
+        </div>
+    </footer>
+
+    <!-- Signature Modal -->
+    <div id="signature-modal" class="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center hidden z-[100]">
+        <div class="glass p-8 rounded-3xl w-full max-w-md space-y-6">
+            <h3 class="text-2xl font-bold text-center">Add Signature</h3>
+            <div class="space-y-4">
+                <div class="flex border-b border-white/10 mb-4">
+                    <button id="tab-draw" class="flex-1 py-2 font-bold border-b-2 border-blue-400">Draw</button>
+                    <button id="tab-type" class="flex-1 py-2 font-bold border-b-2 border-transparent text-white/40">Type</button>
+                </div>
+
+                <div id="draw-container" class="space-y-4">
+                    <div class="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+                        <canvas id="signature-pad" width="400" height="200" class="cursor-crosshair"></canvas>
+                    </div>
+                    <button id="clear-pad" class="text-xs text-red-400 hover:text-red-300">Clear Signature Pad</button>
+                </div>
+
+                <div id="type-container" class="hidden space-y-4">
+                    <input type="text" id="signature-text" placeholder="Type your name..." class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <div class="grid grid-cols-2 gap-3" id="font-options">
+                        <button class="p-3 bg-white/5 rounded-lg text-left italic hover:bg-white/10" data-font="cursive">Cursive</button>
+                        <button class="p-3 bg-white/5 rounded-lg text-left font-serif hover:bg-white/10" data-font="serif">Serif</button>
+                        <button class="p-3 bg-white/5 rounded-lg text-left font-mono hover:bg-white/10" data-font="monospace">Monospace</button>
+                        <button class="p-3 bg-white/5 rounded-lg text-left font-bold hover:bg-white/10" data-font="sans-serif">Bold Sans</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex space-x-4 pt-4">
+                <button id="close-signature" class="flex-1 bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold">Cancel</button>
+                <button id="add-signature-btn" class="flex-1 bg-blue-600 hover:bg-blue-700 py-3 rounded-xl font-bold">Add to PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="pdf-editor.js"></script>
+    <script>
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+    </script>
+    <!-- Floating Install Button for Mobile -->
+    <button class="install-app-btn hidden fixed bottom-6 right-6 z-[100] bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center animate-bounce md:hidden">
+        <i class="fas fa-download text-xl"></i>
+    </button>
+</body>
+</html>
