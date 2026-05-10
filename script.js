@@ -399,6 +399,510 @@ const aiTools = [
         link: "https://aider.chat",
         badge: "new",
         pricing: "Free"
+    },
+    {
+        id: "gemini",
+        name: "Google Gemini",
+        description: "Google's most capable AI model, built to be multimodal and highly efficient.",
+        category: "writing",
+        link: "https://gemini.google.com",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "grok",
+        name: "Grok",
+        description: "A conversational AI with a bit of wit and real-time access to X (formerly Twitter).",
+        category: "writing",
+        link: "https://x.ai",
+        badge: "trending",
+        pricing: "Paid"
+    },
+    {
+        id: "mistral",
+        name: "Mistral AI",
+        description: "Efficient and high-performance open-weight models from the French AI startup.",
+        category: "coding",
+        link: "https://mistral.ai",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "cohere",
+        name: "Cohere",
+        description: "Enterprise AI platform offering NLP solutions for search, generation, and summarization.",
+        category: "productivity",
+        link: "https://cohere.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "huggingface",
+        name: "Hugging Face",
+        description: "The hub for machine learning models, datasets, and demo apps.",
+        category: "coding",
+        link: "https://huggingface.co",
+        badge: "trending",
+        pricing: "Free"
+    },
+    {
+        id: "langchain",
+        name: "LangChain",
+        description: "Framework for developing applications powered by large language models.",
+        category: "coding",
+        link: "https://langchain.com",
+        badge: "new",
+        pricing: "Free"
+    },
+    {
+        id: "pinecone",
+        name: "Pinecone",
+        description: "Managed vector database for adding long-term memory to AI applications.",
+        category: "coding",
+        link: "https://www.pinecone.io",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "pika",
+        name: "Pika",
+        description: "An idea-to-video platform that brings your imagination to life through high-quality video.",
+        category: "video",
+        link: "https://pika.art",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "synthesia",
+        name: "Synthesia",
+        description: "AI video generation platform that enables users to create videos with AI avatars.",
+        category: "video",
+        link: "https://www.synthesia.io",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "pictory",
+        name: "Pictory",
+        description: "Automatically create short, highly-shareable branded videos from your long-form content.",
+        category: "video",
+        link: "https://pictory.ai",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "vidyard",
+        name: "Vidyard",
+        description: "AI-powered video messaging and hosting platform for business and sales teams.",
+        category: "video",
+        link: "https://www.vidyard.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "loom",
+        name: "Loom AI",
+        description: "Async video communication tool that uses AI to summarize videos and suggest titles.",
+        category: "video",
+        link: "https://www.loom.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "adobe-podcast",
+        name: "Adobe Podcast",
+        description: "AI-powered audio recording and editing, all in the web browser.",
+        category: "audio",
+        link: "https://podcast.adobe.com",
+        badge: "",
+        pricing: "Free"
+    },
+    {
+        id: "riffusion",
+        name: "Riffusion",
+        description: "Generate music by using stable diffusion to create images of spectrograms.",
+        category: "audio",
+        link: "https://www.riffusion.com",
+        badge: "",
+        pricing: "Free"
+    },
+    {
+        id: "mubert",
+        name: "Mubert",
+        description: "The first AI-generative music ecosystem for creators and brands.",
+        category: "audio",
+        link: "https://mubert.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "beatoven",
+        name: "Beatoven.ai",
+        description: "Create unique royalty-free music that fits the mood of your video or podcast.",
+        category: "audio",
+        link: "https://www.beatoven.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "lalal",
+        name: "Lalal.ai",
+        description: "High-quality stem splitting based on the world's number one AI-powered technology.",
+        category: "audio",
+        link: "https://www.lalal.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "quillbot",
+        name: "Quillbot",
+        description: "AI-powered paraphrasing tool that helps you write better and faster.",
+        category: "writing",
+        link: "https://quillbot.com",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "writesonic",
+        name: "Writesonic",
+        description: "AI writing tool that creates high-quality content for blogs, ads, and emails.",
+        category: "writing",
+        link: "https://writesonic.com",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "rytr",
+        name: "Rytr",
+        description: "AI writing assistant that helps you create high-quality content in just a few seconds.",
+        category: "writing",
+        link: "https://rytr.me",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "sudowrite",
+        name: "Sudowrite",
+        description: "The AI writing partner you've always wanted for your next novel or story.",
+        category: "writing",
+        link: "https://www.sudowrite.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "wordtune",
+        name: "Wordtune",
+        description: "AI-powered writing companion that helps you rephrase and refine your sentences.",
+        category: "writing",
+        link: "https://www.wordtune.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "hemingway",
+        name: "Hemingway Editor",
+        description: "The app that highlights lengthy, complex sentences and common errors.",
+        category: "writing",
+        link: "https://hemingwayapp.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "frase",
+        name: "Frase",
+        description: "AI content platform that helps you research, write, and optimize SEO content.",
+        category: "writing",
+        link: "https://www.frase.io",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "anyword",
+        name: "Anyword",
+        description: "Data-driven copywriting platform that predicts how your audience will react.",
+        category: "writing",
+        link: "https://anyword.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "hypotenuse",
+        name: "Hypotenuse AI",
+        description: "Streamline your content writing with AI that researchers and writes for you.",
+        category: "writing",
+        link: "https://www.hypotenuse.ai",
+        badge: "new",
+        pricing: "Paid"
+    },
+    {
+        id: "copysmith",
+        name: "CopySmith",
+        description: "AI copywriting platform for e-commerce teams and agencies.",
+        category: "writing",
+        link: "https://copysmith.ai",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "typeface",
+        name: "Typeface",
+        description: "Enterprise-grade generative AI for hyper-personalized content creation.",
+        category: "writing",
+        link: "https://www.typeface.ai",
+        badge: "new",
+        pricing: "Paid"
+    },
+    {
+        id: "contentbot",
+        name: "ContentBot",
+        description: "Advanced AI writing assistant for creators, marketers, and businesses.",
+        category: "writing",
+        link: "https://contentbot.ai",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "meetgeek",
+        name: "MeetGeek",
+        description: "AI meeting assistant that record, transcribe and share highlights of your meetings.",
+        category: "productivity",
+        link: "https://meetgeek.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "read-ai",
+        name: "Read AI",
+        description: "AI for meetings, email, and chat that provides summaries and insights.",
+        category: "productivity",
+        link: "https://www.read.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "krisp",
+        name: "Krisp",
+        description: "AI noise-canceling app that removes background noise from your calls.",
+        category: "productivity",
+        link: "https://krisp.ai",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "sanebox",
+        name: "SaneBox",
+        description: "AI-powered email management that cleans up your inbox automatically.",
+        category: "productivity",
+        link: "https://www.sanebox.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "motion",
+        name: "Motion",
+        description: "AI calendar and task manager that automatically builds your schedule.",
+        category: "productivity",
+        link: "https://www.usemotion.com",
+        badge: "trending",
+        pricing: "Paid"
+    },
+    {
+        id: "akiflow",
+        name: "Akiflow",
+        description: "Centralized task manager and calendar that uses AI to optimize your day.",
+        category: "productivity",
+        link: "https://akiflow.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "clockwise",
+        name: "Clockwise",
+        description: "Smart calendar assistant that optimizes your schedule for focus time.",
+        category: "productivity",
+        link: "https://www.getclockwise.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "superhuman",
+        name: "Superhuman",
+        description: "The fastest email experience ever made, enhanced with powerful AI.",
+        category: "productivity",
+        link: "https://superhuman.com",
+        badge: "trending",
+        pricing: "Paid"
+    },
+    {
+        id: "magical",
+        name: "Magical",
+        description: "AI automation tool that speeds up repetitive tasks across any web app.",
+        category: "productivity",
+        link: "https://www.getmagical.com",
+        badge: "",
+        pricing: "Free"
+    },
+    {
+        id: "mem",
+        name: "Mem",
+        description: "AI-powered workspace that organizes your thoughts and information.",
+        category: "productivity",
+        link: "https://mem.ai",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "taskade",
+        name: "Taskade",
+        description: "The AI-powered productivity platform for modern teams.",
+        category: "productivity",
+        link: "https://www.taskade.com",
+        badge: "",
+        pricing: "Freemium"
+    },
+    {
+        id: "clickup-brain",
+        name: "ClickUp Brain",
+        description: "The first neural network that connects your tasks, docs, people, and company knowledge.",
+        category: "productivity",
+        link: "https://clickup.com/features/ai",
+        badge: "trending",
+        pricing: "Paid"
+    },
+    {
+        id: "asana-intelligence",
+        name: "Asana Intelligence",
+        description: "AI for work management to help teams work smarter and faster.",
+        category: "productivity",
+        link: "https://asana.com/product/ai",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "monday-ai",
+        name: "Monday.com AI",
+        description: "Empower your team to work faster and more efficiently with AI-powered automations.",
+        category: "productivity",
+        link: "https://monday.com/ai",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "krea",
+        name: "Krea.ai",
+        description: "Real-time AI creative tool for high-quality image generation and enhancement.",
+        category: "image",
+        link: "https://www.krea.ai",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "magnific",
+        name: "Magnific AI",
+        description: "The most advanced AI image upscaler and enhancer for professional creators.",
+        category: "image",
+        link: "https://magnific.ai",
+        badge: "new",
+        pricing: "Paid"
+    },
+    {
+        id: "clipdrop",
+        name: "ClipDrop",
+        description: "A suite of AI tools for creators to edit and generate high-quality visuals.",
+        category: "image",
+        link: "https://clipdrop.co",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "vectormagic",
+        name: "Vector Magic",
+        description: "Automatically convert bitmap images like JPEGs and PNGs to clean vector art.",
+        category: "image",
+        link: "https://vectormagic.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "looka",
+        name: "Looka",
+        description: "AI-powered logo maker and brand identity platform for entrepreneurs.",
+        category: "image",
+        link: "https://looka.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "brandmark",
+        name: "Brandmark",
+        description: "Create a professional logo and brand identity with AI in minutes.",
+        category: "image",
+        link: "https://brandmark.io",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "designs-ai",
+        name: "Designs.ai",
+        description: "AI-powered platform to create logos, videos, and social media content.",
+        category: "image",
+        link: "https://designs.ai",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "uizard",
+        name: "Uizard",
+        description: "Design mobile apps, websites, and wireframes in minutes with AI.",
+        category: "image",
+        link: "https://uizard.io",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "ms-designer",
+        name: "Microsoft Designer",
+        description: "Create stunning visuals and social media posts with DALL-E 3 integration.",
+        category: "image",
+        link: "https://designer.microsoft.com",
+        badge: "new",
+        pricing: "Free"
+    },
+    {
+        id: "filmora",
+        name: "Wondershare Filmora",
+        description: "Easy-to-use video editor with powerful AI features like smart cutout and auto reframe.",
+        category: "video",
+        link: "https://filmora.wondershare.com",
+        badge: "",
+        pricing: "Paid"
+    },
+    {
+        id: "tabby",
+        name: "Tabby",
+        description: "A self-hosted AI coding assistant, an open-source alternative to GitHub Copilot.",
+        category: "coding",
+        link: "https://tabby.ml",
+        badge: "new",
+        pricing: "Free"
+    },
+    {
+        id: "mintlify",
+        name: "Mintlify",
+        description: "AI-powered documentation that builds itself and helps developers ship faster.",
+        category: "coding",
+        link: "https://mintlify.com",
+        badge: "trending",
+        pricing: "Freemium"
+    },
+    {
+        id: "vimeo-ai",
+        name: "Vimeo AI",
+        description: "Create, edit, and share professional videos with the help of AI-powered tools.",
+        category: "video",
+        link: "https://vimeo.com/features/ai-video-editing",
+        badge: "",
+        pricing: "Freemium"
     }
 ];
 
