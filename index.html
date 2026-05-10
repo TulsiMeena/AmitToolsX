@@ -64,15 +64,36 @@
                     <input type="text" id="toolSearch" placeholder="Search for AI tools..." data-i18n="search-placeholder">
                 </div>
 
+                <div class="categories-grid" id="categoryCards">
+                    <div class="category-card glass-card" data-category="image">
+                        <i class="fas fa-image"></i>
+                        <h3 data-i18n="cat-image">Image AI</h3>
+                    </div>
+                    <div class="category-card glass-card" data-category="writing">
+                        <i class="fas fa-pen-nib"></i>
+                        <h3 data-i18n="cat-writing">Writing AI</h3>
+                    </div>
+                    <div class="category-card glass-card" data-category="video">
+                        <i class="fas fa-video"></i>
+                        <h3 data-i18n="cat-video">Video AI</h3>
+                    </div>
+                    <div class="category-card glass-card" data-category="audio">
+                        <i class="fas fa-music"></i>
+                        <h3 data-i18n="cat-audio">Audio AI</h3>
+                    </div>
+                    <div class="category-card glass-card" data-category="coding">
+                        <i class="fas fa-code"></i>
+                        <h3 data-i18n="cat-coding">Coding AI</h3>
+                    </div>
+                    <div class="category-card glass-card" data-category="productivity">
+                        <i class="fas fa-rocket"></i>
+                        <h3 data-i18n="cat-productivity">Productivity AI</h3>
+                    </div>
+                </div>
+
                 <div class="categories">
                     <button class="category-btn active" data-category="all" data-i18n="cat-all">All Tools</button>
                     <button class="category-btn" data-category="favorites" data-i18n="cat-favorites"><i class="fas fa-heart"></i> My List</button>
-                    <button class="category-btn" data-category="image" data-i18n="cat-image">Image AI</button>
-                    <button class="category-btn" data-category="writing" data-i18n="cat-writing">Writing AI</button>
-                    <button class="category-btn" data-category="video" data-i18n="cat-video">Video AI</button>
-                    <button class="category-btn" data-category="audio" data-i18n="cat-audio">Audio AI</button>
-                    <button class="category-btn" data-category="coding" data-i18n="cat-coding">Coding AI</button>
-                    <button class="category-btn" data-category="productivity" data-i18n="cat-productivity">Productivity AI</button>
                 </div>
 
                 <div class="advanced-filters glass-card">
@@ -151,9 +172,39 @@
             </div>
         </section>
 
-        <!-- Tool Grid Section -->
+        <!-- Featured Tools Section -->
+        <section class="section-content" id="featured-section" style="background: rgba(0, 210, 255, 0.02);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-i18n="featured-h2">Featured AI Tools</h2>
+                    <p data-i18n="featured-p">Hand-picked premium AI tools to skyrocket your growth.</p>
+                </div>
+                <div class="tool-grid" id="featuredGrid">
+                    <!-- Featured tools will be injected -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Tools Section -->
+        <section class="section-content" id="trending-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 data-i18n="trending-h2">Trending Now</h2>
+                    <p data-i18n="trending-p">The most popular AI tools this week.</p>
+                </div>
+                <div class="tool-grid" id="trendingGrid">
+                    <!-- Trending tools will be injected -->
+                </div>
+            </div>
+        </section>
+
+        <!-- All Tools Section -->
         <section class="section-content" id="tools">
             <div class="container">
+                <div class="section-header">
+                    <h2 data-i18n="all-tools-h2">Explore All AI Tools</h2>
+                    <p data-i18n="all-tools-p">Browse our complete directory of high-quality AI solutions.</p>
+                </div>
                 <div class="tool-grid" id="toolGrid">
                     <!-- Tools will be injected by JavaScript -->
                 </div>
@@ -262,6 +313,12 @@
             <button class="btn btn-primary close-success" style="margin-top: 20px;">Close</button>
         </div>
     </div>
+
+    <!-- Floating Install Button for Mobile -->
+    <button id="mobileInstallBtn" class="floating-install-btn" style="display: none;">
+        <i class="fas fa-download"></i>
+        <span data-i18n="nav-install">Install App</span>
+    </button>
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top" title="Go to top">

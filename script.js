@@ -115,7 +115,13 @@ const translations = {
         "sort-trending": "Trending",
         "sort-az": "A - Z",
         "sort-za": "Z - A",
-        "price-all": "All Prices"
+        "price-all": "All Prices",
+        "featured-h2": "Featured AI Tools",
+        "featured-p": "Hand-picked premium AI tools to skyrocket your growth.",
+        "trending-h2": "Trending Now",
+        "trending-p": "The most popular AI tools this week.",
+        "all-tools-h2": "Explore All AI Tools",
+        "all-tools-p": "Browse our complete directory of high-quality AI solutions."
     },
     hi: {
         "nav-home": "होम",
@@ -233,12 +239,20 @@ const translations = {
         "sort-trending": "ट्रेंडिंग",
         "sort-az": "A - Z",
         "sort-za": "Z - A",
-        "price-all": "सभी कीमतें"
+        "price-all": "सभी कीमतें",
+        "featured-h2": "विशेष रुप से प्रदर्शित AI टूल्स",
+        "featured-p": "आपके विकास को आसमान छूने के लिए चुने गए प्रीमियम AI टूल्स।",
+        "trending-h2": "अब ट्रेंडिंग",
+        "trending-p": "इस सप्ताह के सबसे लोकप्रिय AI टूल्स।",
+        "all-tools-h2": "सभी AI टूल्स एक्सप्लोर करें",
+        "all-tools-p": "उच्च गुणवत्ता वाले AI समाधानों की हमारी पूरी डायरेक्टरी ब्राउज़ करें।"
     }
 };
 
 // DOM Elements
 const toolGrid = document.getElementById('toolGrid');
+const featuredGrid = document.getElementById('featuredGrid');
+const trendingGrid = document.getElementById('trendingGrid');
 const searchInput = document.getElementById('toolSearch');
 const priceFilter = document.getElementById('priceFilter');
 const sortBy = document.getElementById('sortBy');
@@ -246,6 +260,7 @@ const categoryButtons = document.querySelectorAll('.category-btn');
 const themeToggle = document.getElementById('themeToggle');
 const langToggle = document.getElementById('langToggle');
 const installBtn = document.getElementById('installBtn');
+const mobileInstallBtn = document.getElementById('mobileInstallBtn');
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
 const newsletterForm = document.getElementById('newsletterForm');
@@ -329,13 +344,24 @@ function openToolModal(toolId) {
                 ${features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
             </ul>
         </div>
-        <div style="text-align: center;">
-            <a href="${tool.link}" target="_blank" class="btn btn-primary" style="padding: 12px 40px;">${visitText}</a>
+        <div style="text-align: center; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+            <a href="${tool.link}" target="_blank" class="btn btn-primary" style="padding: 12px 60px; width: 100%; max-width: 300px;">${visitText}</a>
+            <button class="btn btn-outline share-modal-btn" data-name="${tool.name}" data-link="${tool.link}" style="width: 100%; max-width: 300px;">
+                <i class="fas fa-share-alt"></i> Share This Tool
+            </button>
         </div>
     `;
 
     toolModal.style.display = 'block';
     document.body.style.overflow = 'hidden'; // Prevent scrolling
+
+    // Add share listener in modal
+    const modalShareBtn = modalBody.querySelector('.share-modal-btn');
+    if (modalShareBtn) {
+        modalShareBtn.addEventListener('click', () => {
+            shareTool(modalShareBtn.getAttribute('data-name'), modalShareBtn.getAttribute('data-link'));
+        });
+    }
 }
 
 if (closeModal) {
@@ -375,14 +401,14 @@ async function shareTool(name, link) {
 }
 
 // Initialize Tools
-function displayTools(tools) {
-    if (!toolGrid) return;
+function displayTools(tools, targetGrid = toolGrid) {
+    if (!targetGrid) return;
 
     const currentLang = localStorage.getItem('lang') || 'en';
     const visitText = translations[currentLang]["tool-visit"];
     const favorites = getFavorites();
 
-    toolGrid.innerHTML = '';
+    targetGrid.innerHTML = '';
 
     if (tools.length === 0) {
         const activeBtn = document.querySelector('.category-btn.active');
@@ -413,7 +439,7 @@ function displayTools(tools) {
 
     tools.forEach(tool => {
         const card = document.createElement('div');
-        card.className = 'glass-card tool-card';
+        card.className = `glass-card tool-card ${targetGrid === featuredGrid ? 'featured-card' : ''}`;
 
         let badgeHTML = '';
         if (tool.badge) {
@@ -453,7 +479,7 @@ function displayTools(tools) {
             </div>
         `;
 
-        toolGrid.appendChild(card);
+        targetGrid.appendChild(card);
     });
 
     // Add event listeners to buttons
@@ -479,6 +505,26 @@ function renderFilteredTools() {
     const category = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
 
     const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+
+    // Display Featured & Trending only if search is empty and category is 'all'
+    const featuredSection = document.getElementById('featured-section');
+    const trendingSection = document.getElementById('trending-section');
+
+    if (searchTerm === '' && category === 'all') {
+        if (featuredSection) featuredSection.style.display = 'block';
+        if (trendingSection) trendingSection.style.display = 'block';
+
+        // Populate Featured (limit to 3)
+        const featuredTools = aiTools.filter(t => t.badge === 'trending' || t.pricing === 'Paid').slice(0, 3);
+        displayTools(featuredTools, featuredGrid);
+
+        // Populate Trending (limit to 3)
+        const trendingTools = aiTools.filter(t => t.badge === 'trending' || t.badge === 'new').slice(4, 7);
+        displayTools(trendingTools, trendingGrid);
+    } else {
+        if (featuredSection) featuredSection.style.display = 'none';
+        if (trendingSection) trendingSection.style.display = 'none';
+    }
     const price = priceFilter ? priceFilter.value : 'all';
     const sort = sortBy ? sortBy.value : 'newest';
     const favorites = getFavorites();
@@ -588,6 +634,34 @@ categoryButtons.forEach(btn => {
     });
 });
 
+// Category Cards Filtering
+document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const category = card.getAttribute('data-category');
+        // Clear search
+        if (searchInput) searchInput.value = '';
+
+        // Find corresponding category button and click it
+        const catBtn = document.querySelector(`.category-btn[data-category="${category}"]`);
+        if (catBtn) {
+            catBtn.click();
+        } else {
+            // Fallback: manually set active and render
+            categoryButtons.forEach(b => b.classList.remove('active'));
+            renderFilteredTools();
+        }
+
+        // Scroll to tools section
+        const toolsSection = document.getElementById('tools');
+        if (toolsSection) {
+            window.scrollTo({
+                top: toolsSection.offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
 // Mobile Menu Toggle
 if (menuBtn) {
     menuBtn.addEventListener('click', () => {
@@ -635,6 +709,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
     if (installBtn) installBtn.style.display = 'block';
+    if (mobileInstallBtn) mobileInstallBtn.style.display = 'flex';
     if (installBanner) installBanner.style.display = 'block';
 });
 
@@ -644,6 +719,7 @@ const handleInstall = async () => {
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
             if (installBtn) installBtn.style.display = 'none';
+            if (mobileInstallBtn) mobileInstallBtn.style.display = 'none';
             if (installBanner) installBanner.style.display = 'none';
         }
         deferredPrompt = null;
@@ -658,8 +734,15 @@ if (installBannerBtn) {
     installBannerBtn.addEventListener('click', handleInstall);
 }
 
+if (mobileInstallBtn) {
+    mobileInstallBtn.addEventListener('click', handleInstall);
+}
+
 // Initial Load
 document.addEventListener('DOMContentLoaded', () => {
+    // Initial Render
+    renderFilteredTools();
+
     // Load Saved Theme
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
